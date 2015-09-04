@@ -14,15 +14,23 @@
 		Email:      <input type="email" name="email" tabindex="2" required><br><br>
 		Password:	<input type="password" name="password" tabindex="3" required><br><br>
 		
-	
+		Skill Level:
+		<input type="radio" name="skill_level" value="Novice" tabindex="4" checked>Novice
+		<input type="radio" name="skill_level" value="Advanced">Advanced
+		<input type="radio" name="skill_level" value="Expert">Expert<br><br>
+		
 		<fieldset>
 			<legend>Skill Areas</legend>
-			<input type="checkbox" name="skills" value="sensors">sensors	
-			<input type="checkbox" name="skills" value="code">code	
-			<input type="checkbox" name="skills" value="hardware">hardware
-		</fieldset>
+			<input type="checkbox" name="skill_area" value="sensors">sensors	
+			<input type="checkbox" name="skill_area" value="code">code	
+			<input type="checkbox" name="skill_area" value="mechanisms">mechanisms
+		</fieldset><br>
 	
-	
+		Profile Picture: <input type="file" id="fileinput" accept="image/*"><br><br>
+		Started Robotics: <input type="month" id="first_hobby"><br><br>
+		Favorite Color: <input type="color" name="fav_color"><br><br>
+		URL: <input type="url" name="url"><br><br>
+		Telephone: <input type="tel" name="phone"><br><br>
 	</form>
 	</section>
 This is the sign up page!
