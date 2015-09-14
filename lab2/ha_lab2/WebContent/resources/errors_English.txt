@@ -1,0 +1,5 @@
+LAST_NAME_TOO_SHORT Your last name is too short
+EMAIL_INVALID Your email is invalid
+LAST_NAME_HAS_INVALID_CHARS Your last name contains invalid characters
+USER_NAME_EMPTY Your user name can not be empty or only contain white space
+USER_NAME_HAS_INVALID_CHARS Your user name can only contain letters, numbers, dashes and underscores
