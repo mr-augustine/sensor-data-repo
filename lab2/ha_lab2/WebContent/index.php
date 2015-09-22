@@ -4,7 +4,7 @@
 	//echo "URL: $url <br>";
 	$urlPieces = split("/", $url);
 	
-	print_r($urlPieces);
+	//print_r($urlPieces);
 	if (count($urlPieces) < 2)
 		$control = "none";
 	else 
@@ -18,5 +18,3 @@
 			HomeView::show();
 	};
 ?>
-
-Hello
