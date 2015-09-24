@@ -1,0 +1,5 @@
+EMAIL_EMPTY Ihre E-Mail kann nicht leer sein oder Leerzeichen enthalten nur
+EMAIL_INVALID Ihre E-Mail ist ungültig 
+USER_NAME_EMPTY Ihr Benutzername darf nicht leer sein oder Leerzeichen enthalten nur
+USER_NAME_TOO_SHORT Ihr Benutzername ist zu kurz
+USER_NAME_HAS_INVALID_CHARS Ihr Benutzername kann nur Buchstaben, Zahlen, Bindestriche und Unterstriche

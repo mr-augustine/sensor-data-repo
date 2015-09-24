@@ -14,32 +14,38 @@ include_once("../models/Messages.class.php");
 
 Messages::setErrors("../resources/errors_English.txt");
 
-echo "LAST_NAME_TOO_SHORT: " .Messages::getError("LAST_NAME_TOO_SHORT")."<br>";
+echo "EMAIL_EMPTY: " .Messages::getError("EMAIL_EMPTY")."<br>";
 echo "EMAIL_INVALID: " .Messages::getError("EMAIL_INVALID")."<br>";
-echo "LAST_NAME_INVALID: " .Messages::getError("LAST_NAME_HAS_INVALID_CHARS")."<br>";
+echo "USER_NAME_EMPTY: " .Messages::getError("USER_NAME_EMPTY")."<br>";
+echo "USER_NAME_TOO_SHORT: " .Messages::getError("USER_NAME_TOO_SHORT")."<br>";
+echo "USER_NAME_INVALID: " .Messages::getError("USER_NAME_HAS_INVALID_CHARS")."<br>";
 
-echo (empty(Messages::getError("LAST_NAME_TOO_SHORT")))?
-      "Failed: it did not set LAST_NAME_TOO_SHORT from file":"";
+echo (empty(Messages::getError("USER_NAME_TOO_SHORT")))?
+      "Failed: it did not set USER_NAME_TOO_SHORT from file":"";
 ?>
 
 <h2>It should allow reset</h2>
 <?php 
 Messages::reset();
 
-echo "LAST_NAME_TOO_SHORT: " .Messages::getError("LAST_NAME_TOO_SHORT")."<br>";
+echo "EMAIL_EMPTY: " .Messages::getError("EMAIL_EMPTY")."<br>";
 echo "EMAIL_INVALID: " .Messages::getError("EMAIL_INVALID")."<br>";
-echo "LAST_NAME_HAS_INVALID_CHARS: " .Messages::getError("LAST_NAME_HAS_INVALID_CHARS")."<br>";
+echo "USER_NAME_EMPTY: " .Messages::getError("USER_NAME_EMPTY")."<br>";
+echo "USER_NAME_TOO_SHORT: " .Messages::getError("USER_NAME_TOO_SHORT")."<br>";
+echo "USER_NAME_INVALID: " .Messages::getError("USER_NAME_HAS_INVALID_CHARS")."<br>";
 
 ?>
 
 <h2>It should allow change of locale</h2>
 <?php 
-Messages::$locale = 'Spanish';
+Messages::$locale = 'German';
 Messages::reset();
 
-echo "LAST_NAME_TOO_SHORT: " .Messages::getError("LAST_NAME_TOO_SHORT")."<br>";
+echo "EMAIL_EMPTY: " .Messages::getError("EMAIL_EMPTY")."<br>";
 echo "EMAIL_INVALID: " .Messages::getError("EMAIL_INVALID")."<br>";
-echo "LAST_NAME_HAS_INVALID_CHARS: " .Messages::getError("LAST_NAME_HAS_INVALID_CHARS")."<br>";
+echo "USER_NAME_EMPTY: " .Messages::getError("USER_NAME_EMPTY")."<br>";
+echo "USER_NAME_TOO_SHORT: " .Messages::getError("USER_NAME_TOO_SHORT")."<br>";
+echo "USER_NAME_INVALID: " .Messages::getError("USER_NAME_HAS_INVALID_CHARS")."<br>";
 
 ?>
 </body>
