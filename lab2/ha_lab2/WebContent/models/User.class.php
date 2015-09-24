@@ -1,6 +1,7 @@
 <?php
 include ("Messages.class.php");
 class User {
+	private static $MIN_USERNAME_LENGTH = 6;
 	private $errorCount;
 	private $errors;
 	private $formInput;
@@ -99,6 +100,8 @@ class User {
 		
 		if (empty($this->userName))
 			$this->setError('userName', 'USER_NAME_EMPTY');
+		elseif (strlen($this->userName) < self::$MIN_USERNAME_LENGTH)
+			$this->setError('userName', 'USER_NAME_TOO_SHORT');
 		elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
 			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
 			$this->setError('userName', 'USER_NAME_HAS_INVALID_CHARS');
