@@ -44,12 +44,13 @@ class User {
 	
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("userName" => $this->userName); 
+		$paramArray = array("userName" => $this->userName, "email" => $this->email);
+		
 		return $paramArray;
 	}
 
 	public function __toString() {
-		$str = "User name: ".$this->userName;
+		$str = "User name: ".$this->userName." Email: ".$this->email;
 		return $str;
 	}
 	
@@ -96,7 +97,7 @@ class User {
 	private function validateUserName() {
 		$this->userName = $this->extractForm('userName');
 		
-		if (empty($this->email))
+		if (empty($this->userName))
 			$this->setError('userName', 'USER_NAME_EMPTY');
 		elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
 			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
