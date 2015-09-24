@@ -52,6 +52,7 @@ class HomeView {
 		<a href="">Help</a> |
 		<a href="">Terms</a> |
 		<a href="">Privacy</a>
+		 | <a href="tests.html">TESTS</a>
 		</nav>
 		
 		<p>Copyright 2015</p>
