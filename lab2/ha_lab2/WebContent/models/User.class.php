@@ -4,6 +4,7 @@ class User {
 	private $errorCount;
 	private $errors;
 	private $formInput;
+	private $email;
 	private $userName;
 	
 	public function __construct($formInput = null) {
@@ -33,6 +34,10 @@ class User {
 		return $this->errors;
 	}
 
+	public function getEmail() {
+		return $this->email;
+	}
+	
 	public function getUserName() {
 		return $this->userName;
 	}
@@ -64,8 +69,10 @@ class User {
 		$errors = array();
 		if (is_null($this->formInput))
 			$this->initializeEmpty();
-		else  	 
+		else { 	 
 		   $this->validateUserName();
+		   $this->validateEmail();
+		}
 	}
 
 	private function initializeEmpty() {
@@ -74,16 +81,27 @@ class User {
 	 	$this->userName = "";
 	}
 
+	private function validateEmail() {
+		$this->email = $this->extractForm('email');
+		
+		if (empty($this->email))
+			$this->setError('email', 'EMAIL_EMPTY');
+		elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+			$this->setError('email', 'EMAIL_INVALID');
+			//shouldn't this also be in the if-block above?
+			$this->errorCount ++;
+		}
+	}
+	
 	private function validateUserName() {
-		// Username should only contain letters, numbers, dashes and underscore
 		$this->userName = $this->extractForm('userName');
-		if (empty($this->userName))
+		
+		if (empty($this->email))
 			$this->setError('userName', 'USER_NAME_EMPTY');
 		elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
 			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
-			$this->setError('userName', 'LAST_NAME_HAS_INVALID_CHARS');
-			$this->errorCount ++;
+			$this->setError('userName', 'USER_NAME_HAS_INVALID_CHARS');
 		}
-	}	
+	}
 }
 ?>

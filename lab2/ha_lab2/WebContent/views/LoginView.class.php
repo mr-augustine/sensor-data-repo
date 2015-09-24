@@ -19,7 +19,14 @@ class LoginView {
 		<form action="simpleEcho.php" method="post">
 		<p>
 		email<br>
-		<input type="email" name="email" tabindex="1" required><br><br>
+		<input type="email" name="email" 
+		<?php if (!is_null($user)) {echo 'value = "'. $user->getEmail() .'"';}?> tabindex="1" required>
+		<span class="error">
+	   	<?php if (!is_null($user)) {echo $user->getError('email');}?>
+		</span>
+		
+		<br><br>
+		
 		password<br>
 		<input type="password" name="password" tabindex="2" required>
 		</p>
