@@ -16,7 +16,7 @@ class HomeView {
 		<p>Botspace is the free, simple, and structured way to share your robot projects with a community of peers.</p>
 		<p>Talk to other hobbyists about their creations, or ask for help with your own. Botspace is a community to help you make your robots awesome!</p>
 	
-		<form style="display: inline" action="signup.html" method="get">
+		<form style="display: inline" action="signup" method="get">
 	  		<button>Sign up - It's free.</button><br><br>
 		</form>
 		<form style="display: inline" action="login">

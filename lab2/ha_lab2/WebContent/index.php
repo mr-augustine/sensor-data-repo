@@ -14,6 +14,9 @@
 		case "login":
 			LoginController::run();
 			break;
+		case "signup":
+			SignupController::run();
+			break;
 		default:
 			HomeView::show();
 	};
