@@ -20,9 +20,9 @@ class SignupView {
 			Password:	<input type="password" name="password" tabindex="3" required><br><br>
 			
 			Skill Level:
-			<input type="radio" name="skill_level" value="Novice" tabindex="4" checked>Novice
-			<input type="radio" name="skill_level" value="Advanced" tabindex="5">Advanced
-			<input type="radio" name="skill_level" value="Expert" tabindex="6">Expert<br><br>
+			<input type="radio" name="skill_level" value="novice" tabindex="4" checked>Novice
+			<input type="radio" name="skill_level" value="advanced" tabindex="5">Advanced
+			<input type="radio" name="skill_level" value="expert" tabindex="6">Expert<br><br>
 			
 			<fieldset>
 				<legend>Skill Areas</legend>
@@ -36,12 +36,12 @@ class SignupView {
 				<input type="checkbox" name="skill_areas[]" value="computer-vision" tabindex="14">computer-vision
 				<input type="checkbox" name="skill_areas[]" value="ultrasonic" tabindex="15">ultrasonic
 				<input type="checkbox" name="skill_areas[]" value="infrared" tabindex="16">infrared
-				<input type="checkbox" name="skill_areas[]" value="GPS" tabindex="17">GPS
+				<input type="checkbox" name="skill_areas[]" value="gps" tabindex="17">GPS
 				<input type="checkbox" name="skill_areas[]" value="compass" tabindex="18">compass
 			</fieldset><br>
 		
-			Profile Picture: <input type="file" name="fileinput" accept="image/*" tabindex="19"><br><br>
-			Started Robotics: <input type="month" name="first_hobby" min="1970-01" max="<?php echo date("Y-m")?>" tabindex="20"><br><br>
+			Profile Picture: <input type="file" name="profile_pic" accept="image/*" tabindex="19"><br><br>
+			Started Robotics: <input type="month" name="started_hobby" min="1970-01" max="<?php echo date("Y-m")?>" tabindex="20"><br><br>
 			Favorite Color: <input type="color" name="fav_color" tabindex="21"><br><br>
 			URL: <input type="url" name="url" tabindex="22"><br><br>
 			Telephone: <input type="tel" name="phone" tabindex="23"><br><br>

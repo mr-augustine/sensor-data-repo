@@ -2,6 +2,7 @@
 include ("Messages.class.php");
 class User {
 	private static $MIN_USERNAME_LENGTH = 6;
+	private static $MIN_PASSWORD_LENGTH = 8;
 	private $errorCount;
 	private $errors;
 	private $formInput;
