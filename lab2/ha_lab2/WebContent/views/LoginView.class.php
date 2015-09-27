@@ -16,10 +16,10 @@ class LoginView {
 	
 		<section>
 		<h1>Log into botspace</h1>
-		<form action="simpleEcho.php" method="post">
+		<form action="login" method="post">
 		<p>
 		email<br>
-		<input type="email" name="email" 
+		<input type="text" name="email" 
 		<?php if (!is_null($user)) {echo 'value = "'. $user->getEmail() .'"';}?> tabindex="1" required>
 		<span class="error">
 	   	<?php if (!is_null($user)) {echo $user->getError('email');}?>

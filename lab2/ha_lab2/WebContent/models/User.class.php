@@ -72,8 +72,12 @@ class User {
 		if (is_null($this->formInput))
 			$this->initializeEmpty();
 		else { 	 
-		   $this->validateUserName();
-		   $this->validateEmail();
+			//The username will not be used for login
+		   	//$this->validateUserName();
+		   	$this->validateEmail();
+		   	
+		   	//Password checking will be implemented later
+		   	//$this->validatePassword();
 		}
 	}
 

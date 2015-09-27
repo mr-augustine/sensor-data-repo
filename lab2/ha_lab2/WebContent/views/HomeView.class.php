@@ -1,7 +1,7 @@
 <?php
 class HomeView {
   public static function show() {  
-		
+
 ?>
 	<!DOCTYPE html>
 	<html>
@@ -11,7 +11,7 @@ class HomeView {
 	</head>
 	
 	<body>
-	<img src="resources/images/botspace-logo.png" alt="bostpace logo" style="width:627px;height:126px;">
+	<img src="resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">
 	
 		<p>Botspace is the free, simple, and structured way to share your robot projects with a community of peers.</p>
 		<p>Talk to other hobbyists about their creations, or ask for help with your own. Botspace is a community to help you make your robots awesome!</p>

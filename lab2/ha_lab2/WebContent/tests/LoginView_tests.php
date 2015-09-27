@@ -12,7 +12,7 @@ include_once("../views/LoginView.class.php");
 include_once("../models/User.class.php");
 ?>
 
-<h2>It should call show when $user has an input</h2>
+<h2>It should call show() when $user has an input</h2>
 <?php 
 $validTest = array("email" => "myemail@email.com");
 $s1 = new User($validTest);
