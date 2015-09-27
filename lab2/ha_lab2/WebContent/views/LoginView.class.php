@@ -29,6 +29,7 @@ class LoginView {
 		
 		password<br>
 		<input type="password" name="password" tabindex="2" required>
+		<?php if (!is_null($user)) {echo $user->getError('password');}?>
 		</p>
 		
 		<input type="submit" value="Submit">

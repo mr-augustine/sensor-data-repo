@@ -6,7 +6,7 @@ class User {
 	private $errors;
 	private $formInput;
 	private $email;
-	private $userName;
+	private $password;
 	
 	public function __construct($formInput = null) {
 		$this->formInput = $formInput;
@@ -72,12 +72,8 @@ class User {
 		if (is_null($this->formInput))
 			$this->initializeEmpty();
 		else { 	 
-			//The username will not be used for login
-		   	//$this->validateUserName();
 		   	$this->validateEmail();
-		   	
-		   	//Password checking will be implemented later
-		   	//$this->validatePassword();
+		   	$this->validatePassword();
 		}
 	}
 
@@ -95,6 +91,15 @@ class User {
 		elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
 			$this->setError('email', 'EMAIL_INVALID');
 			//shouldn't this also be in the if-block above?
+			$this->errorCount ++;
+		}
+	}
+	
+	private function validatePassword() {
+		$this->password = $this->extractForm('password');
+	
+		if (empty($this->password)) {
+			$this->setError('password', 'PASSWORD_EMPTY');
 			$this->errorCount ++;
 		}
 	}
