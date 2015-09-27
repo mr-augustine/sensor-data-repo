@@ -7,6 +7,7 @@ class User {
 	private $formInput;
 	private $email;
 	private $password;
+	private $userName;
 	
 	public function __construct($formInput = null) {
 		$this->formInput = $formInput;
