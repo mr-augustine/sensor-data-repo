@@ -115,16 +115,49 @@ class UserData {
 		return $this->url;
 	}
 	
+	private function validateProfilePic() {
+		// If set, the profile pic should be a valid filename with a picture-type file extension
+		$this->profile_pic = $this->extractForm('profile_pic');
+		
+		if (!empty($this->profile_pic)) {
+			$finfo = new finfo;
+			
+			$fileinfo = $finfo->file($file, FILEINFO_MIME);
+			
+			// Verify that the mime type specifies an image
+			if (!(strpos($fileinfo, "image/") == 0)) {
+				$this->setError('profile_pic', 'PROFILE_PIC_WRONG_TYPE');
+			}
+		}
+	}
+	
+	private function validateSkillAreas() {
+		// If set, skill areas should only be from the available options
+		$this->skill_areas = $this->extractForm('skill_areas');
+		
+		if (!empty($this->skill_areas)) {
+			$numSkillAreas = count($this->skill_areas);
+			
+			for ($i = 0; $i < $numSkillAreas; $i++) {
+				if (!in_array($this->skill_areas[$i], UserData::SKILL_AREAS)) {
+					$this->setError('skill_area', 'SKILL_AREA_INVALID');
+					
+					// error out if at least one skill area is invalid
+					break;
+				}
+			}
+			
+		}
+	}
+	
 	private function validateSkillLevel() {
-		// Skill level should only be one of the available options {novice, advanced, exper}
+		// Skill level should only be one of the available options {novice, advanced, expert}
 		$this->skill_level = $this->extractForm('skill_level');
 		
 		if (empty($this->skill_level)) {
 			$this->setError('skill_level', 'SKILL_LEVEL_NOT_SET');
-			$this->errorCount ++;
-		} elseif (!in_array($this->skill_level, $SKILL_LEVELS)) {
+		} elseif (!in_array($this->skill_level, UserData::$SKILL_LEVELS)) {
 			$this->setError('skill_level', 'SKILL_LEVEL_INVALID');
-			$this->errorCount ++;
 		}
 	}
 	
@@ -134,11 +167,9 @@ class UserData {
 		
 		if (empty($this->user_name)) {
 			$this->setError('user_name', 'USER_NAME_EMPTY');
-			$this->errorCount ++;
 		} elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
 			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
 			$this->setError('user_name', 'USER_NAME_HAS_INVALID_CHARS');
-			$this->errorCount ++;
 		}
 	}
 	
