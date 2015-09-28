@@ -32,14 +32,45 @@ class UserData {
 	}
 	
 	private function initialize() {
-// 		$this->errorCount = 0;
-// 		$errors = array();
-// 		if (is_null($this->formInput))
-// 			$this->initializeEmpty();
-// 		else {
-// 			$this->validateEmail();
-// 			$this->validatePassword();
-// 		}
+		$this->errorCount = 0;
+		$errors = array();
+		
+		if (is_null($this->formInput))
+			$this->initializeEmpty();
+		else {
+			$this->validateUserName();
+			$this->validateSkillLevel();
+			$this->validateSkillAreas();
+			$this->validateProfilePic();
+			$this->validateStartedHobby();
+			$this->validateFavColor();
+			$this->validateUrl();
+			$this->validatePhone();
+		}
+	}
+	
+	private function initializeEmpty() {
+		$this->errorCount = 0;
+		$errors = array();
+		$this->user_name = "";
+		$this->skill_areas = array();
+		$this->profile_pic = "";
+		$this->started_hobby = "";
+		$this->fav_color = "";
+		$this->url = "";
+		$this->phone = "";
+	}
+	
+	private function extractForm($valueName) {
+		// Extract a stripped value from the form array
+		$value = "";
+		
+		if (isset($this->formInput[$valueName])) {
+			$value = trim($this->formInput[$valueName]);
+			$value = stripslashes ($value);
+			$value = htmlspecialchars ($value);
+			return $value;
+		}
 	}
 	
 	public function setError($errorName, $errorValue) {
@@ -82,6 +113,33 @@ class UserData {
 	
 	public function getUrl() {
 		return $this->url;
+	}
+	
+	private function validateSkillLevel() {
+		// Skill level should only be one of the available options {novice, advanced, exper}
+		$this->skill_level = $this->extractForm('skill_level');
+		
+		if (empty($this->skill_level)) {
+			$this->setError('skill_level', 'SKILL_LEVEL_NOT_SET');
+			$this->errorCount ++;
+		} elseif (!in_array($this->skill_level, $SKILL_LEVELS)) {
+			$this->setError('skill_level', 'SKILL_LEVEL_INVALID');
+			$this->errorCount ++;
+		}
+	}
+	
+	private function validateUserName() {
+		// Username should only contain letters, numbers, dashes and underscore
+		$this->user_name = $this->extractForm('user_name');
+		
+		if (empty($this->user_name)) {
+			$this->setError('user_name', 'USER_NAME_EMPTY');
+			$this->errorCount ++;
+		} elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
+			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
+			$this->setError('user_name', 'USER_NAME_HAS_INVALID_CHARS');
+			$this->errorCount ++;
+		}
 	}
 	
 	public function __toString() {

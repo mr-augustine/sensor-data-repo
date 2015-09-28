@@ -15,7 +15,7 @@ class SignupView {
 		<section>
 		<h1>Create an account</h1>
 		<form action="simpleEcho.php" method="post">
-			Name:       <input type="text" name="name" tabindex="1" required><br><br>
+			Name:       <input type="text" name="user_name" tabindex="1" required><br><br>
 			Email:      <input type="email" name="email" tabindex="2" required><br><br>
 			Password:	<input type="password" name="password" tabindex="3" required><br><br>
 			
