@@ -43,7 +43,7 @@ echo "The object is: $s1<br>";
 
 <h2>It should have an error when the password contains too few characters</h2>
 <?php 
-$shorPasswordTest = array("email" => "valid@email.com", "password" => "fail");
+$shortPasswordTest = array("email" => "valid@email.com", "password" => "fail");
 $s1 = new User($shortPasswordTest);
 $test2 = (empty($s1->getErrors()))?'':
 'Failed:It should have errors when invalid input is provided<br>';
