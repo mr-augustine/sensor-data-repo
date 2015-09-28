@@ -108,7 +108,7 @@ class UserData {
 	}
 	
 	public function getPhone() {
-		$this->phone;
+		return $this->phone;
 	}
 	
 	public function getProfilePic() {
