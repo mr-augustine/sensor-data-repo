@@ -107,12 +107,20 @@ class UserData {
 		return $this->skill_areas;
 	}
 	
+	public function getSkillLevel() {
+		return $this->skill_level;
+	}
+	
 	public function getStartedHobby() {
 		return $this->started_hobby;
 	}
 	
 	public function getUrl() {
 		return $this->url;
+	}
+	
+	public function getUserName() {
+		return $this->user_name;
 	}
 	
 	private function validateFavColor() {
@@ -167,7 +175,7 @@ class UserData {
 			$numSkillAreas = count($this->skill_areas);
 			
 			for ($i = 0; $i < $numSkillAreas; $i++) {
-				if (!in_array($this->skill_areas[$i], UserData::SKILL_AREAS)) {
+				if (!in_array($this->skill_areas[$i], UserData::$SKILL_AREAS)) {
 					$this->setError('skill_area', 'SKILL_AREA_INVALID');
 					
 					// error out if at least one skill area is invalid
