@@ -93,10 +93,10 @@ class User {
 	private function validatePassword() {
 		$this->password = $this->extractForm('password');
 	
-		if (empty($this->password)) {
+		if (empty($this->password))
 			$this->setError('password', 'PASSWORD_EMPTY');
-			$this->errorCount ++;
-		}
+		elseif (strlen($this->password) < self::$MIN_PASSWORD_LENGTH)
+			$this->setError('password', 'PASSWORD_TOO_SHORT');
 	}
 }
 ?>

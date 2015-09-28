@@ -6,6 +6,7 @@ USER_NAME_HAS_INVALID_CHARS Your username can only contain letters, numbers, das
 SKILL_LEVEL_INVALID Your skill level is invalid
 SKILL_LEVEL_NOT_SET Your skill level must be set
 PASSWORD_EMPTY Your password cannot be empty
+PASSWORD_TOO_SHORT Your password is too short
 PROFILE_PIC_WRONG_TYPE Your picture is not a valid type
 HOBBY_DATE_FORMAT_INVALID Your date format is invalid
 HOBBY_DATE_INVALID Your date is invalid
