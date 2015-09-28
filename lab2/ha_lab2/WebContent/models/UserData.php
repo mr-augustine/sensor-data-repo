@@ -1,10 +1,12 @@
 <?php
 include ("Messages.class.php");
 class UserData {
+	private static $MIN_USERNAME_LENGTH = 6;
 	private static $SKILL_LEVELS = array("novice", "advanced", "expert");
 	private static $SKILL_AREAS = array("system-design", "programming", "machining",
 			"soldering", "wiring", "circuit-design", "power-systems", "computer-vision",
 			"ultrasonic", "infrared", "gps", "compass");
+	
 	private $errorCount;
 	private $errors;
 	private $formInput;
@@ -249,7 +251,9 @@ class UserData {
 		
 		if (empty($this->user_name)) {
 			$this->setError('user_name', 'USER_NAME_EMPTY');
-		} elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
+		} elseif (strlen($this->userName) < self::$MIN_USERNAME_LENGTH) {
+			$this->setError('userName', 'USER_NAME_TOO_SHORT');
+		}elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
 			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
 			$this->setError('user_name', 'USER_NAME_HAS_INVALID_CHARS');
 		}

@@ -1,11 +1,11 @@
 <?php
 include ("Messages.class.php");
 class User {
-	private static $MIN_USERNAME_LENGTH = 6;
 	private static $MIN_PASSWORD_LENGTH = 8;
 	private $errorCount;
 	private $errors;
 	private $formInput;
+	
 	private $email;
 	private $password;
 	private $userName;
@@ -41,19 +41,15 @@ class User {
 		return $this->email;
 	}
 	
-	public function getUserName() {
-		return $this->userName;
-	}
-	
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("userName" => $this->userName, "email" => $this->email);
+		$paramArray = array("email" => $this->email);
 		
 		return $paramArray;
 	}
 
 	public function __toString() {
-		$str = "User name: ".$this->userName." Email: ".$this->email;
+		$str = "[User] {Email: ".$this->email."}";
 		return $str;
 	}
 	
@@ -90,11 +86,8 @@ class User {
 		
 		if (empty($this->email))
 			$this->setError('email', 'EMAIL_EMPTY');
-		elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+		elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL))
 			$this->setError('email', 'EMAIL_INVALID');
-			//shouldn't this also be in the if-block above?
-			$this->errorCount ++;
-		}
 	}
 	
 	private function validatePassword() {
@@ -103,19 +96,6 @@ class User {
 		if (empty($this->password)) {
 			$this->setError('password', 'PASSWORD_EMPTY');
 			$this->errorCount ++;
-		}
-	}
-	
-	private function validateUserName() {
-		$this->userName = $this->extractForm('userName');
-		
-		if (empty($this->userName))
-			$this->setError('userName', 'USER_NAME_EMPTY');
-		elseif (strlen($this->userName) < self::$MIN_USERNAME_LENGTH)
-			$this->setError('userName', 'USER_NAME_TOO_SHORT');
-		elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
-			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
-			$this->setError('userName', 'USER_NAME_HAS_INVALID_CHARS');
 		}
 	}
 }
