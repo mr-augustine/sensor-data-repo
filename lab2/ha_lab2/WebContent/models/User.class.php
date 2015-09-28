@@ -1,5 +1,5 @@
 <?php
-include ("Messages.class.php");
+include_once ("Messages.class.php");
 class User {
 	private static $MIN_PASSWORD_LENGTH = 8;
 	private $errorCount;

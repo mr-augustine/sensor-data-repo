@@ -1,9 +1,9 @@
 <?php
-include ("Messages.class.php");
+//include ("Messages.class.php");
 class UserData {
 	private static $MIN_USERNAME_LENGTH = 6;
-	private static $SKILL_LEVELS = array("novice", "advanced", "expert");
-	private static $SKILL_AREAS = array("system-design", "programming", "machining",
+	public static $SKILL_LEVELS = array("novice", "advanced", "expert");
+	public static $SKILL_AREAS = array("system-design", "programming", "machining",
 			"soldering", "wiring", "circuit-design", "power-systems", "computer-vision",
 			"ultrasonic", "infrared", "gps", "compass");
 	
@@ -68,9 +68,23 @@ class UserData {
 		$value = "";
 		
 		if (isset($this->formInput[$valueName])) {
-			$value = trim($this->formInput[$valueName]);
-			$value = stripslashes ($value);
-			$value = htmlspecialchars ($value);
+			
+			// Handle leaf-values and array-values differently
+			if (!is_array($this->formInput[$valueName])) {
+				$value = trim($this->formInput[$valueName]);
+				$value = stripslashes ($value);
+				$value = htmlspecialchars ($value);
+			} else {
+				$value = array();
+				
+				foreach ($this->formInput[$valueName] as $arrayValue) {
+					$tempValue = trim($arrayValue);
+					$tempValue = stripslashes ($arrayValue);
+					$tempValue = htmlspecialchars ($arrayValue);
+					
+					array_push($value, $tempValue);
+				}
+			}
 			return $value;
 		}
 	}
@@ -125,6 +139,17 @@ class UserData {
 		return $this->user_name;
 	}
 	
+	public function getParameters() {
+		// Return data fields as an associative array
+		$paramArray = array("user_name" => $this->user_name, "skill_level" => $this->skill_level,
+			"skill_areas" => $this->skill_areas, "profile_pic" => $this->profile_pic,
+			"started_hobby" => $this->started_hobby, "fav_color" => $this->fav_color,
+			"url" => $this->url, "phone" => $this->phone
+		);
+		
+		return $paramArray;
+	}
+	
 	private function validateFavColor() {
 		// The favorite color should be a valid hex code, prefixed with a '#' {#0123ab}
 		$this->fav_color = $this->extractForm('fav_color');
@@ -146,7 +171,7 @@ class UserData {
 
 			// remove spaces then check formatting
 			$this->phone = str_replace(' ', '', $this->phone);
-			if(!filter_var($this->started_hobby, FILTER_VALIDATE_REGEXP,
+			if(!filter_var($this->phone, FILTER_VALIDATE_REGEXP,
 					array("options"=>array("regexp" =>"/^\d{3}[-.]?\d{3}[-.]?\d{4}$/")) )) {
 				$this->setError('phone', 'PHONE_NUMBER_INVALID');
 			}
@@ -158,14 +183,20 @@ class UserData {
 		$this->profile_pic = $this->extractForm('profile_pic');
 		
 		if (!empty($this->profile_pic)) {
-			$finfo = new finfo;
+			if(!filter_var($this->profile_pic, FILTER_VALIDATE_REGEXP,
+				array("options"=>array("regexp" =>"/\.(bmp|jpg|jpeg|png|gif|tif)$/")) )) {
+					$this->setError('profile_pic', 'PROFILE_PIC_WRONG_TYPE');
+			}
+			
+			// TODO: figure out a better way of verifying filetype
+			/*$finfo = new finfo;
 			
 			$fileinfo = $finfo->file($file, FILEINFO_MIME);
 			
 			// Verify that the mime type specifies an image
 			if (!(strpos($fileinfo, "image/") == 0)) {
 				$this->setError('profile_pic', 'PROFILE_PIC_WRONG_TYPE');
-			}
+			}*/
 		}
 	}
 	
@@ -184,7 +215,6 @@ class UserData {
 					break;
 				}
 			}
-			
 		}
 	}
 	
@@ -200,7 +230,7 @@ class UserData {
 	}
 	
 	private function validateStartedHobby() {
-		// Hobby start date should be a valide year-month combination between epoch and current month
+		// Hobby start date should be a valid year-month combination between epoch and current month
 		$this->started_hobby = $this->extractForm('started_hobby');
 		
 		if (empty($this->started_hobby)) {
@@ -251,9 +281,9 @@ class UserData {
 		
 		if (empty($this->user_name)) {
 			$this->setError('user_name', 'USER_NAME_EMPTY');
-		} elseif (strlen($this->userName) < self::$MIN_USERNAME_LENGTH) {
-			$this->setError('userName', 'USER_NAME_TOO_SHORT');
-		}elseif (!filter_var($this->userName, FILTER_VALIDATE_REGEXP,
+		} elseif (strlen($this->user_name) < self::$MIN_USERNAME_LENGTH) {
+			$this->setError('user_name', 'USER_NAME_TOO_SHORT');
+		} elseif (!filter_var($this->user_name, FILTER_VALIDATE_REGEXP,
 			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
 			$this->setError('user_name', 'USER_NAME_HAS_INVALID_CHARS');
 		}

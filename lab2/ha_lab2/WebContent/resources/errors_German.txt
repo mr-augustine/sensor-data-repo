@@ -3,6 +3,7 @@ EMAIL_INVALID Ihre E-Mail ist ungültig
 USER_NAME_EMPTY Ihr Benutzername darf nicht leer sein oder Leerzeichen enthalten nur
 USER_NAME_TOO_SHORT Ihr Benutzername ist zu kurz
 USER_NAME_HAS_INVALID_CHARS Ihr Benutzername kann nur Buchstaben, Zahlen, Bindestriche und Unterstriche
+SKILL_AREA_INVALID Ihrer Spielfläche ist ungültig
 SKILL_LEVEL_INVALID Ihrer Spielstärke ist ungültig
 SKILL_LEVEL_NOT_SET Ihrer Spielstärke eingestellt werden
 PASSWORD_EMPTY Das Passwort darf nicht leer sein

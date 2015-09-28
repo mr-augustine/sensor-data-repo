@@ -14,7 +14,7 @@ class SignupView {
 	
 		<section>
 		<h1>Create an account</h1>
-		<form action="simpleEcho.php" method="post">
+		<form action="signup" method="post">
 			Name:       <input type="text" name="user_name" 
 			<?php if (!is_null($userData)) { echo 'value = "'. $userData->getUserName() .'"'; }?> tabindex="1" required>
 			<span class="error">
@@ -35,7 +35,8 @@ class SignupView {
 			Skill Level:
 			<input type="radio" name="skill_level" value="novice" tabindex="4" 
 			<?php
-				if (!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['0']) == 0) {
+				if ((is_null($userData)) || 
+						(!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['0']) == 0)) {
 					echo "checked";
 				} ?> >Novice
 			<input type="radio" name="skill_level" value="advanced" tabindex="5"
