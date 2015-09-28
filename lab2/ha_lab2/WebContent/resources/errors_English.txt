@@ -9,3 +9,5 @@ PASSWORD_EMPTY Your password cannot be empty
 PROFILE_PIC_WRONG_TYPE Your picture is not a valid type
 HOBBY_DATE_FORMAT_INVALID Your date format is invalid
 HOBBY_DATE_INVALID Your date is invalid
+URL_INVALID Your URL is invalid
+PHONE_NUMBER_INVALID Your phone number is invalid

@@ -115,8 +115,36 @@ class UserData {
 		return $this->url;
 	}
 	
+	private function validateFavColor() {
+		// The favorite color should be a valid hex code, prefixed with a '#' {#0123ab}
+		$this->fav_color = $this->extractForm('fav_color');
+		
+		if (empty($this->fav_color)) {
+			$this->setError('fav_color', 'FAV_COLOR_EMPTY');
+		} elseif (!filter_var($this->fav_color, FILTER_VALIDATE_REGEXP,
+			array("options"=>array("regexp" =>"/^#[0-9a-f]{6}$/")) )) {
+			$this->setError('fav_color', 'FAV_COLOR_INVALID');
+		}
+	}
+	
+	private function validatePhone() {
+		// If set, the phone number must contain valid characters
+		$this->phone = $this->extractForm('phone');
+		
+		if (!empty($this->phone)) {
+			// TODO: relax the formatting constraint; normalize then check
+
+			// remove spaces then check formatting
+			$this->phone = str_replace(' ', '', $this->phone);
+			if(!filter_var($this->started_hobby, FILTER_VALIDATE_REGEXP,
+					array("options"=>array("regexp" =>"/^\d{3}[-.]?\d{3}[-.]?\d{4}$/")) )) {
+				$this->setError('phone', 'PHONE_NUMBER_INVALID');
+			}
+		}
+	}
+	
 	private function validateProfilePic() {
-		// If set, the profile pic should be a valid filename with a picture-type file extension
+		// If set, the profile pic should be a picture filetype
 		$this->profile_pic = $this->extractForm('profile_pic');
 		
 		if (!empty($this->profile_pic)) {
@@ -194,6 +222,17 @@ class UserData {
 			}
 		}
 		
+	}
+	
+	private function validateUrl() {
+		// If set, URL should be in valid format
+		$this->url = $this->extractForm('url');
+		
+		if (!empty($this->url)) {
+			if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
+				$this->setError('url', 'URL_INVALID');
+			}
+		}
 	}
 	
 	private function validateUserName() {
