@@ -16,10 +16,21 @@ class SignupView {
 		<h1>Create an account</h1>
 		<form action="simpleEcho.php" method="post">
 			Name:       <input type="text" name="user_name" 
-			<?php if (!is_null($userData)) {echo 'value = "'. $userData->getUserName() .'"';}?> tabindex="1" required><br><br>
+			<?php if (!is_null($userData)) { echo 'value = "'. $userData->getUserName() .'"'; }?> tabindex="1" required>
+			<span class="error">
+			<?php if (!is_null($userData)) { echo $userData->getError('user_name'); }?>
+			</span><br><br>
+			
 			Email:      <input type="email" name="email" 
-			<?php if (!is_null($user)) {echo 'value = "'. $user->getEmail() .'"';}?> tabindex="2" required><br><br>
-			Password:	<input type="password" name="password" tabindex="3" required><br><br>
+			<?php if (!is_null($user)) { echo 'value = "'. $user->getEmail() .'"'; }?> tabindex="2" required>
+			<span class="error">
+			<?php if (!is_null($user)) { echo $user->getError('email'); }?>
+			</span><br><br>
+			
+			Password:	<input type="password" name="password" tabindex="3" required>
+			<span class="error">
+			<?php if (!is_null($user)) { echo $user->getError('password'); }?>
+			</span><br><br>
 			
 			Skill Level:
 			<input type="radio" name="skill_level" value="novice" tabindex="4" 
@@ -36,8 +47,12 @@ class SignupView {
 			<?php
 				if (!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['2']) == 0) {
 					echo "checked";
-				} ?> >Expert<br><br>
+				} ?> >Expert
+			<span class="error">
+			<?php if (!is_null($userData)) { echo $userData->getError('skill_level'); }?>
+			</span><br><br>
 			
+			<?php if (!is_null($userData)) { echo $userData->getError('skill_area').'<br>'; }?>
 			<fieldset>
 				<legend>Skill Areas</legend>
 				<input type="checkbox" name="skill_areas[]" value="system-design" tabindex="7"
@@ -104,20 +119,28 @@ class SignupView {
 		
 			Profile Picture: <input type="file" name="profile_pic" accept="image/*" tabindex="19">
 			<?php if (!is_null($userData)) { echo $userData->getError('profile_pic'); }?><br><br>
+			
 			Started Robotics: <input type="month" name="started_hobby" min="1970-01" max="<?php echo date("Y-m")?>" tabindex="20"
 			<?php if (!is_null($userData) && !empty($userData->getStartedHobby())) {
 					echo 'value="'.$userData->getStartedHobby().'"';
 				}
 			?>>
-			<?php if (!is_null($userData)) {echo $userData->getError('started_hobby');}?><br><br>>
+			<?php if (!is_null($userData)) {echo $userData->getError('started_hobby');}?><br><br>
+			
 			Favorite Color: <input type="color" name="fav_color" tabindex="21"
 			<?php if (!is_null($userData) && !empty($userData->getFavColor())) {
 					echo 'value="'.$userData->getFavColor().'"';
 				}
 			?>>
-			<?php if (!is_null($userData)) { echo $userData->getError('fav_color'); }?><br><br>>
-			URL: <input type="url" name="url" tabindex="22"><br><br>
-			Telephone: <input type="tel" name="phone" tabindex="23"><br><br>
+			<?php if (!is_null($userData)) { echo $userData->getError('fav_color'); }?><br><br>
+			
+			URL: <input type="url" name="url" tabindex="22"
+			<?php if (!is_null($userData)) { echo 'value="'.$userData->getUrl().'"'; }?>>
+			<?php if (!is_null($userData)) { echo $userData->getError('url'); }?><br><br>
+			
+			Telephone: <input type="tel" name="phone" tabindex="23"
+			<?php if (!is_null($userData)) { echo 'value="'.$userData->getPhone().'"'; }?>>
+			<?php if (!is_null($userData)) { echo $userData->getError('phone'); }?><br><br>
 			
 			<input type="submit" value="Submit">
 		</form>
