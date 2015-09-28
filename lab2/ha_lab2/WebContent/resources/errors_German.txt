@@ -9,7 +9,9 @@ SKILL_LEVEL_NOT_SET Ihrer Spielstärke eingestellt werden
 PASSWORD_EMPTY Das Passwort darf nicht leer sein
 PASSWORD_TOO_SHORT Das Passwort ist zu kurz
 PROFILE_PIC_WRONG_TYPE Ihr Bild ist kein gültiger Typ
+HOBBY_DATE_EMPTY Ihr Hobby Datum nicht gesetzt ist
 HOBBY_DATE_FORMAT_INVALID Ihr Datumsformat ist ungültig
 HOBBY_DATE_INVALID Ihr Datum ist ungültig
+FAV_COLOR_EMPTY Ihre Lieblingsfarbe ist nicht gesetzt
 URL_INVALID Ihre URL ist ungültig
 PHONE_NUMBER_INVALID Ihre Telefonnummer ist ungültig

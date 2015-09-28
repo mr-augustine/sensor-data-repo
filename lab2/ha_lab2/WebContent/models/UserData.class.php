@@ -1,5 +1,5 @@
 <?php
-//include ("Messages.class.php");
+include_once ("Messages.class.php");
 class UserData {
 	private static $MIN_USERNAME_LENGTH = 6;
 	public static $SKILL_LEVELS = array("novice", "advanced", "expert");
@@ -209,7 +209,7 @@ class UserData {
 			
 			for ($i = 0; $i < $numSkillAreas; $i++) {
 				if (!in_array($this->skill_areas[$i], UserData::$SKILL_AREAS)) {
-					$this->setError('skill_area', 'SKILL_AREA_INVALID');
+					$this->setError('skill_areas', 'SKILL_AREA_INVALID');
 					
 					// error out if at least one skill area is invalid
 					break;
@@ -234,7 +234,7 @@ class UserData {
 		$this->started_hobby = $this->extractForm('started_hobby');
 		
 		if (empty($this->started_hobby)) {
-			$this->setError('started_hobby', 'HOBBY_START_NOT_SET');
+			$this->setError('started_hobby', 'HOBBY_DATE_EMPTY');
 		}
 		
 		// Use a simple regex to check date format {yyyy-dd}
@@ -258,7 +258,7 @@ class UserData {
 			
 			if ( !($startYear >= 1970 && $startYear <= $currentYear) || 
 					!($startMonth >= 1 && $startMonth <= $currentMonth) ) {
-				$this->setError('started_hobby', 'HOBBY_DATE_INVALID');	
+				$this->setError('started_hobby', 'HOBBY_DATE_INVALID');
 			}
 		}
 		
@@ -291,7 +291,7 @@ class UserData {
 	
 	public function __toString() {
 		$str = "[UserData] {user_name: ".$this->user_name."; skill_level: ".$this->skill_level
-			."; skill_areas: ".$this->getSkillAreas()."; profile_pic: ".$this->getProfilePic()
+			."; skill_areas: ".print_r($this->getSkillAreas(),true)."; profile_pic: ".$this->getProfilePic()
 			."; started_hobby: ".$this->getStartedHobby()."; fav_color: ".$this->getFavColor()
 			."; url: ".$this->getUrl()."; phone: ".$this->getPhone()."; robots: ".$this->getRobots()
 			."}";

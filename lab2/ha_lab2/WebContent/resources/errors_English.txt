@@ -9,7 +9,9 @@ SKILL_LEVEL_NOT_SET Your skill level must be set
 PASSWORD_EMPTY Your password cannot be empty
 PASSWORD_TOO_SHORT Your password is too short
 PROFILE_PIC_WRONG_TYPE Your picture is not a valid type
+HOBBY_DATE_EMPTY Your hobby date is not set
 HOBBY_DATE_FORMAT_INVALID Your date format is invalid
 HOBBY_DATE_INVALID Your date is invalid
+FAV_COLOR_EMPTY Your favorite color is not set
 URL_INVALID Your URL is invalid
 PHONE_NUMBER_INVALID Your phone number is invalid
