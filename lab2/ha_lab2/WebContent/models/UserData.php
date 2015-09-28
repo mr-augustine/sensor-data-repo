@@ -161,6 +161,41 @@ class UserData {
 		}
 	}
 	
+	private function validateStartedHobby() {
+		// Hobby start date should be a valide year-month combination between epoch and current month
+		$this->started_hobby = $this->extractForm('started_hobby');
+		
+		if (empty($this->started_hobby)) {
+			$this->setError('started_hobby', 'HOBBY_START_NOT_SET');
+		}
+		
+		// Use a simple regex to check date format {yyyy-dd}
+		elseif (!filter_var($this->started_hobby, FILTER_VALIDATE_REGEXP,
+			array("options"=>array("regexp" =>"/^[12]\d{3}-[012]\d$/")) )) {
+			$this->setError('started_hobby', 'HOBBY_DATE_FORMAT_INVALID');
+			break;
+		}
+		
+		// Verify that the date range is appropriate {epoch .. current date}
+		else {
+			list($startYear, $startMonth) = explode("-", $this->started_hobby, 2);
+			$currentYear = date("Y");
+			$currentMonth = date("m");
+			
+			// Convert all date fields to integers
+			$currentYear += 0;
+			$currentMonth += 0;
+			$startYear += 0;
+			$startMonth += 0;
+			
+			if ( !($startYear >= 1970 && $startYear <= $currentYear) || 
+					!($startMonth >= 1 && $startMonth <= $currentMonth) ) {
+				$this->setError('started_hobby', 'HOBBY_DATE_INVALID');	
+			}
+		}
+		
+	}
+	
 	private function validateUserName() {
 		// Username should only contain letters, numbers, dashes and underscore
 		$this->user_name = $this->extractForm('user_name');
