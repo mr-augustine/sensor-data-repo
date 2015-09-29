@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Project Validations</title>
+</head>
+<body>
+
+<h1>User.class.php</h1>
+<ul>
+<li><em>email</em>: Mandatory; Implemented -> {EMAIL_EMPTY, EMAIL_INVALID} Testable -> {all}</li>
+<li><em>password</em>: Mandatory; Implemented -> {PASSWORD_EMPTY, PASSWORD_TOO_SHORT}  Testable -> {all}</li>
+</ul>
+
+<h1>UserData.class.php</h1>
+<ul>
+<li><em>user_name</em>: Mandatory; Implemented -> {USER_NAME_EMPTY, USER_NAME_TOO_SHORT, USER_NAME_HAS_INVALID_CHARS} Testable -> {all}</li>
+<li><em>skill_level</em>: Mandatory; Implemented -> {SKILL_LEVEL_NOT_SET, SKILL_LEVEL_INVALID} Testable -> {all}</li>
+<li><em>skill_areas</em>: Optional; Implemented -> {SKILL_AREA_INVALID} Testable -> {all}</li>
+<li><em>profile_pic</em>: Optional; Implemented -> {PROFILE_PIC_WRONG_TYPE} Testable -> {all}</li>
+<li><em>started_hobby</em>: Mandatory; Implemented -> {HOBBY_DATE_EMPTY, HOBBY_DATE_FORMAT_INVALID, HOBBY_DATE_INVALID} Testable -> {all}</li>
+<li><em>fav_color</em>: Mandatory; Implemented -> {FAV_COLOR_EMPTY, FAV_COLOR_INVALID} Testable -> {all}</li>
+<li><em>url</em>: Optional; Implemented -> {URL_INVALID} Testable -> {all}</li>
+<li><em>phone</em>: Optional; Implemented -> {PHONE_NUMBER_INVALID} Testable -> {all}</li>
+</ul>
+
+
+<h1>RobotData.class.php</h1>
+<ul>
+<li><em>robot_name</em>: Mandatory; Implemented -> {ROBOT_NAME_EMPTY} Testable -> {all}</li>
+<li><em>creator</em>: Mandatory; Implemented -> {ROBOT_CREATOR_EMPTY} Testable -> {all}</li>
+<li><em>status</em>: Mandatory; Implemented -> {ROBOT_STATUS_EMPTY, ROBOT_STATUS_INVALID} Testable -> {all}</li>
+</ul>
+
+</body>
+</html>
