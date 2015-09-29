@@ -38,13 +38,24 @@ class RobotData {
 		return $this->errors;
 	}
 
-	public function getEmail() {
-		return $this->email;
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	public function getRobotName() {
+		return $this->robot_name;
+	}
+	
+	public function getStatus() {
+		return $this->status;
 	}
 	
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("email" => $this->email);
+		$paramArray = array("robot_name" => $this->robot_name,
+				"creator" => $this->creator,
+				"status" => $this->status
+		);
 		
 		return $paramArray;
 	}
