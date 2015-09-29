@@ -13,6 +13,8 @@ class ProfileView {
 	</head>
 	<body>
 	
+	<a href="home">HOME</a><br><br>
+	
 	Here's the user!<br><br>
 	<?php echo $userData; ?>
 	
