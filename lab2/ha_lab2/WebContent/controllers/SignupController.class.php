@@ -8,7 +8,7 @@ class SignupController {
 			$userData = new UserData($_POST);
 			//print_r($_FILES); echo '<br>';
 			if ($user->getErrorCount() == 0 && $userData->getErrorCount() == 0)
-				HomeView::show();
+				ProfileView::show($userData);
 			else
 				SignupView::show($user, $userData);
 		} else  // Initial link
