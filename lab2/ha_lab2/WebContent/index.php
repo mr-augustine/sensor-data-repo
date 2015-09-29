@@ -17,6 +17,9 @@
 		case "signup":
 			SignupController::run();
 			break;
+		case "profile":
+			ProfileController::run();
+			break;
 		default:
 			HomeView::show();
 	};
