@@ -16,3 +16,7 @@ FAV_COLOR_EMPTY Your favorite color is not set
 FAV_COLOR_INVALID Your favorite color is invalid
 URL_INVALID Your URL is invalid
 PHONE_NUMBER_INVALID Your phone number is invalid
+ROBOT_NAME_EMPTY Your robot name cannot be empty or only contain whitespace
+ROBOT_CREATOR_EMPTY Your creator name cannot be empty or only contain whitespace
+ROBOT_STATUS_EMPTY Your status cannot be empty or only contain whitespace
+ROBOT_STATUS_INVALID Your status is invalid

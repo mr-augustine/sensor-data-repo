@@ -32,6 +32,10 @@ echo "FAV_COLOR_EMPTY: " .Messages::getError("FAV_COLOR_EMPTY")."<br>";
 echo "FAV_COLOR_INVALID: " .Messages::getError("FAV_COLOR_INVALID")."<br>";
 echo "URL_INVALID: " .Messages::getError("URL_INVALID")."<br>";
 echo "PHONE_NUMBER_INVALID: " .Messages::getError("PHONE_NUMBER_INVALID")."<br>";
+echo "ROBOT_NAME_EMPTY: " .Messages::getError("ROBOT_NAME_EMPTY")."<br>";
+echo "ROBOT_CREATOR_EMPTY: " .Messages::getError("ROBOT_CREATOR_EMPTY")."<br>";
+echo "ROBOT_STATUS_EMPTY: " .Messages::getError("ROBOT_STATUS_EMPTY")."<br>";
+echo "ROBOT_STATUS_INVALID: " .Messages::getError("ROBOT_STATUS_INVALID")."<br>";
 
 
 echo (empty(Messages::getError("USER_NAME_TOO_SHORT")))?
@@ -60,6 +64,10 @@ echo "FAV_COLOR_EMPTY: " .Messages::getError("FAV_COLOR_EMPTY")."<br>";
 echo "FAV_COLOR_INVALID: " .Messages::getError("FAV_COLOR_INVALID")."<br>";
 echo "URL_INVALID: " .Messages::getError("URL_INVALID")."<br>";
 echo "PHONE_NUMBER_INVALID: " .Messages::getError("PHONE_NUMBER_INVALID")."<br>";
+echo "ROBOT_NAME_EMPTY: " .Messages::getError("ROBOT_NAME_EMPTY")."<br>";
+echo "ROBOT_CREATOR_EMPTY: " .Messages::getError("ROBOT_CREATOR_EMPTY")."<br>";
+echo "ROBOT_STATUS_EMPTY: " .Messages::getError("ROBOT_STATUS_EMPTY")."<br>";
+echo "ROBOT_STATUS_INVALID: " .Messages::getError("ROBOT_STATUS_INVALID")."<br>";
 
 ?>
 
@@ -86,6 +94,10 @@ echo "FAV_COLOR_EMPTY: " .Messages::getError("FAV_COLOR_EMPTY")."<br>";
 echo "FAV_COLOR_INVALID: " .Messages::getError("FAV_COLOR_INVALID")."<br>";
 echo "URL_INVALID: " .Messages::getError("URL_INVALID")."<br>";
 echo "PHONE_NUMBER_INVALID: " .Messages::getError("PHONE_NUMBER_INVALID")."<br>";
+echo "ROBOT_NAME_EMPTY: " .Messages::getError("ROBOT_NAME_EMPTY")."<br>";
+echo "ROBOT_CREATOR_EMPTY: " .Messages::getError("ROBOT_CREATOR_EMPTY")."<br>";
+echo "ROBOT_STATUS_EMPTY: " .Messages::getError("ROBOT_STATUS_EMPTY")."<br>";
+echo "ROBOT_STATUS_INVALID: " .Messages::getError("ROBOT_STATUS_INVALID")."<br>";
 
 ?>
 </body>

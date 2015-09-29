@@ -16,3 +16,7 @@ FAV_COLOR_EMPTY Ihre Lieblingsfarbe ist nicht gesetzt
 FAV_COLOR_INVALID Ihre Lieblingsfarbe ist ungültig
 URL_INVALID Ihre URL ist ungültig
 PHONE_NUMBER_INVALID Ihre Telefonnummer ist ungültig
+ROBOT_NAME_EMPTY Ihr Roboter Name darf nicht leer sein oder Leerzeichen enthalten nur
+ROBOT_CREATOR_EMPTY Ihr Schöpfer Name darf nicht leer sein oder Leerzeichen enthalten nur
+ROBOT_STATUS_EMPTY Ihr Status kann nicht leer sein oder Leerzeichen enthalten nur
+ROBOT_STATUS_INVALID Ihr Status ist ungültig

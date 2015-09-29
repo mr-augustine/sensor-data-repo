@@ -20,6 +20,9 @@
 		case "profile":
 			ProfileController::run();
 			break;
+		case "mystery":
+			RobotProfileController::run();
+			break;
 		default:
 			HomeView::show();
 	};
