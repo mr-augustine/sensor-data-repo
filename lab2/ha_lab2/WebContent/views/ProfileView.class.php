@@ -7,9 +7,9 @@ class ProfileView {
 	<html>
 	<head>
 	<meta charset="utf-8">
-	<meta name= "keywords" content="Botspace profile">
+	<meta name= "keywords" content="Botspace Human profile">
 	<meta name="description" content = "Profile for Human Botspace Member">
-	<title>Botspace Profile</title>
+	<title>Botspace Human Profile</title>
 	</head>
 	<body>
 	

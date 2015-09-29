@@ -7,9 +7,9 @@ class RobotProfileView {
 	<html>
 	<head>
 	<meta charset="utf-8">
-	<meta name= "keywords" content="Botspace profile">
+	<meta name= "keywords" content="Botspace Robot profile">
 	<meta name="description" content = "Profile for Robot Botspace Member">
-	<title>Botspace Profile</title>
+	<title>Botspace Robot Profile</title>
 	</head>
 	<body>
 	
