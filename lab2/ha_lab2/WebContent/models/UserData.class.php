@@ -241,7 +241,6 @@ class UserData {
 		elseif (!filter_var($this->started_hobby, FILTER_VALIDATE_REGEXP,
 			array("options"=>array("regexp" =>"/^[12]\d{3}-[012]\d$/")) )) {
 			$this->setError('started_hobby', 'HOBBY_DATE_FORMAT_INVALID');
-			break;
 		}
 		
 		// Verify that the date range is appropriate {epoch .. current date}

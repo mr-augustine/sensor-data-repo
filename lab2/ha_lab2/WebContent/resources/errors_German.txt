@@ -13,5 +13,6 @@ HOBBY_DATE_EMPTY Ihr Hobby Datum nicht gesetzt ist
 HOBBY_DATE_FORMAT_INVALID Ihr Datumsformat ist ungültig
 HOBBY_DATE_INVALID Ihr Datum ist ungültig
 FAV_COLOR_EMPTY Ihre Lieblingsfarbe ist nicht gesetzt
+FAV_COLOR_INVALID Ihre Lieblingsfarbe ist ungültig
 URL_INVALID Ihre URL ist ungültig
 PHONE_NUMBER_INVALID Ihre Telefonnummer ist ungültig
