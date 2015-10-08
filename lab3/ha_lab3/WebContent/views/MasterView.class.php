@@ -1,6 +1,7 @@
 <?php
 class MasterView {
-	private static $STD_FOOTER = '
+
+	private static $STD_FOOTER = <<<EOT
 	<footer>
 		<hr>
 	
@@ -14,7 +15,10 @@ class MasterView {
 		</nav>
 		
 		<p>Copyright 2015</p>
-	</footer>';
+	</footer>
+EOT;
+// The HEREDOC terminator must not be indented
+// TODO Can't use variables within HEREDOC for initializing class properties
 	
 	public static function showHeader($title) {
 		if (is_null($title))
@@ -31,7 +35,7 @@ class MasterView {
 
 	public static function showFooter($footer) {
 		if (is_null($footer))
-			echo self::$STD_FOOTER;	
+			echo self::$STD_FOOTER;
 ?>	 	
     </body>
     </html>
