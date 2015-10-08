@@ -1,16 +1,15 @@
 <?php
 class HomeView {
-  public static function show() {  
-
-?>
-	<!DOCTYPE html>
-	<html>
-	<head>
-	<meta charset="utf-8">
-	<title>botspace</title>
-	</head>
 	
-	<body>
+  	public static function show($user) {  
+  		MasterView::showHeader("botspace");
+  		HomeView::showDetails($user);
+  		MasterView::showFooter(null);
+  	}
+  	
+  	public static function showDetails($user) {
+?>
+
 	<img src="resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">
 	
 		<p>Botspace is the free, simple, and structured way to share your robot projects with a community of peers.</p>
@@ -43,23 +42,8 @@ class HomeView {
 		</section>
 		</aside>
 		
-	<footer>
-		<hr>
-	
-		<nav>
-		<a href="">Tour</a> |
-		<a href="">About</a> |
-		<a href="">Help</a> |
-		<a href="">Terms</a> |
-		<a href="">Privacy</a>
-		 | <a href="tests.html">TESTS</a>
-		</nav>
-		
-		<p>Copyright 2015</p>
-	</footer>
-	</body>
-	</html>
+
 <?php
-  }
+  	}
 }
 ?>

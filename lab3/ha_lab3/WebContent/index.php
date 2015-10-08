@@ -24,6 +24,6 @@
 			RobotProfileController::run();
 			break;
 		default:
-			HomeView::show();
+			HomeView::show(null);
 	};
 ?>
