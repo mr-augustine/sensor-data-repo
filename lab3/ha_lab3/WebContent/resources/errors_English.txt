@@ -1,5 +1,6 @@
 EMAIL_EMPTY Your email cannot be empty or only contain whitespace
 EMAIL_INVALID Your email is invalid
+EMAIL_PASSWORD_COMBO_INVALID Your username or password is incorrect
 USER_NAME_EMPTY Your username cannot be empty or only contain whitespace
 USER_NAME_TOO_SHORT Your username is too short
 USER_NAME_HAS_INVALID_CHARS Your username can only contain letters, numbers, dashes and underscores

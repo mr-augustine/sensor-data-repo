@@ -1,14 +1,23 @@
 <?php
+	// Use an output buffer
+	ob_start();
+	session_start();
+	
 	include("includer.php");   
 	$url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-	//echo "URL: $url <br>";
-	$urlPieces = split("/", $url);
 	
-	//print_r($urlPieces);
-	if (count($urlPieces) < 2)
-		$control = "none";
-	else 
-		$control = $urlPieces[2];
+	// $ctrl_act_arg === Control, Action, Arguments
+	list($fill, $base, $ctrl_act_args) =
+		explode('/', $url, 3) + array("", "", "");
+	list($control, $action, $arguments) =
+		explode('_', $ctrl_act_args, 3) + array("", "", "");
+	
+	$_SESSION['base'] = $base;
+	$_SESSION['control'] = $control;
+	$_SESSION['action'] = $action;
+	$_SESSION['arguments'] = $arguments;
+	
+	//print_r("base=".$base.",control=".$control.",action=".$action.",args=".$arguments);
 	
 	switch ($control) {
 		case "login":
@@ -26,4 +35,6 @@
 		default:
 			HomeView::show(array(null));
 	};
+	
+	ob_end_flush();
 ?>
