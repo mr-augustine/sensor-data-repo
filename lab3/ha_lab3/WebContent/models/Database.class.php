@@ -2,9 +2,8 @@
 // A singleton class that maintains the database connection
 class Database {
     private static $db;
+    private static $dbName;
 	private static $dsn = 'mysql:host=localhost;dbname=';
-	private static $dbName;
-	private static $email;
 	private static $options = 
 	   array (PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
 	
@@ -20,7 +19,7 @@ class Database {
 					           ".." . DIRECTORY_SEPARATOR . "myConfig.ini";
 				
 				$passArray = parse_ini_file($configPath);
-				$username = $passArray["email"];
+				$username = $passArray["username"];
 				$password = $passArray["password"];
 				self::$dbName = $dbName;
 				$dbspec = self::$dsn.self::$dbName.";charset=utf8";

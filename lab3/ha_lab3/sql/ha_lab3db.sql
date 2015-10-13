@@ -11,3 +11,12 @@ CREATE TABLE Users (
   date_created       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (userId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO Users (userId, email, password) VALUES 
+	   (1, 'bjabituya@yahoo.com', 'wwwwwwww');
+INSERT INTO Users (userId, email, password) VALUES 
+	   (2, 'charlie.g@hotmail.com', 'xxxxxxxx');
+INSERT INTO Users (userId, email, password) VALUES 
+	   (3, 'altars@gmail.com', 'yyyyyyyy');
+INSERT INTO Users (userId, email, password) VALUES 
+	   (4, 'asuda@kenbishi.jp', 'zzzzzzzz');
