@@ -5,14 +5,14 @@ require_once dirname(__FILE__).'\..\..\WebContent\models\User.class.php';
 class UserTest extends PHPUnit_Framework_TestCase {
 	
   public function testValidUserCreate() {
-  	$validTest = array("email" => "validemail@", "password" => "validPassword");
+  	$validTest = array("email" => "validemail@email.com", "password" => "validPassword");
   	$s1 = new User($validTest);
   	
     $this->assertTrue(is_a($s1, 'User') && $s1->getErrorCount() == 0, 
     	'It should create a valid User object when valid input is provided');
   }
   
-  public function testInvalidUserCreate() {
+  public function testInvalidEmail() {
   	$invalidTest = array("email" => "invalidEmail@", "password" => "validPassword");
   	$s1 = new User($invalidTest);
   	

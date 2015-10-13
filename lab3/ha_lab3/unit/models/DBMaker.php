@@ -39,10 +39,10 @@ class DBMaker {
 			$sql = "INSERT INTO Users (userId, email, password) VALUES
 		                          (:userId, :email, :password)";
 			$st = $db->prepare ( $sql );
-			$st->execute (array (':userId' => 1, ':email' => 'bjabituya@yahoo.com', ':password' => 'xxx'));
-			$st->execute (array (':userId' => 2, ':email' => 'charlie.g@hotmail.com', ':password' => 'yyy'));
-			$st->execute (array (':userId' => 3, ':email' => 'altars@gmail.com', ':password' => 'zzz'));
-			$st->execute (array (':userId' => 4, ':email' => 'asuda@kenbishi.jp', ':password' => 'www'));
+			$st->execute (array (':userId' => 1, ':email' => 'bjabituya@yahoo.com', ':password' => 'wwwwwwww'));
+			$st->execute (array (':userId' => 2, ':email' => 'charlie.g@hotmail.com', ':password' => 'xxxxxxxx'));
+			$st->execute (array (':userId' => 3, ':email' => 'altars@gmail.com', ':password' => 'yyyyyyyy'));
+			$st->execute (array (':userId' => 4, ':email' => 'asuda@kenbishi.jp', ':password' => 'zzzzzzzz'));
 			
 		} catch ( PDOException $e ) {
 			echo $e->getMessage (); // not final error handling
