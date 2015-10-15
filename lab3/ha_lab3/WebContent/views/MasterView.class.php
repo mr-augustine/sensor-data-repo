@@ -20,26 +20,35 @@ EOT;
 // The HEREDOC terminator must not be indented
 // TODO Can't use variables within HEREDOC for initializing class properties
 	
-	public static function showHeader($title) {
+	public static function showHeader() {
+		$title = (array_key_exists('headertitle', $_SESSION))?
+			$_SESSION['headertitle']:"";
+		
+		echo "<!DOCTYPE html>\n";
+		echo "<html>\n";
+		echo "<head>\n";
+		echo "<title>$title</title>\n";
+		echo "</head>\n\t<body>\n";
 		if (is_null($title))
 			$title = "";	
-?>	 	
-     <!DOCTYPE html>
-     <html>
-     <head>
-     <title><?php echo $title; ?></title>
-     </head>
-     <body>
-<?php  
      }
 
-	public static function showFooter($footer) {
-		if (is_null($footer))
-			echo self::$STD_FOOTER;
-?>	 	
-    </body>
-    </html>
- <?php  
+	public static function showFooter() {
+		$footer = (array_key_exists('footertitle', $_SESSION))?
+			$_SESSION['footertitle']:"";
+		echo $footer;
+		echo '<footer>'."\n";
+		echo '<hr>'."\n\n";
+		
+		echo '<nav>'."\n";
+		echo '<a href="">Tour</a> |'."\n";
+		echo '<a href="">About</a> |'."\n";
+		echo '<a href="">Help</a> |'."\n";
+		echo '<a href="">Terms</a> |'."\n";
+		echo '<a href="">Privacy</a>'."\n";
+		echo '</nav>'."\n";
+		echo '</footer>'."\n";
+		echo "\t</body>\n</html>";	
      }
 }
 ?>

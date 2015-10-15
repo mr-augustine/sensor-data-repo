@@ -1,56 +1,41 @@
 <?php  
 class LoginView {
 	
-  public static function show($user) {  	
-?> 
-    <!DOCTYPE html>
-	<html>
-	<head>
-	<meta charset="utf-8">
-	<meta name= "keywords" content="Botspace login">
-	<meta name="description" content = "Login for Botspace">
-	<title>Log into botspace</title>
-	</head>
-	<body>
-	<img src="resources/images/botspace-logo.png" alt="bostpace logo" style="width:627px;height:126px;">
-	
-		<section>
-		<h1>Log into botspace</h1>
-		<form action="login" method="post">
-		<p>
-		email<br>
-		<input type="text" name="email" 
-		<?php if (!is_null($user)) {echo 'value = "'. $user->getEmail() .'"';}?> tabindex="1" required>
-		<span class="error">
-	   	<?php if (!is_null($user)) {echo $user->getError('email');}?>
-		</span>
+  	public static function show() {
+  		$_SESSION['headertitle'] = "Log into botspace";
+  		MasterView::showHeader();
+  		LoginView::showDetails();
+  		MasterView::showFooter();
+  	}
+
+  	public static function showDetails() {
+  		$user = (array_key_exists('user', $_SESSION))?$_SESSION['user']:null;
+  		$base = (array_key_exists('base', $_SESSION))?$_SESSION['base']:"";
+  		
+    	echo '<img src="resources/images/botspace-logo.png" alt="bostpace logo" style="width:627px;height:126px;">'."\n";
+		echo '<section>'."\n";
+		echo '<h1>Log into botspace</h1>'."\n\n";
+		echo '<form action="login" method="post">'."\n";
+		echo '<p>'."\n";
+		echo 'email<br>'."\n";
 		
-		<br><br>
+		echo '<input type="text" name="email"'."\n"; 
+		if (!is_null($user)) {echo 'value = "'. $user->getEmail() .'"';}
+		echo 'tabindex="1" required>'."\n";
+		echo '<span class="error">'."\n";
+	   	if (!is_null($user)) {echo $user->getError('email');}
+		echo "\n".'</span>';
 		
-		password<br>
-		<input type="password" name="password" tabindex="2" required>
-		<?php if (!is_null($user)) {echo $user->getError('password');}?>
-		</p>
+		echo '<br><br>'."\n\n";
 		
-		<input type="submit" value="Submit">
-		</form>
-		</section>
-	
-	
-	<footer>
-		<hr>
-	
-		<nav>
-		<a href="">Tour</a> |
-		<a href="">About</a> |
-		<a href="">Help</a> |
-		<a href="">Terms</a> |
-		<a href="">Privacy</a>
-		</nav>
-	</footer>
-	</body>
-	</html>
-<?php 
-  }
+		echo 'password<br>'."\n";
+		echo '<input type="password" name="password" tabindex="2" required>'."\n";
+		if (!is_null($user)) {echo $user->getError('password');}
+		echo '</p>'."\n\n";
+		
+		echo '<input type="submit" value="Submit">'."\n";
+		echo '</form>'."\n";
+		echo '</section>'."\n";
+	}
 }
 ?>

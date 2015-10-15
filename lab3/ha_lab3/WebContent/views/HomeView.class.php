@@ -1,50 +1,44 @@
 <?php
 class HomeView {
 
-  	public static function show($user) {  
-  		MasterView::showHeader("botspace");
-  		HomeView::showDetails($user);
-  		MasterView::showFooter(null);
+  	public static function show() {  
+  		$_SESSION['headertitle'] = "botspace";
+  		MasterView::showHeader();
+  		HomeView::showDetails();
+  		MasterView::showFooter();
   	}
   	
-  	public static function showDetails($user) {
-?>
-
-	<img src="resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">
-	
-	<?php 	if (!is_null($user) && array_key_exists("user_name", $user))
-				HomeView::showHobbyistGreeting($user);
-			else
-				HomeView::showGuestGreeting();
-
-	?>
-	
-		<aside>
-		<section>
-		<h2>Robot Showcase</h2>
-		<ul>
-			<li><a href="">Robot 1</a></li>
-			<li><a href="">Robot 2</a></li>
-			<li><a href="">Robot 3</a></li>
-		</ul>
-		</section>
+  	public static function showDetails() {
+  		$base = $_SESSION['base'];
+  		
+  		echo '<img src="resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">';
 		
-		<section>
-		<h2>Hobbyist Showcase</h2>
-		<ul>
-			<li><a href="">Human 1</a></li>
-			<li><a href="">Human 2</a></li>
-			<li><a href="">Human 3</a></li>
-		</ul>
-		</section>
-		</aside>
-		
-
-<?php
+  		if (HomeView::userLoggedIn())
+  			HomeView::showHobbyistGreeting($_SESSION['user']);
+  		else 
+  			HomeView::showGuestGreeting();
+  		
+  		echo '<aside><section>';
+  		echo '<h2>Robot Showcase</h2>';
+  		echo '<ul>';
+  		echo '<li><a href="">Robot 1</a></li>';
+  		echo '<li><a href="">Robot 2</a></li>';
+  		echo '<li><a href="">Robot 3</a></li>';
+  		echo '</ul></section>';
+  		echo '<section>';
+  		echo '<h2>Hobbyist Showcase</h2>';
+  		echo '<ul>';
+  		echo '<li><a href="">Human 1</a></li>';
+  		echo '<li><a href="">Human 2</a></li>';
+  		echo '<li><a href="">Human 3</a></li>';
+  		echo '</ul></section>';
+  		echo '<aside>';
   	}
 
+  	// Assumes $_SESSION was already checked for a valid user
   	public static function showHobbyistGreeting($user) {
-  		echo "<br><br>Welcome, " . $user["user_name"] . "!<br><br>";
+  		//print_r($user);
+  		echo "<br><br>Welcome, " . $user->getEmail() . "!<br><br>";
   	}
   	
   	public static function showGuestGreeting() {
@@ -63,5 +57,8 @@ GREETING;
   		echo $guestGreeting;
   	}
   	
+  	public static function userLoggedIn() {
+  		return (array_key_exists("user", $_SESSION) && !is_null($_SESSION['user']));
+  	}
 }
 ?>
