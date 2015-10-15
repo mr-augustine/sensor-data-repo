@@ -12,6 +12,23 @@ CREATE TABLE Users (
   PRIMARY KEY (userId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE if EXISTS UserData;
+CREATE TABLE UserData (
+  userDataId		 int(11) NOT NULL AUTO_INCREMENT,
+  userId			 int(11) NOT NULL COLLATE utf8_unicode_ci,
+  user_name			 varchar(30) UNIQUE NOT NULL COLLATE utf8_unicode,
+  skill_level		 int(1) COLLATE utf8_unicode_ci,
+  profile_pic		 varchar(255) UNIQUE NOT NULL COLLATE utf8_unicode,
+  started_hobby 	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_created		 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  fav_color		 	 char(6) NOT NULL COLLATE utf8_unicode,
+  url				 varchar(255) COLLATE utf8_unicode,
+  phone				 varchar(255) COLLATE utf8_unicode,
+  PRIMARY KEY (userDataId),
+  FOREIGN KEY (userId) REFERENCES Users(userId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf-8 COLLATE=utf8_unicode_ci;
+
+
 INSERT INTO Users (userId, email, password) VALUES 
 	   (1, 'bjabituya@yahoo.com', 'wwwwwwww');
 INSERT INTO Users (userId, email, password) VALUES 
