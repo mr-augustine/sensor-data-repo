@@ -28,8 +28,8 @@ function makeDB($dbName) {
 		);
 		$st->execute();
 		
-		$sql = "INSERT INTO Users (userId, userName, password) VALUES
-		                          (:userId, :userName, :password)";
+		$sql = "INSERT INTO Users (userId, email, password) VALUES
+		                          (:userId, :email, :password)";
 		$st = $db->prepare($sql);
 		$st->execute (array (':userId' => 1, ':email' => 'bjabituya@yahoo.com', ':password' => 'wwwwwwww'));
 		$st->execute (array (':userId' => 2, ':email' => 'charlie.g@hotmail.com', ':password' => 'xxxxxxxx'));

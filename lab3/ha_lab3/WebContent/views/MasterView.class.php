@@ -38,16 +38,17 @@ EOT;
 			$_SESSION['footertitle']:"";
 		echo $footer;
 		echo '<footer>'."\n";
-		echo '<hr>'."\n\n";
+		echo MasterView::$STD_FOOTER."\n";
+// 		echo '<hr>'."\n\n";
 		
-		echo '<nav>'."\n";
-		echo '<a href="">Tour</a> |'."\n";
-		echo '<a href="">About</a> |'."\n";
-		echo '<a href="">Help</a> |'."\n";
-		echo '<a href="">Terms</a> |'."\n";
-		echo '<a href="">Privacy</a>'."\n";
-		echo '</nav>'."\n";
-		echo '</footer>'."\n";
+// 		echo '<nav>'."\n";
+// 		echo '<a href="">Tour</a> |'."\n";
+// 		echo '<a href="">About</a> |'."\n";
+// 		echo '<a href="">Help</a> |'."\n";
+// 		echo '<a href="">Terms</a> |'."\n";
+// 		echo '<a href="">Privacy</a>'."\n";
+// 		echo '</nav>'."\n";
+// 		echo '</footer>'."\n";
 		echo "\t</body>\n</html>";	
      }
 }
