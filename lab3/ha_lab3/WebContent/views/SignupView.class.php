@@ -2,165 +2,163 @@
 class SignupView {
 	
 	public static function show($user, $userData) {
-?>		
-	<!DOCTYPE html>
-	<html>
-	<head>
-	<meta charset="utf-8">
-	<title>Sign up for a botspace account</title>
-	</head>
-	<body>
-	<img src="resources/images/botspace-logo.png" alt="bostpace logo" style="width:627px;height:126px;">
+		$_SESSION['headertitle'] = "Sign up for a botspace account";
+		MasterView::showHeader();
+		SignupView::showDetails($user, $userData);
+		MasterView::showFooter();
+	}
+
+	public static function showDetails($user, $userData) {
+  		$base = (array_key_exists('base', $_SESSION))?$_SESSION['base']:"";
+  		
+		echo '<img src="resources/images/botspace-logo.png" alt="bostpace logo" style="width:627px;height:126px;">'."\n";
 	
-		<section>
-		<h1>Create an account</h1>
-		<form action="signup" method="post">
-			Name:       <input type="text" name="user_name" 
-			<?php if (!is_null($userData)) { echo 'value = "'. $userData->getUserName() .'"'; }?> tabindex="1" required>
-			<span class="error">
-			<?php if (!is_null($userData)) { echo $userData->getError('user_name'); }?>
-			</span><br><br>
+		echo '<section>'."\n";
+		echo '<h1>Create an account</h1>'."\n";
+		echo '<form action="signup" method="post">'."\n";
+		echo 'Name:       <input type="text" name="user_name"'; 
+			if (!is_null($userData)) { echo 'value = "'. $userData->getUserName() .'"'; }
+		echo 'tabindex="1" required>'."\n";
+		echo '<span class="error">'."\n";
+			if (!is_null($userData)) { echo $userData->getError('user_name'); }
+		echo '</span><br><br>'."\n";
 			
-			Email:      <input type="email" name="email" 
-			<?php if (!is_null($user)) { echo 'value = "'. $user->getEmail() .'"'; }?> tabindex="2" required>
-			<span class="error">
-			<?php if (!is_null($user)) { echo $user->getError('email'); }?>
-			</span><br><br>
+		echo 'Email:      <input type="email" name="email"'; 
+			if (!is_null($user)) { echo 'value = "'. $user->getEmail() .'"'; }
+		echo 'tabindex="2" required>'."\n";
+		echo '<span class="error">'."\n";
+			if (!is_null($user)) { echo $user->getError('email'); }
+		echo '</span><br><br>'."\n";
 			
-			Password:	<input type="password" name="password" tabindex="3" required>
-			<span class="error">
-			<?php if (!is_null($user)) { echo $user->getError('password'); }?>
-			</span><br><br>
+		echo 'Password:   <input type="password" name="password" tabindex="3" required>'."\n";
+		echo '<span class="error">'."\n";
+			if (!is_null($user)) { echo $user->getError('password'); }
+		echo '</span><br><br>'."\n";
 			
-			Skill Level:
-			<input type="radio" name="skill_level" value="novice" tabindex="4" 
-			<?php
-				if ((is_null($userData)) || 
-						(!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['0']) == 0)) {
+		echo 'Skill Level:'."\n";
+		echo '<input type="radio" name="skill_level" value="novice" tabindex="4"'; 
+			if ((is_null($userData)) || 
+					(!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['0']) == 0)) {
 					echo "checked";
-				} ?> >Novice
-			<input type="radio" name="skill_level" value="advanced" tabindex="5"
-			<?php
-				if (!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['1']) == 0) {
-					echo "checked";
-				} ?> >Advanced
-			<input type="radio" name="skill_level" value="expert" tabindex="6"
-			<?php
-				if (!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['2']) == 0) {
-					echo "checked";
-				} ?> >Expert
-			<span class="error">
-			<?php if (!is_null($userData)) { echo $userData->getError('skill_level'); }?>
-			</span><br><br>
+			}
+		echo '>Novice';
+		echo '<input type="radio" name="skill_level" value="advanced" tabindex="5"';
+			if (!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['1']) == 0) {
+				echo "checked";
+			}
+		echo '>Advanced';
+		echo '<input type="radio" name="skill_level" value="expert" tabindex="6"';
+			if (!is_null($userData) && strcmp($userData->getSkillLevel(), UserData::$SKILL_LEVELS['2']) == 0) {
+				echo "checked";
+			}
+		echo '>Expert'."\n";
+		echo '<span class="error">'."\n";
+			if (!is_null($userData)) { echo $userData->getError('skill_level'); }
+		echo  '</span><br><br>'."\n";
 			
-			<?php if (!is_null($userData)) { echo $userData->getError('skill_area').'<br>'; }?>
-			<fieldset>
-				<legend>Skill Areas</legend>
-				<input type="checkbox" name="skill_areas[]" value="system-design" tabindex="7"
-				<?php if (!is_null($userData) && in_array("system-design", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>system-design
-				<input type="checkbox" name="skill_areas[]" value="programming" tabindex="8"
-				<?php if (!is_null($userData) && in_array("programming", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>programming
-				<input type="checkbox" name="skill_areas[]" value="machining" tabindex="9"
-				<?php if (!is_null($userData) && in_array("machining", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>machining
-				<input type="checkbox" name="skill_areas[]" value="soldering" tabindex="10"
-				<?php if (!is_null($userData) && in_array("soldering", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>soldering
-				<input type="checkbox" name="skill_areas[]" value="wiring" tabindex="11"
-				<?php if (!is_null($userData) && in_array("wiring", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>wiring
-				<input type="checkbox" name="skill_areas[]" value="circuit-design" tabindex="12"
-				<?php if (!is_null($userData) && in_array("circuit-design", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>circuit-design
-				<input type="checkbox" name="skill_areas[]" value="power-systems" tabindex="13"
-				<?php if (!is_null($userData) && in_array("power-systems", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>power-systems
-				<input type="checkbox" name="skill_areas[]" value="computer-vision" tabindex="14"
-				<?php if (!is_null($userData) && in_array("computer-vision", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>computer-vision
-				<input type="checkbox" name="skill_areas[]" value="ultrasonic" tabindex="15"
-				<?php if (!is_null($userData) && in_array("ultrasonic", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>ultrasonic
-				<input type="checkbox" name="skill_areas[]" value="infrared" tabindex="16"
-				<?php if (!is_null($userData) && in_array("infrared", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>infrared
-				<input type="checkbox" name="skill_areas[]" value="gps" tabindex="17"
-				<?php if (!is_null($userData) && in_array("gps", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>GPS
-				<input type="checkbox" name="skill_areas[]" value="compass" tabindex="18"
-				<?php if (!is_null($userData) && in_array("compass", $userData->getSkillAreas())) {
-						echo "checked";
-					}
-				?>>compass
-			</fieldset><br>
+		if (!is_null($userData)) { echo $userData->getError('skill_area').'<br>'; }
+		echo '<fieldset>'."\n";
+		echo '<legend>Skill Areas</legend>'."\n";
+		echo '<input type="checkbox" name="skill_areas[]" value="system-design" tabindex="7"';
+			if (!is_null($userData) && in_array("system-design", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>system-design';
+		echo '<input type="checkbox" name="skill_areas[]" value="programming" tabindex="8"';
+			if (!is_null($userData) && in_array("programming", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>programming';
+		echo '<input type="checkbox" name="skill_areas[]" value="machining" tabindex="9"';
+			if (!is_null($userData) && in_array("machining", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>machining';
+		echo '<input type="checkbox" name="skill_areas[]" value="soldering" tabindex="10"';
+			if (!is_null($userData) && in_array("soldering", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>soldering';
+		echo '<input type="checkbox" name="skill_areas[]" value="wiring" tabindex="11"';
+			if (!is_null($userData) && in_array("wiring", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>wiring';
+		echo '<input type="checkbox" name="skill_areas[]" value="circuit-design" tabindex="12"';
+			if (!is_null($userData) && in_array("circuit-design", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>circuit-design';
+		echo '<input type="checkbox" name="skill_areas[]" value="power-systems" tabindex="13"';
+			if (!is_null($userData) && in_array("power-systems", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>power-systems';
+		echo '<input type="checkbox" name="skill_areas[]" value="computer-vision" tabindex="14"';
+			if (!is_null($userData) && in_array("computer-vision", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>computer-vision';
+		echo '<input type="checkbox" name="skill_areas[]" value="ultrasonic" tabindex="15"';
+			if (!is_null($userData) && in_array("ultrasonic", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>ultrasonic';
+		echo '<input type="checkbox" name="skill_areas[]" value="infrared" tabindex="16"';
+			if (!is_null($userData) && in_array("infrared", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>infrared';
+		echo '<input type="checkbox" name="skill_areas[]" value="gps" tabindex="17"';
+			if (!is_null($userData) && in_array("gps", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>GPS';
+		echo '<input type="checkbox" name="skill_areas[]" value="compass" tabindex="18"';
+			if (!is_null($userData) && in_array("compass", $userData->getSkillAreas())) {
+				echo "checked";
+			}
+		echo '>compass'."\n";
+		echo '</fieldset><br>'."\n";
 		
-			Profile Picture: <input type="file" name="profile_pic" accept="image/*" tabindex="19">
-			<?php if (!is_null($userData)) { echo $userData->getError('profile_pic'); }?><br><br>
+		echo 'Profile Picture: <input type="file" name="profile_pic" accept="image/*" tabindex="19">';
+		if (!is_null($userData)) { echo $userData->getError('profile_pic'); }
+		echo '<br><br>';
 			
-			Started Robotics: <input type="month" name="started_hobby" min="1970-01" max="<?php echo date("Y-m")?>" tabindex="20"
-			<?php if (!is_null($userData) && !empty($userData->getStartedHobby())) {
-					echo 'value="'.$userData->getStartedHobby().'"';
-				}
-			?>>
-			<?php if (!is_null($userData)) {echo $userData->getError('started_hobby');}?><br><br>
+		echo 'Started Robotics: <input type="month" name="started_hobby" min="1970-01" max="';
+		echo 'date("Y-m")';
+		echo 'tabindex="20"';
+			if (!is_null($userData) && !empty($userData->getStartedHobby())) {
+				echo 'value="'.$userData->getStartedHobby().'"';
+			}
+		echo '>'."\n";
+		if (!is_null($userData)) {echo $userData->getError('started_hobby');}
+		echo '<br><br>';
 			
-			Favorite Color: <input type="color" name="fav_color" tabindex="21"
-			<?php if (!is_null($userData) && !empty($userData->getFavColor())) {
-					echo 'value="'.$userData->getFavColor().'"';
-				}
-			?>>
-			<?php if (!is_null($userData)) { echo $userData->getError('fav_color'); }?><br><br>
+		echo 'Favorite Color: <input type="color" name="fav_color" tabindex="21"';
+			if (!is_null($userData) && !empty($userData->getFavColor())) {
+				echo 'value="'.$userData->getFavColor().'"';
+			}
+		echo '>'."\n";
+			if (!is_null($userData)) { echo $userData->getError('fav_color'); }
+		echo '<br><br>'."\n";
 			
-			URL: <input type="url" name="url" tabindex="22"
-			<?php if (!is_null($userData)) { echo 'value="'.$userData->getUrl().'"'; }?>>
-			<?php if (!is_null($userData)) { echo $userData->getError('url'); }?><br><br>
+		echo 'URL: <input type="url" name="url" tabindex="22"';
+			if (!is_null($userData)) { echo 'value="'.$userData->getUrl().'"'; }
+		echo '>';
+			if (!is_null($userData)) { echo $userData->getError('url'); }
+		echo '<br><br>'."\n";
 			
-			Telephone: <input type="tel" name="phone" tabindex="23"
-			<?php if (!is_null($userData)) { echo 'value="'.$userData->getPhone().'"'; }?>>
-			<?php if (!is_null($userData)) { echo $userData->getError('phone'); }?><br><br>
+		echo 'Telephone: <input type="tel" name="phone" tabindex="23"';
+			if (!is_null($userData)) { echo 'value="'.$userData->getPhone().'"'; }
+		echo '>'."\n";
+			if (!is_null($userData)) { echo $userData->getError('phone'); }
+		echo '<br><br>'."\n";
 			
-			<input type="submit" value="Submit">
-		</form>
-		</section>
-	
-	<footer>
-		<hr>
-	
-		<nav>
-		<a href="">Tour</a> |
-		<a href="">About</a> |
-		<a href="">Help</a> |
-		<a href="">Terms</a> |
-		<a href="">Privacy</a>
-		</nav>
-	</footer>
-	</body>
-	</html>
-<?php 
-  }
+		echo '<input type="submit" value="Submit">'."\n";
+		echo '</form>'."\n";
+		echo '</section>'."\n";
+ 
+	}
 }
 ?>
