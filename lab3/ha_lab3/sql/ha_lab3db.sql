@@ -28,6 +28,38 @@ CREATE TABLE UserData (
   FOREIGN KEY (userId) REFERENCES Users(userId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE if EXISTS Skills;
+CREATE TABLE Skills (
+  skillId			 int(3) NOT NULL AUTO_INCREMENT,
+  skill_name		 varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  PRIMARY KEY (skillId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(1, 'system-design');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(2, 'programming');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(3, 'machining');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(4, 'soldering');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(5, 'wiring');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(6, 'circuit-design');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(7, 'power-systems');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(8, 'computer-vision');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(9, 'ultrasonic');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(10, 'infrared');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(11, 'GPS');
+INSERT INTO Skills (skillId, skill_name) VALUES
+	(12, 'compass');
+
 
 INSERT INTO Users (userId, email, password) VALUES 
 	   (1, 'bjabituya@yahoo.com', 'wwwwwwww');
