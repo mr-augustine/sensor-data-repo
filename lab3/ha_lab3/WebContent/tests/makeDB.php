@@ -73,7 +73,7 @@ function makeDB($dbName) {
 		$st->execute (array (':skillId' => 9, ':skill_name' => 'ultrasonic'));
 		$st->execute (array (':skillId' => 10, ':skill_name' => 'infrared'));
 		$st->execute (array (':skillId' => 11, ':skill_name' => 'GPS'));
-		$st->execute (array (':skillId' => 12, ':skill_name' => 'compase'));
+		$st->execute (array (':skillId' => 12, ':skill_name' => 'compass'));
 		
 		$sql = "INSERT INTO Users (userId, email, password) VALUES
 		                          (:userId, :email, :password)";

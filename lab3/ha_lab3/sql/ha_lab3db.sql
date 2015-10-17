@@ -35,6 +35,16 @@ CREATE TABLE Skills (
   PRIMARY KEY (skillId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE if EXISTS SkillAssocs;
+CREATE TABLE SkillAssocs (
+  skillAssocId		 int(11) NOT NULL AUTO_INCREMENT,
+  skillId			 int(3) NOT NULL,
+  userDataId		 int(11) NOT NULL,
+  PRIMARY KEY (skillAssocId),
+  FOREIGN KEY (skillId) REFERENCES Skills(skillId),
+  FOREIGN KEY (userDataId) REFERENCES UserData(userDataId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 INSERT INTO Skills (skillId, skill_name) VALUES
 	(1, 'system-design');
 INSERT INTO Skills (skillId, skill_name) VALUES
@@ -73,3 +83,10 @@ INSERT INTO Users (userId, email, password) VALUES
 
 INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
 	(1, 1, 'jabituya', 2, 'none.jpg', '2015-10-17 07:38:46', '008000', 'http://www.google.com', '210-555-9090');
+
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(1, 1, 1);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(2, 1, 2);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(3, 1, 8);
