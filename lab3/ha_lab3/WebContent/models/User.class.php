@@ -47,6 +47,10 @@ class User {
 		return $paramArray;
 	}
 
+	public function getPassword() {
+		return $this->password;
+	}
+	
 	public function __toString() {
 		$str = "[User] {Email: ".$this->email."}";
 		return $str;
