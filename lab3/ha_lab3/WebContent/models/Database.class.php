@@ -13,10 +13,11 @@ class Database {
 		
 		if (!isset (self::$db) || self::$db == null) {
 			try {
-				if ($configPath == null)
+				if ($configPath == null) {
 			   	    $configPath = dirname(__FILE__).DIRECTORY_SEPARATOR."..". 
 				             DIRECTORY_SEPARATOR. ".." . DIRECTORY_SEPARATOR.
 					           ".." . DIRECTORY_SEPARATOR . "myConfig.ini";
+				}
 				
 				$passArray = parse_ini_file($configPath);
 				$username = $passArray["username"];
