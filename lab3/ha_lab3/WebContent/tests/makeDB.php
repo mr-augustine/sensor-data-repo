@@ -59,6 +59,20 @@ function makeDB($dbName) {
 		);
 		$st->execute();
 		
+		$st = $db->prepare("DROP TABLE if EXISTS SkillAssocs");
+		$st->execute();
+		$st = $db->prepare(
+			"CREATE TABLE SkillAssocs (
+  				skillAssocId	 int(11) NOT NULL AUTO_INCREMENT,
+  				skillId			 int(3) NOT NULL,
+ 				userDataId		 int(11) NOT NULL,
+  				PRIMARY KEY (skillAssocId),
+  				FOREIGN KEY (skillId) REFERENCES Skills(skillId),
+  				FOREIGN KEY (userDataId) REFERENCES UserData(userDataId)
+			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"	
+		);
+		$st->execut();
+		
 		$sql = "INSERT INTO Skills (skillId, skill_name) VALUES
 				(:skillId, :skill_name)";
 		$st = $db->prepare($sql);
@@ -87,6 +101,15 @@ function makeDB($dbName) {
 				(:userDataId, :userId, :user_name, :skill_level, :profile_pic, :started_hobby, :fav_color, :url, :phone)";
 		$st = $db->prepare($sql);
 		$st->execute (array (':userDataId' => 1, ':userId' => 1, ':user_name' => 'jabituya', ':skill_level' => 2, ':profile_pic' => 'none.jpg', ':started_hobby' => '1986-05-09 00:00:00', ':fav_color' => '008000', ':url' => 'http://www.google.com', ':phone' => '210-555-9090'));
+		
+		$sql = "INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+				(:skillAssocId, :userDataId, :skillId)";
+		$st = $db->prepare($sql);
+		$st->execute (array (':skillAssocId' => 1, ':userDataId' => 1, ':skillId' => 1));
+		$st->execute (array (':skillAssocId' => 2, ':userDataId' => 1, ':skillId' => 2));
+		$st->execute (array (':skillAssocId' => 3, ':userDataId' => 1, ':skillId' => 8));
+		
+		
 	} catch ( PDOException $e ) {
 		echo $e->getMessage ();  // not final error handling
 	}
