@@ -12,6 +12,7 @@ class UserData {
 	private $formInput;
 	
 	private $userDataId;
+	private $userId;
 	private $user_name;
 	private $skill_level;
 	private $skill_areas;
@@ -94,6 +95,10 @@ class UserData {
 		$this->userDataId = $id;
 	}
 	
+	public function setUserId($id) {
+		$this->userId = $id;
+	}
+	
 	public function setError($errorName, $errorValue) {
 		// Sets a particular error value and increments error count
 		$this->errors[$errorName] =  Messages::getError($errorValue);
@@ -142,6 +147,14 @@ class UserData {
 	
 	public function getUserName() {
 		return $this->user_name;
+	}
+	
+	public function getUserDataId() {
+		return $this->userDataId;
+	}
+	
+	public function getUserId() {
+		return $this->userId;
 	}
 	
 	public function getParameters() {

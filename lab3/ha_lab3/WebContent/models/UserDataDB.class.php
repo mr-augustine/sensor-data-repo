@@ -3,11 +3,74 @@ class UserDataDB {
 
 	// Inserts a UserData object into the UserData table and returns the userDataId
 	public static function addUserData($userData) {
+		$query = "INSERT INTO UserData (userId, user_name, skill_level,  
+				profile_pic, started_hobby, fav_color, url, phone) VALUES
+				(:userId, :user_name, :skill_level, :skill_areas, :profile_pic,
+				:started_hobby, :fav_color, :url, :phone)";
+		// TODO: Add a SkillAssoc query
+		// TODO: Add a Robots query
 		
+		$returnId = 0;
+		
+		try {
+			// check null and check for errors
+			// check for User by given userId; throw exception if non-existent
+			// 
+			if (is_null($userData) || $userData->getErrorCount() > 0)
+				throw new PDOException("Invalid UserData object can't be inserted");
+			if (!isset($userData->getUserId()))
+				throw new PDOException("UserId not specified");
+			
+			$db = Database::getDB();
+			$users = UsersDB::getUserBy('userId', $userData->getUserId());
+			if ($users[0]->getUserId() != $userData->getUserId())
+			// Alternatively,
+			// if (count($users) != 1)
+				throw new PDOException("Cannot associate UserData with invalid User");
+			
+			$statement = $db->prepare($query);
+			$statement->bindValue(":userId", $userData->getUserId());
+			$statement->bindValue(":user_name", $userData->getUserName());
+			$statement->bindValue(":skill_level", $userData->getSkillLevel());
+			// TODO: Have the profile pic uploaded to a designated folder and moved
+			$statement->bindValue(":profile_pic", $userData->getProfilePic());
+			$statement->bindValue(":started_hobby", $userData->getStartedHobby());
+			$statement->bindValue(":fav_color", $userData->getFavColor());
+			$statement->bindValue(":url", $userData->getUrl());
+			$statement->bindValue(":phone", $userData->getPhone());
+			
+			$statement->execute();
+			$statement->closeCursor();
+			$returnId = $db->lastInsertId("userDataId");
+			
+			$query = "INSERT INTO SkillAssocs (userDataId, skillId) VALUES
+					(:userDataId, :skillId)";
+			// Handle skill area associations separately since they're going into a different table
+			// TODO: Review this for instances where this can go wrong
+			foreach ($userData->getSkillAreas() as $skill) {
+				$skillQuery = "SELECT skillId FROM Skills WHERE skill_name = $skill";
+				$skillSt = $db->prepare($query);
+				$skillSt->execute();
+				$returnResult = $skillSt->fetchAll(PDO::FETCH_ASSOC);
+				$returnSkillId = $returnResult[0];
+				$skillSt->closeCursor();
+				
+				$statement = $db->prepare($query);
+				$statement->bindValue(":userDataId", $returnId);
+				$statement->bindValue(":skillId", $returnSkillId);
+				$statement->execute();
+				$statement->closeCursor();
+				$skillAssocId = $db->lastInsertId("skillAssocId");
+			}
+		} catch (Exception $e) { // Not permanent error handling
+			echo "<p>Error adding user data to UserData ".$e->getMessage()."</p>";
+		}
+		
+		return $returnId;
 	}
 	
 	public static function getUserDataRowSetsBy($type = null, $value = null) {
-		$allowedTypes = ['userId', 'user_name', 'skill_level', 'skill_area', 'robot_name'];
+		$allowedTypes = ['userId', 'user_name', 'skill_level', 'skill_areas', 'robot_name'];
 		$userDataRowSets = NULL;
 		
 		try {
