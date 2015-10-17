@@ -50,5 +50,18 @@ class UsersDBTest extends PHPUnit_Framework_TestCase {
   				'The database should have the same number of elements after trying to insert duplicate');
   		ob_get_clean();
   	}
+  	
+  	public function testInsertInvalidUser() {
+  		$myDb = DBMaker::create('botspacetest');
+  		Database::clearDB();
+  		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
+  		$beforeCount = count(UsersDB::getAllUsers());
+  		$invalidTest = array("email" => "invalidemail@", "password" => "22222222");
+  		$s1 = new User($invalidTest);
+  		$userId = UsersDB::addUser($s1);
+  		$afterCount = count(UsersDB::getAllUsers());
+  		$this->assertEquals($afterCount, $beforeCount,
+  				'The database should have no additional users after insertion');
+  	}
 }
 ?>
