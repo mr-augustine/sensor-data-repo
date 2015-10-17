@@ -11,6 +11,7 @@ class UserData {
 	private $errors;
 	private $formInput;
 	
+	private $userDataId;
 	private $user_name;
 	private $skill_level;
 	private $skill_areas;
@@ -87,6 +88,10 @@ class UserData {
 			}
 			return $value;
 		}
+	}
+	
+	public function setUserDataId($id) {
+		$this->userDataId = $id;
 	}
 	
 	public function setError($errorName, $errorValue) {

@@ -16,7 +16,17 @@ include_once("./makeDB.php");
 ?>
 
 <h2>It should get all user data from a test database</h2>
-
+<?php 
+makeDB('botspacetest');
+Database::clearDB();
+$db = Database::getDB('botspacetest');
+$userData = UserDataDB::getUserDataBy();
+$userDataCount = count($userData);
+echo "Number of user data in db is: $userDataCount <br>";
+foreach ($userData as $userData) {
+	echo "$userData <br>";
+}
+?>
 
 <h2>It should allow a new valid user data to be added for a new user</h2>
 
