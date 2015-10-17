@@ -292,7 +292,7 @@ class UserData {
 		$str = "[UserData] {user_name: ".$this->user_name."; skill_level: ".$this->skill_level
 			."; skill_areas: ".print_r($this->getSkillAreas(),true)."; profile_pic: ".$this->getProfilePic()
 			."; started_hobby: ".$this->getStartedHobby()."; fav_color: ".$this->getFavColor()
-			."; url: ".$this->getUrl()."; phone: ".$this->getPhone()."; robots: ".$this->getRobots()
+			."; url: ".$this->getUrl()."; phone: ".$this->getPhone()."; robots: ".print_r($this->getRobots(),true)
 			."}";
 		
 		return $str;

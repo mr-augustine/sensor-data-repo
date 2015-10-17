@@ -69,3 +69,7 @@ INSERT INTO Users (userId, email, password) VALUES
 	   (3, 'altars@gmail.com', 'yyyyyyyy');
 INSERT INTO Users (userId, email, password) VALUES 
 	   (4, 'asuda@kenbishi.jp', 'zzzzzzzz');
+
+
+INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
+	(1, 1, 'jabituya', 2, 'none.jpg', '2015-10-17 07:38:46', '008000', 'http://www.google.com', '210-555-9090');
