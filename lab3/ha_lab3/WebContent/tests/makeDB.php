@@ -71,7 +71,7 @@ function makeDB($dbName) {
   				FOREIGN KEY (userDataId) REFERENCES UserData(userDataId)
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"	
 		);
-		$st->execut();
+		$st->execute();
 		
 		$sql = "INSERT INTO Skills (skillId, skill_name) VALUES
 				(:skillId, :skill_name)";
