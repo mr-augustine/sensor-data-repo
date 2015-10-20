@@ -175,9 +175,11 @@ class UserData {
 		if (empty($this->fav_color)) {
 			$this->setError('fav_color', 'FAV_COLOR_EMPTY');
 		} elseif (!filter_var($this->fav_color, FILTER_VALIDATE_REGEXP,
-			array("options"=>array("regexp" =>"/^#[0-9a-f]{6}$/")) )) {
+			array("options"=>array("regexp" =>"/^#[0-9a-fA-F]{6}$/")) )) {
 			$this->setError('fav_color', 'FAV_COLOR_INVALID');
 		}
+		
+		$this->fav_color = substr($this->fav_color, 1);
 	}
 	
 	private function validatePhone() {

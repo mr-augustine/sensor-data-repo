@@ -1,7 +1,8 @@
 <?php
 class UsersDB {
 	
-	// Inserts a User object into the Users table and returns the userId
+	// Inserts a User object into the Users table and returns the User
+	// with the userId property set, if successful
 	public static function addUser($user) {
 		$query = "INSERT INTO Users (email, password)
 		                      VALUES(:email, :password)";
@@ -9,7 +10,7 @@ class UsersDB {
 		
 		try {
 			if (is_null($user) || $user->getErrorCount() > 0)
-				throw new PDOException("Invalid User object can't be inserted");
+				return $user;
 			
 			$db = Database::getDB ();
 			$statement = $db->prepare ($query);
@@ -18,11 +19,11 @@ class UsersDB {
 			$statement->execute ();
 			$statement->closeCursor();
 			$returnId = $db->lastInsertId("userId");
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error adding user to Users ".$e->getMessage()."</p>";
+		} catch (Exception $e) { // Not permanent error handling
+			$user->setError('userId', 'USER_INVALID');
 		}
 		
-		return $returnId;
+		return $user;
 	}
 	
 	// Returns all rows in the Users table as an array of arrays 

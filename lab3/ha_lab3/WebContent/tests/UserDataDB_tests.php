@@ -39,12 +39,12 @@ echo "Number of user data in db before adding is: " . count(UserDataDB::getUserD
 $validTestUser = array("email" => "newbie@validemail.com", "password" => "validpassword");
 $user = new User($validTestUser);
 $userId = UsersDB::addUser($user);
-$validTestUserData = array("user_name" => "newbie-user", "skill_level" => 1, 
+$validTestUserData = array("user_name" => "newbie-user", "skill_level" => "novice", 
 		"skill_areas" => array("computer-vision", "soldering", "circuit-design"),
-		"profile_pic" => "no-picture.jpg", "started_hobby" => "2015-10-11 12:00:00",
-		"fav_color" => "FF8000", "url" => "http://www.wired.com", "phone" => "210-555-1234",
-		"userId" => $userId);
+		"profile_pic" => "no-picture.jpg", "started_hobby" => "2015-10",
+		"fav_color" => "#ff8000", "url" => "http://www.wired.com", "phone" => "210-555-1234");
 $userData = new UserData($validTestUserData);
+$userData->setUserId($userId);
 $userDataId = UserDataDB::addUserData($userData);
 echo "Number of user data in db after adding is: " . count(UserDataDB::getUserDataBy()) . "<br>";
 echo "UserData ID of new user is: $userDataId"
