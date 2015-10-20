@@ -226,15 +226,11 @@ class UserData {
 		$this->skill_areas = $this->extractForm('skill_areas');
 		
 		if (!empty($this->skill_areas)) {
-			$numSkillAreas = count($this->skill_areas);
-			
-			for ($i = 0; $i < $numSkillAreas; $i++) {
-				if (!in_array($this->skill_areas[$i], UserData::$SKILL_AREAS)) {
-					$this->setError('skill_areas', 'SKILL_AREA_INVALID');
-					
-					// error out if at least one skill area is invalid
-					break;
-				}
+			foreach ($skill_areas as $skill) {
+				$newSkill = new Skill($skill);
+				
+				if (!in_array($newSkill, Skill::$SKILL_AREAS))
+					$this->setError('SKILL_AREA_INVALID');
 			}
 		}
 	}

@@ -8,6 +8,7 @@ USER_NAME_HAS_INVALID_CHARS Ihr Benutzername kann nur Buchstaben, Zahlen, Bindes
 SKILL_AREA_INVALID Ihrer Spielfläche ist ungültig
 SKILL_LEVEL_INVALID Ihrer Spielstärke ist ungültig
 SKILL_LEVEL_NOT_SET Ihrer Spielstärke eingestellt werden
+SKILL_NAME_EMPTY Ihre Fähigkeiten Name darf nicht leer sein
 PASSWORD_EMPTY Das Passwort darf nicht leer sein
 PASSWORD_TOO_SHORT Das Passwort ist zu kurz
 PROFILE_PIC_WRONG_TYPE Ihr Bild ist kein gültiger Typ

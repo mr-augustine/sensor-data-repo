@@ -8,6 +8,7 @@ USER_NAME_HAS_INVALID_CHARS Your username can only contain letters, numbers, das
 SKILL_AREA_INVALID Your skill area is invalid
 SKILL_LEVEL_INVALID Your skill level is invalid
 SKILL_LEVEL_NOT_SET Your skill level must be set
+SKILL_NAME_EMPTY Your skill name cannot be empty
 PASSWORD_EMPTY Your password cannot be empty
 PASSWORD_TOO_SHORT Your password is too short
 PROFILE_PIC_WRONG_TYPE Your picture is not a valid type
