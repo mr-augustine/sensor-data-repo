@@ -57,6 +57,7 @@ class UserData {
 		$this->errorCount = 0;
 		$errors = array();
 		$this->user_name = "";
+		$this->skill_level = "";
 		$this->skill_areas = array();
 		$this->profile_pic = "";
 		$this->started_hobby = "";
