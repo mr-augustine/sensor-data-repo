@@ -24,5 +24,7 @@ class UserDataTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(is_a($s1, 'UserData') && $s1->getErrorCount() == 0,
 				'It should create a valid UserData object when valid input is provided');
 	}
+	
+	// Add tests for invalid fields
 }
 ?>
