@@ -18,6 +18,18 @@ class SkillAssocs {
 		$this->initialize();
 	}
 	
+	public function getError($errorName) {
+		if (isset($this->errors[$errorName]))
+			return $this->errors[$errorName];
+		else
+			return "";
+	}
+	
+	public function setError($errorName, $errorValue) {
+		$this->errors[$errorName] = Messages::getError($errorValue);
+		$this->errorCount++;
+	}
+	
 	public function getErrorCount() {
 		return $this->errorCount;
 	}
@@ -54,7 +66,7 @@ class SkillAssocs {
 			$this->userDataId = htmlspecialchars($this->userDataId);
 			$this->skillId = trim($this->skillId);
 			$this->skillId = stripslashes($this->skillId);
-			$this->userDataId = htmlspecialchars($this->skillId);
+			$this->skillId = htmlspecialchars($this->skillId);
 			
 			$this->validateSkillId();
 			$this->validateUserDataId();
@@ -69,16 +81,18 @@ class SkillAssocs {
 	}
 	
 	private function validateSkillId() {
+		// Also includes the case where skillId == 0
 		if (empty($this->skillId))
 			$this->setError('skillId', 'SKILL_ID_EMPTY');
-		elseif (!is_numeric($this->skillId) || $this->skillId <= 0)
+		elseif (!is_numeric($this->skillId) || $this->skillId < 0)
 			$this->setError('skillId', 'SKILL_ID_INVALID');
 	}
 	
 	private function validateUserDataId() {
+		// Also includes the case where userDataId == 0
 		if (empty($this->userDataId))
 			$this->setError('userDataId', 'USER_DATA_ID_EMPTY');
-		elseif (!is_numeric($this->userDataId) || $this->userDataId <=0)
+		elseif (!is_numeric($this->userDataId) || $this->userDataId < 0)
 			$this->setError('userDataId', 'USER_DATA_ID_INVALID');
 	}
 }

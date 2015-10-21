@@ -16,8 +16,8 @@ class SkillTest extends PHPUnit_Framework_TestCase {
 		$invalidTest = array("skill_name" => "compooter-vision");
 		$s1 = new Skill($invalidTest);
 		
-		$this->assertTrue(!empty($s1->getError('skill_name') && 
-			strcmp(Messages::getError('SKILL_AREA_INVALID'), $s1->getError('skill_name') == 0) ),
+		$this->assertTrue(!empty($s1->getError('skill_name')) && 
+			(strcmp(Messages::getError('SKILL_AREA_INVALID'), $s1->getError('skill_name')) == 0),
 			'It should have a skill_name error if the name is invalid');
 	}
 }
