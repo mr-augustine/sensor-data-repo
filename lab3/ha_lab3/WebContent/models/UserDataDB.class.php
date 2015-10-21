@@ -53,7 +53,7 @@ class UserDataDB {
 				
 				$skillArray = SkillsDB::getSkillsBy('skill_name', $skill);
 				$skillObject = $skillArray[0];
-				echo "skill_name: ".$skillObject->getSkillName();
+				//echo "skill_name: ".$skillObject->getSkillName();
 				$skillstatement = $db->prepare($query);
 				$skillstatement->bindValue(":userDataId", $returnId);
 				$skillstatement->bindValue(":skillId", $skillObject->getSkillId());
