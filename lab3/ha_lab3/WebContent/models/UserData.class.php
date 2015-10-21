@@ -3,9 +3,6 @@ include_once ("Messages.class.php");
 class UserData {
 	private static $MIN_USERNAME_LENGTH = 6;
 	public static $SKILL_LEVELS = array("novice", "advanced", "expert");
-	public static $SKILL_AREAS = array("system-design", "programming", "machining",
-			"soldering", "wiring", "circuit-design", "power-systems", "computer-vision",
-			"ultrasonic", "infrared", "gps", "compass");
 	
 	private $errorCount;
 	private $errors;
@@ -75,19 +72,20 @@ class UserData {
 			// Handle leaf-values and array-values differently
 			if (!is_array($this->formInput[$valueName])) {
 				$value = trim($this->formInput[$valueName]);
-				$value = stripslashes ($value);
-				$value = htmlspecialchars ($value);
+				$value = stripslashes($value);
+				$value = htmlspecialchars($value);
 			} else {
 				$value = array();
 				
 				foreach ($this->formInput[$valueName] as $arrayValue) {
 					$tempValue = trim($arrayValue);
-					$tempValue = stripslashes ($arrayValue);
-					$tempValue = htmlspecialchars ($arrayValue);
+					$tempValue = stripslashes($arrayValue);
+					$tempValue = htmlspecialchars($arrayValue);
 					
 					array_push($value, $tempValue);
 				}
 			}
+			
 			return $value;
 		}
 	}
@@ -226,11 +224,14 @@ class UserData {
 		$this->skill_areas = $this->extractForm('skill_areas');
 		
 		if (!empty($this->skill_areas)) {
-			foreach ($skill_areas as $skill) {
-				$newSkill = new Skill($skill);
+			foreach ($this->skill_areas as $skill) {
+				//TODO: Fix temporary workaround of wrapping the skill
+				//into an array. This was done because Skill::extractForm()
+				//expects an array with a value for the 'skill_name' key
+				$newSkill = new Skill(array("skill_name" => $skill));
 				
-				if (!in_array($newSkill, Skill::$SKILL_AREAS))
-					$this->setError('SKILL_AREA_INVALID');
+				if (!in_array($newSkill->getSkillName(), Skill::$SKILL_AREAS))
+					$this->setError('skill_areas', 'SKILL_AREA_INVALID');
 			}
 		}
 	}
