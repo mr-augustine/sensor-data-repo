@@ -69,7 +69,19 @@ class UsersDBTest extends PHPUnit_Framework_TestCase {
   	}
   	
   	public function testGetUsersByEmail() {
-  		$this->assertTrue(false, 'Test not implemented yet');
+  		$myDb = DBMaker::create('botspacetest');
+  		Database::clearDB();
+  		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
+  		$testUserEmail = 'charlie.g@hotmail.com';
+  		$users = UsersDB::getUsersBy('email', $testUserEmail);
+  		
+  		$this->assertTrue(count($users) == 1, 
+  				'The database should return exactly one user with the provided email');
+  		
+  		$user = $users[0];
+  		
+  		$this->assertTrue(strcmp($user->getEmail(), $testUserEmail) == 0, 
+  				'The database should return exactly one user with the provided email');;
   	}
 }
 ?>
