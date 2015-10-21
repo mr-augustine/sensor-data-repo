@@ -69,7 +69,7 @@ class SkillAssocsDBTest extends PHPUnit_Framework_TestCase {
 		
 		$skillAssoc = $skillAssocs[0];
 		
-		$this->assertTrue($skillAssoc->getSkillAssocId() == $testSkillAssocId, 
+		$this->assertEquals($skillAssoc->getSkillAssocId(), $testSkillAssocId, 
 				'The database should have exactly one SkillAssoc with the provided skillAssocId');
 	}
 

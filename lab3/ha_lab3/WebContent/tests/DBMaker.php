@@ -42,7 +42,7 @@ class DBMaker {
 					userDataId		 int(11) NOT NULL AUTO_INCREMENT,
   					userId			 int(11) NOT NULL COLLATE utf8_unicode_ci,
   					user_name		 varchar(30) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
-  					skill_level		 int(1) COLLATE utf8_unicode_ci,
+  					skill_level		 varchar(30) NOT NULL COLLATE utf8_unicode_ci,
   					profile_pic		 varchar(255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
   					started_hobby 	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   					date_created	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -106,7 +106,7 @@ class DBMaker {
 			$sql = "INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
 					(:userDataId, :userId, :user_name, :skill_level, :profile_pic, :started_hobby, :fav_color, :url, :phone)";
 			$st = $db->prepare( $sql );
-			$st->execute (array (':userDataId' => 1, ':userId' => 1, ':user_name' => 'jabituya', ':skill_level' => 2, ':profile_pic' => 'none.jpg',
+			$st->execute (array (':userDataId' => 1, ':userId' => 1, ':user_name' => 'jabituya', ':skill_level' => "advanced", ':profile_pic' => 'none.jpg',
 					':started_hobby' => '2015-10-17 07:38:46', ':fav_color' => '008000', ':url' => 'http://www.google.com', ':phone' => '210-555-9090'));
 			
 			// Populate the SkillAssocs table
