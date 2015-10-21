@@ -106,12 +106,18 @@ class UserDataDBTest extends PHPUnit_Framework_TestCAse {
 		$myDb = DBMaker::create('botspacetest');
 		Database::clearDB();
 		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
-		$testSkillLevel = "advanced"; 
-		$this->assertTrue(false, 'Test not implmented yet');
+		$testSkillLevel = "advanced";
+		$userDataArray = UserDataDB::getUserDataBy('skill_level', $testSkillLevel);
+		
+		foreach ($userDataArray as $userData) {
+			$this->assertTrue(strcmp($userData->getSkillLevel(), $testSkillLevel) == 0, 
+					'The database should return only user data with the specified skill level');
+		}
 	}
 	
-	public function testGetUserDataBySkillArea() {
+	// TODO: Implmenent this feature later
+	/*public function testGetUserDataBySkillArea() {
 		$this->assertTrue(false, 'Test not implmented yet');
-	}
+	}*/
 }
 ?>
