@@ -1,12 +1,17 @@
 EMAIL_EMPTY Ihre E-Mail kann nicht leer sein oder Leerzeichen enthalten nur
 EMAIL_INVALID Ihre E-Mail ist ungültig 
 EMAIL_PASSWORD_COMBO_INVALID Ihr Benutzername oder Passwort ist nicht korrekt
+USER_DATA_ID_EMPTY Die Benutzerdaten-ID darf nicht leer sein
+USER_DATA_ID_INVALID Die Benutzerdaten-ID ist ungültig
 USER_DATA_INVALID Benutzerdaten konnte nicht erstellt werden
 USER_INVALID Benutzer konnte nicht erstellt werden
 USER_NAME_EMPTY Ihr Benutzername darf nicht leer sein oder Leerzeichen enthalten nur
 USER_NAME_TOO_SHORT Ihr Benutzername ist zu kurz
 USER_NAME_HAS_INVALID_CHARS Ihr Benutzername kann nur Buchstaben, Zahlen, Bindestriche und Unterstriche
-SKILL_AREA_INVALID Ihrer Spielfläche ist ungültig
+SKILL_AREA_INVALID Skill-Bereich konnte nicht erstellt werden
+SKILL_ASSOC_INVALID Geschicklichkeit Verband konnte nicht erstellt werden
+SKILL_ID_INVALID Ihre Geschicklichkeit-ID ist ungültig
+SKILL_ID_EMPTY Der Skill-ID darf nicht leer sein
 SKILL_LEVEL_INVALID Ihrer Spielstärke ist ungültig
 SKILL_LEVEL_NOT_SET Ihrer Spielstärke eingestellt werden
 SKILL_NAME_EMPTY Ihre Fähigkeiten Name darf nicht leer sein

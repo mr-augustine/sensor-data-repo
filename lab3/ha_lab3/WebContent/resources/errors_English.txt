@@ -1,12 +1,17 @@
 EMAIL_EMPTY Your email cannot be empty or only contain whitespace
 EMAIL_INVALID Your email is invalid
 EMAIL_PASSWORD_COMBO_INVALID Your username or password is incorrect
+USER_DATA_ID_EMPTY The user data id cannot be empty
+USER_DATA_ID_INVALID The user data id is invalid
 USER_DATA_INVALID UserData could not be created
 USER_INVALID User could not be created
 USER_NAME_EMPTY Your username cannot be empty or only contain whitespace
 USER_NAME_TOO_SHORT Your username is too short
 USER_NAME_HAS_INVALID_CHARS Your username can only contain letters, numbers, dashes and underscores
-SKILL_AREA_INVALID Your skill area is invalid
+SKILL_AREA_INVALID Skill Area could not be created
+SKILL_ASSOC_INVALID Skill Association could not be created
+SKILL_ID_INVALID Your skill id is invalid
+SKILL_ID_EMPTY The skill id cannot be empty
 SKILL_LEVEL_INVALID Your skill level is invalid
 SKILL_LEVEL_NOT_SET Your skill level must be set
 SKILL_NAME_EMPTY Your skill name cannot be empty
