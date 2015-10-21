@@ -6,7 +6,6 @@ class UsersDB {
 	public static function addUser($user) {
 		$query = "INSERT INTO Users (email, password)
 		                      VALUES(:email, :password)";
-		$returnId = 0;
 		
 		try {
 			if (is_null($user) || $user->getErrorCount() > 0)
@@ -74,7 +73,7 @@ class UsersDB {
 	// Returns values in the $column extracted from $rowSets as an array
 	public static function getUserValues($rowSets, $column) {
 		$userValues = array();
-		print_r($rowSets);
+		//print_r($rowSets);
 	
 		foreach ($rowSets as $userRow )  {
 			$userValue = $userRow[$column];

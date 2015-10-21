@@ -1,6 +1,7 @@
 EMAIL_EMPTY Ihre E-Mail kann nicht leer sein oder Leerzeichen enthalten nur
 EMAIL_INVALID Ihre E-Mail ist ungültig 
 EMAIL_PASSWORD_COMBO_INVALID Ihr Benutzername oder Passwort ist nicht korrekt
+USER_DATA_INVALID Benutzerdaten konnte nicht erstellt werden
 USER_INVALID Benutzer konnte nicht erstellt werden
 USER_NAME_EMPTY Ihr Benutzername darf nicht leer sein oder Leerzeichen enthalten nur
 USER_NAME_TOO_SHORT Ihr Benutzername ist zu kurz

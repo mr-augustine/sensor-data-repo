@@ -10,26 +10,22 @@ class UserDataDB {
 		// TODO: Add a SkillAssoc query
 		// TODO: Add a Robots query
 		
-		$returnId = 0;
-		
 		try {
 			// check null and check for errors
 			// check for User by given userId; throw exception if non-existent
-			// 
 			if (is_null($userData) || $userData->getErrorCount() > 0)
-				throw new PDOException("Invalid UserData object can't be inserted: ".$userData->getErrorCount()." "
-						.print_r($userData->getErrors(), true));
+				throw new PDOException("Invalid UserData object can't be inserted: "/*.$userData->getErrorCount()." "
+						.print_r($userData->getErrors(), true)*/);
+			
 			$newUserId = $userData->getUserId();
+			
 			if (!isset($newUserId))
 				throw new PDOException("UserId not specified");
 			
+			// Verify that the specified user exists in the database
 			$db = Database::getDB();
 			$users = UsersDB::getUserValuesBy('userId', $newUserId, 'userId');
-			print_r($users)."\n";
-			//$users = UsersDB::getUsersBy('userId', $newUserId);
 			if ($users[0] != $newUserId)
-			// Alternatively,
-			// if (count($users) != 1)
 				throw new PDOException("Cannot associate UserData with invalid User");
 			
 			$statement = $db->prepare($query);
@@ -51,26 +47,28 @@ class UserDataDB {
 					(:userDataId, :skillId)";
 			// Handle skill area associations separately since they're going into a different table
 			// TODO: Review this for instances where this can go wrong
+
 			foreach ($userData->getSkillAreas() as $skill) {
-				$skillQuery = "SELECT skillId FROM Skills WHERE skill_name = $skill";
-				$skillSt = $db->prepare($query);
-				$skillSt->execute();
-				$returnResult = $skillSt->fetchAll(PDO::FETCH_ASSOC);
-				$returnSkillId = $returnResult[0];
-				$skillSt->closeCursor();
+				// Translate the skill to a skillId, then create a skill association
 				
+				$skillArray = SkillsDB::getSkillsBy('skill_name', $skill);
+				$skillObject = $skillArray[0];
+				echo "skill_name: ".$skillObject->getSkillName();
 				$skillstatement = $db->prepare($query);
 				$skillstatement->bindValue(":userDataId", $returnId);
-				$skillstatement->bindValue(":skillId", $returnSkillId);
+				$skillstatement->bindValue(":skillId", $skillObject->getSkillId());
 				$skillstatement->execute();
 				$skillstatement->closeCursor();
 				$skillAssocId = $db->lastInsertId("skillAssocId");
 			}
+			
+			$userData->setUserDataId($returnId);
 		} catch (Exception $e) { // Not permanent error handling
-			echo "<p>Error adding user data to UserData ".$e->getMessage()."</p>";
+			$userData->setError('userDataId', 'USER_DATA_INVALID');
+			echo $e->getMessage();
 		}
 		
-		return $returnId;
+		return $userData;
 	}
 	
 	public static function getUserDataRowSetsBy($type = null, $value = null) {
