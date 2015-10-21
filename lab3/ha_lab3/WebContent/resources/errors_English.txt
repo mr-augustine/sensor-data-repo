@@ -4,6 +4,8 @@ EMAIL_PASSWORD_COMBO_INVALID Your username or password is incorrect
 USER_DATA_ID_EMPTY The user data id cannot be empty
 USER_DATA_ID_INVALID The user data id is invalid
 USER_DATA_INVALID UserData could not be created
+USER_ID_EMPTY The user id cannot be empty
+USER_ID_INVALID The user id is invalid
 USER_INVALID User could not be created
 USER_NAME_EMPTY Your username cannot be empty or only contain whitespace
 USER_NAME_TOO_SHORT Your username is too short

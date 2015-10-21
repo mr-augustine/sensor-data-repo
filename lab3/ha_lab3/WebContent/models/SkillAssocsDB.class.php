@@ -63,11 +63,13 @@ class SkillAssocsDB {
 		
 		if (!empty($skillAssocsRows)) {
 			foreach ($skillAssocsRows as $row) {
-				$skillAssoc = new SkillAssoc($row);
+				$skillAssoc = new SkillAssocs($row['userDataId'], $row['skillId']);
 				$skillAssoc->setSkillAssocId($row['skillAssocId']);
 				array_push($skillAssocs, $skillAssoc);
 			}
 		}
+		
+		return $skillAssocs;
 	}
 }
 ?>

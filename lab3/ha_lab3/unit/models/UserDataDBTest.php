@@ -23,13 +23,13 @@ class UserDataDBTest extends PHPUnit_Framework_TestCAse {
 		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
 		
 		// UserData is not associated with userId yet
-		$validTest = array("user_name" => "altars2000", "skill_level" => "novice",
+		$validTest = array("userId" => 3, "user_name" => "altars2000", "skill_level" => "novice",
 				"skill_areas" => array("programming", "ultrasonic", "wiring"),
 				"profile_pic" => "no-photo.jpg", "started_hobby" => "2015-10",
 				"fav_color" => "#00ff00", "url" => "http://www.askjeeves.com",
 				"phone" => "210-555-4444");
 		$s1 = new UserData($validTest);
-		$s1->setUserId(3);
+
 		$beforeCount = count(UserDataDB::getUserDataBy());
 		$newUserData = UserDataDB::addUserData($s1);
 

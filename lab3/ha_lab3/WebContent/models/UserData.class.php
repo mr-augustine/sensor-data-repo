@@ -39,6 +39,7 @@ class UserData {
 		if (is_null($this->formInput))
 			$this->initializeEmpty();
 		else {
+			$this->validateUserId();
 			$this->validateUserName();
 			$this->validateSkillLevel();
 			$this->validateSkillAreas();
@@ -51,6 +52,7 @@ class UserData {
 	}
 	
 	private function initializeEmpty() {
+		$this->userId = 0;
 		$this->errorCount = 0;
 		$errors = array();
 		$this->user_name = "";
@@ -289,6 +291,16 @@ class UserData {
 			if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
 				$this->setError('url', 'URL_INVALID');
 			}
+		}
+	}
+	
+	private function validateUserId() {
+		$this->userId = $this->extractForm('userId');
+		
+		if (!is_numeric($this->userId) || $this->userId <= 0) {
+			$this->setError('userId', 'USER_ID_INVALID');
+		} elseif (empty($this->userId)) {
+			$this->setError('userId', 'USER_ID_EMPTY');
 		}
 	}
 	

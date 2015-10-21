@@ -68,5 +68,8 @@ class UsersDBTest extends PHPUnit_Framework_TestCase {
   		ob_get_clean();
   	}
   	
+  	public function testGetUsersByEmail() {
+  		$this->assertTrue(false, 'Test not implemented yet');
+  	}
 }
 ?>

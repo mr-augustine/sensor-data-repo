@@ -17,7 +17,7 @@ class UserDataTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testValidMandatoryOnlyFieldsUserDataCreate() {
-		$validTest = array("user_name" => "test-user123", "skill_level" => "novice",
+		$validTest = array("userId" => 2, "user_name" => "test-user123", "skill_level" => "novice",
 				"started_hobby" => "2015-10", "fav_color" => "#00ff00");
 		$s1 = new UserData($validTest);
 		//print_r($s1->getErrors());

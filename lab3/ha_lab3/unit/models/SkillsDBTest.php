@@ -24,7 +24,7 @@ class SkillsDBTest extends PHPUnit_Framework_TestCase {
 		$skills = SkillsDB::getSkillsBy('skill_name', 'GPS');
 		
 		$this->assertEquals(count($skills), 1,
-				'The database should return exactly on Skill');
+				'The database should return exactly one Skill');
 		
 		$skill = $skills[0];
 		

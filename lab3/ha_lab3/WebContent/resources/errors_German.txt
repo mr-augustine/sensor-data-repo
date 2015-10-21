@@ -4,6 +4,8 @@ EMAIL_PASSWORD_COMBO_INVALID Ihr Benutzername oder Passwort ist nicht korrekt
 USER_DATA_ID_EMPTY Die Benutzerdaten-ID darf nicht leer sein
 USER_DATA_ID_INVALID Die Benutzerdaten-ID ist ungültig
 USER_DATA_INVALID Benutzerdaten konnte nicht erstellt werden
+USER_ID_EMPTY Die Benutzer-ID darf nicht leer sein
+USER_ID_INVALID Die Benutzer-ID ist ungültig
 USER_INVALID Benutzer konnte nicht erstellt werden
 USER_NAME_EMPTY Ihr Benutzername darf nicht leer sein oder Leerzeichen enthalten nur
 USER_NAME_TOO_SHORT Ihr Benutzername ist zu kurz

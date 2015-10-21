@@ -81,19 +81,17 @@ class SkillAssocs {
 	}
 	
 	private function validateSkillId() {
-		// Also includes the case where skillId == 0
-		if (empty($this->skillId))
-			$this->setError('skillId', 'SKILL_ID_EMPTY');
-		elseif (!is_numeric($this->skillId) || $this->skillId < 0)
+		if (!is_numeric($this->skillId) || $this->skillId < 0)
 			$this->setError('skillId', 'SKILL_ID_INVALID');
+		elseif (empty($this->skillId))
+			$this->setError('skillId', 'SKILL_ID_EMPTY');
 	}
 	
 	private function validateUserDataId() {
-		// Also includes the case where userDataId == 0
-		if (empty($this->userDataId))
-			$this->setError('userDataId', 'USER_DATA_ID_EMPTY');
-		elseif (!is_numeric($this->userDataId) || $this->userDataId < 0)
+		if (!is_numeric($this->userDataId) || $this->userDataId < 0)
 			$this->setError('userDataId', 'USER_DATA_ID_INVALID');
+		elseif (empty($this->userDataId))
+			$this->setError('userDataId', 'USER_DATA_ID_EMPTY');
 	}
 }
 ?>
