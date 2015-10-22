@@ -29,8 +29,6 @@ EOT;
 		echo "<head>\n";
 		echo "<title>$title</title>\n";
 		echo "</head>\n\t<body>\n";
-		if (is_null($title))
-			$title = "";	
      }
 
 	public static function showFooter() {
@@ -39,16 +37,6 @@ EOT;
 		echo $footer;
 		echo '<footer>'."\n";
 		echo MasterView::$STD_FOOTER."\n";
-// 		echo '<hr>'."\n\n";
-		
-// 		echo '<nav>'."\n";
-// 		echo '<a href="">Tour</a> |'."\n";
-// 		echo '<a href="">About</a> |'."\n";
-// 		echo '<a href="">Help</a> |'."\n";
-// 		echo '<a href="">Terms</a> |'."\n";
-// 		echo '<a href="">Privacy</a>'."\n";
-// 		echo '</nav>'."\n";
-// 		echo '</footer>'."\n";
 		echo "\t</body>\n</html>";	
      }
 }

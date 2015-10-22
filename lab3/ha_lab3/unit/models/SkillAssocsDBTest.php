@@ -3,7 +3,7 @@ require_once dirname(__FILE__).'\..\..\WebContent\models\Database.class.php';
 require_once dirname(__FILE__).'\..\..\WebContent\models\Messages.class.php';
 require_once dirname(__FILE__).'\..\..\WebContent\models\SkillAssocs.class.php';
 require_once dirname(__FILE__).'\..\..\WebContent\models\SkillAssocsDB.class.php';
-require_once dirname(__FILE__).'\..\..\WebContent\tests\DBMaker.php';
+require_once dirname(__FILE__).'\..\..\WebContent\tests\DBMaker.class.php';
 
 class SkillAssocsDBTest extends PHPUnit_Framework_TestCase {
 	
