@@ -7,6 +7,7 @@ class RobotData {
 	private $errors;
 	private $formInput;
 	
+	private $robotId;
 	private $robot_name;
 	private $creator;
 	private $status;
@@ -30,6 +31,14 @@ class RobotData {
 		$this->errorCount ++;
 	}
 
+	public function setRobotId($id) {
+		$this->robotId = $id;
+	}
+	
+	public function getRobotId() {
+		return $this->robotId;
+	}
+	
 	public function getErrorCount() {
 		return $this->errorCount;
 	}
@@ -52,7 +61,8 @@ class RobotData {
 	
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("robot_name" => $this->robot_name,
+		$paramArray = array("robotId" => $this->robotId,
+				"robot_name" => $this->robot_name,
 				"creator" => $this->creator,
 				"status" => $this->status
 		);

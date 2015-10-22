@@ -51,9 +51,9 @@ class User {
 	
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("email" => $this->email,
-				"password" => $this->password,
-				"userId" => $this->userId
+		$paramArray = array("userId" => $this->userId,
+				"email" => $this->email,
+				"password" => $this->password
 		);
 		
 		return $paramArray;
