@@ -100,6 +100,10 @@ class UserData {
 		$this->userId = $id;
 	}
 	
+	public function setSkillAreas($skill_areas) {
+		$this->skill_areas = $skill_areas;
+	}
+	
 	public function setError($errorName, $errorValue) {
 		// Sets a particular error value and increments error count
 		$this->errors[$errorName] =  Messages::getError($errorValue);

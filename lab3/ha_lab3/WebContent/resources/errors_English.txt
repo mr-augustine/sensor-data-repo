@@ -3,6 +3,8 @@ EMAIL_INVALID Your email is invalid
 EMAIL_PASSWORD_COMBO_INVALID Your username or password is incorrect
 USER_COULD_NOT_BE_UPDATED The user could not be updated
 USER_DOES_NOT_EXIST A user with this id does not exist
+USER_DATA_COULD_NOT_BE_UPDATED The user data could not be updated
+USER_DATA_DOES_NOT_EXIST A user data entry with this id does not exist
 USER_DATA_ID_EMPTY The user data id cannot be empty
 USER_DATA_ID_INVALID The user data id is invalid
 USER_DATA_INVALID UserData could not be created

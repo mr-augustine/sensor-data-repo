@@ -113,12 +113,27 @@ class UserDataDB {
 		if (!empty($rowSets)) {
 			foreach ($rowSets as $userDataRow) {
 				$userData = new UserData($userDataRow);
+				$userDataId = $userDataRow['userDataId'];
 				
 				// The UserData constructor does not set the userDataId for
 				// a new UserData object; the UserData table takes care of that
 				// during insertion. Here we manually set the userDataId to
 				// complete the UserData object.
-				$userData->setUserDataId($userDataRow['userDataId']);
+				$userData->setUserDataId($userDataId);
+				
+				// We should also get the user's associated skills
+				$skillIds = SkillAssocsDB::getSkillAssocsBy('userDataId', $userDataId);
+				$skill_areas = array();
+				
+				foreach ($skillIds as $skillId) {
+					// skillIds start from 1, however array-indexing
+					// starts at 0; so we use an offset of -1 when retrieving
+					// values from $SKILL_AREAS
+					$skill_name = Skill::$SKILL_AREAS[$skillId - 1];
+					array_push($skill_areas, $skill_name);
+				}
+				$userData->setSkillAreas($skill_areas);
+				
 				array_push($usersData, $userData);
 			}
 		}
@@ -141,6 +156,65 @@ class UserDataDB {
 		}
 		
 		return $userDataValues;
+	}
+	
+	public static function updateUserData($userData) {
+		try {
+			$db = Database::getDB();
+			
+			if (is_null($userData) || $userData->getErrorCount() > 0)
+				return $userData;
+			
+			$checkUserData = UserDataDB::getUserDataBy('userDataId', $userData->getUserDataId());
+			
+			if (empty($checkUserData))
+				$userData->setError('userDataId', 'USER_DATA_DOES_NOT_EXIST');
+			if ($userData->getErrorCount() > 0)
+				return $userData;
+			
+			$query = "UPDATE UserData SET userId = :userId, user_name = :user_name, 
+					skill_level = :skill_level, profile_pic = :profile_pic, 
+					started_hobby = :started_hobby, fav_color = :fav_color, url = :url,
+					phone = :phone
+					WHERE userDataId = :userDataId";
+			
+			$statement = $db->prepare($query);
+			$statement->bindValue(":userId", $userData->getUserId());
+			$statement->bindValue(":user_name", $userData->getUserName());
+			$statement->bindValue(":skill_level", $userData->getSkillLevel());
+			$statement->bindValue(":profile_pic", $userData->getProfilePic());
+			$statement->bindValue(":started_hobby", $userData->getStartedHobby());
+			$statement->bindValue(":fav_color", $userData->getFavColor());
+			$statement->bindValue(":url", $userData->getUrl());
+			$statement->bindValue(":phone", $userData->getPhone());
+			$statement->bindValue(":userDataId", $userData->getUserDataId());
+			$statement->execute();
+			$statement->closeCursor();
+			
+			// Handle updates for the Skill Areas
+			// 1 - Delete all existing skill associations for the user
+			$deleteQuery = "DELETE from SkillAssocs WHERE userDataId = :$userDataId";
+			$statement = $db->prepare($deleteQuery);
+			$statement->bindValue(":$userDataId", $userData->getUserDataId());
+			$statement->execute();
+			$statement->closeCursor();
+			
+			// 2 - Add all of the new skill associations, if any
+			$skillAreas = $userData->getSkillAreas();
+			$userDataId = $userData->getUserDataId();
+			
+			foreach ($skillAreas as $skill_name) {
+				// Translate the skill_name into a skillId first
+				
+				// skillIds start from 1, whereas array-indexing starts at 0;
+				// so we add 1 to the index
+				$skillId = array_search($skill_name, Skill::$SKILL_AREAS) + 1;
+				$newSkillAssoc = new SkillAssocs($userDataId, $skillId);
+				SkillAssocsDB::addSkillAssoc($newSkillAssoc);
+			}
+		} catch (Exception $e) {
+			$userData->setError('userDataId', 'USER_DATA_COULD_NOT_BE_UPDATED');
+		}
 	}
 }
 ?>
