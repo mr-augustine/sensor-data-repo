@@ -122,10 +122,11 @@ class UserDataDB {
 				$userData->setUserDataId($userDataId);
 				
 				// We should also get the user's associated skills
-				$skillIds = SkillAssocsDB::getSkillAssocsBy('userDataId', $userDataId);
+				$skillAssocs = SkillAssocsDB::getSkillAssocsBy('userDataId', $userDataId);
 				$skill_areas = array();
 				
-				foreach ($skillIds as $skillId) {
+				foreach ($skillAssocs as $skillAssoc) {
+					$skillId = $skillAssoc->getSkillId();
 					// skillIds start from 1, however array-indexing
 					// starts at 0; so we use an offset of -1 when retrieving
 					// values from $SKILL_AREAS
