@@ -54,32 +54,35 @@ class SkillsDB {
 	}
 	
 	public static function updateSkill($skill) {
-		try {
-			$db = Database::getDB();
+		// THIS PROBABLY SHOULD NOT BE SUPPORTED UNTIL THE SKILL CLASS CAN
+		// SOURCE ITS LIST OF VALID SKILLS FROM THE DATABASE *AND*
+		// KEEP THE LIST IN SYNC
+// 		try {
+// 			$db = Database::getDB();
 			
-			if (is_null($skill) || $skill->getErrorCount() > 0)
-				return $skill;
+// 			if (is_null($skill) || $skill->getErrorCount() > 0)
+// 				return $skill;
 			
-			$checkSkill = SkillsDB::getSkillsBy('skillId', $skill->getSkillId());
+// 			$checkSkill = SkillsDB::getSkillsBy('skillId', $skill->getSkillId());
 			
-			if (empty($checkSkill))
-				$skill->setError('skillId', 'SKILL_DOES_NOT_EXIST');
-			if ($skill->getErrorCount() > 0)
-				return $skill;
+// 			if (empty($checkSkill))
+// 				$skill->setError('skillId', 'SKILL_DOES_NOT_EXIST');
+// 			if ($skill->getErrorCount() > 0)
+// 				return $skill;
 			
-			$query = "UPDATE Skills SET skill_name = :skill_name
-					WHERE skillId = :skillId";
+// 			$query = "UPDATE Skills SET skill_name = :skill_name
+// 					WHERE skillId = :skillId";
 			
-			$statement = $db->prepare($query);
-			$statement->bindValue(":skill_name", $skill->getSkillName());
-			$statement->bindValue(":skillId", $skill->getSkillId());
-			$statement->execute();
-			$statement->closeCursor();
-		} catch (Exception $e) {
-			$skill->setError('skillId', 'SKILL_COULD_NOT_BE_UPDATED');
-		}
+// 			$statement = $db->prepare($query);
+// 			$statement->bindValue(":skill_name", $skill->getSkillName());
+// 			$statement->bindValue(":skillId", $skill->getSkillId());
+// 			$statement->execute();
+// 			$statement->closeCursor();
+// 		} catch (Exception $e) {
+// 			$skill->setError('skillId', 'SKILL_COULD_NOT_BE_UPDATED');
+// 		}
 		
-		return $skill;
+// 		return $skill;
 	}
 }
 ?>

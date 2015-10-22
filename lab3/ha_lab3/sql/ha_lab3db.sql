@@ -19,9 +19,9 @@ CREATE TABLE UserData (
   user_name			 varchar(30) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
   skill_level		 varchar(30) NOT NULL COLLATE utf8_unicode_ci,
   profile_pic		 varchar(255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
-  started_hobby 	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  started_hobby 	 DATE,
   date_created		 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  fav_color		 	 char(6) NOT NULL COLLATE utf8_unicode_ci,
+  fav_color		 	 char(7) NOT NULL COLLATE utf8_unicode_ci,
   url				 varchar(255) COLLATE utf8_unicode_ci,
   phone				 varchar(255) COLLATE utf8_unicode_ci,
   PRIMARY KEY (userDataId),
@@ -82,7 +82,7 @@ INSERT INTO Users (userId, email, password) VALUES
 
 
 INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
-	(1, 1, 'jabituya', 'advanced', 'none.jpg', '2015-10-17 07:38:46', '008000', 'http://www.google.com', '210-555-9090');
+	(1, 1, 'jabituya', 'advanced', 'none.jpg', '2015-10-17 07:38:46', '#008000', 'http://www.google.com', '210-555-9090');
 
 INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
 	(1, 1, 1);

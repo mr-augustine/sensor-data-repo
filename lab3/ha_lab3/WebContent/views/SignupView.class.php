@@ -125,8 +125,8 @@ class SignupView {
 		if (!is_null($userData)) { echo $userData->getError('profile_pic'); }
 		echo '<br><br>';
 			
-		echo 'Started Robotics: <input type="month" name="started_hobby" min="1970-01" max="';
-		echo 'date("Y-m")';
+		echo 'Started Robotics: <input type="date" name="started_hobby" min="1970-01-01" max="';
+		echo 'date("Y-m-d")';
 		echo 'tabindex="20"';
 			if (!is_null($userData) && !empty($userData->getStartedHobby())) {
 				echo 'value="'.$userData->getStartedHobby().'"';

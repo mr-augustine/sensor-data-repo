@@ -25,13 +25,6 @@ class UserData {
 		$this->initialize();
 	}
 	
-	public function getError($errorName) {
-		if (isset($this->errors[$errorName]))
-			return $this->errors[$errorName];
-		else
-			return "";
-	}
-	
 	private function initialize() {
 		$this->errorCount = 0;
 		$errors = array();
@@ -110,6 +103,13 @@ class UserData {
 		$this->errorCount ++;
 	}
 	
+	public function getError($errorName) {
+		if (isset($this->errors[$errorName]))
+			return $this->errors[$errorName];
+		else
+			return "";
+	}
+	
 	public function getErrorCount() {
 		return $this->errorCount;
 	}
@@ -164,7 +164,8 @@ class UserData {
 	
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("user_name" => $this->user_name, "skill_level" => $this->skill_level,
+		$paramArray = array("userDataId" => $this->userDataId, "userId" => $this->userId,
+			"user_name" => $this->user_name, "skill_level" => $this->skill_level,
 			"skill_areas" => $this->skill_areas, "profile_pic" => $this->profile_pic,
 			"started_hobby" => $this->started_hobby, "fav_color" => $this->fav_color,
 			"url" => $this->url, "phone" => $this->phone
@@ -184,7 +185,8 @@ class UserData {
 			$this->setError('fav_color', 'FAV_COLOR_INVALID');
 		}
 		
-		$this->fav_color = substr($this->fav_color, 1);
+		// Removing the # prefix
+		//$this->fav_color = substr($this->fav_color, 1);
 	}
 	
 	private function validatePhone() {
@@ -263,26 +265,49 @@ class UserData {
 		
 		// Use a simple regex to check date format {yyyy-dd}
 		elseif (!filter_var($this->started_hobby, FILTER_VALIDATE_REGEXP,
-			array("options"=>array("regexp" =>"/^[12]\d{3}-[012]\d$/")) )) {
+			array("options"=>array("regexp" =>"/^\d{4}-\d{2}-\d{2}$/")) )) {
+			//array("options"=>array("regexp" =>"/^[12]\d{3}-[012]\d$/")) )) {
 			$this->setError('started_hobby', 'HOBBY_DATE_FORMAT_INVALID');
 		}
 		
 		// Verify that the date range is appropriate {epoch .. current date}
 		else {
-			list($startYear, $startMonth) = explode("-", $this->started_hobby, 2);
-			$currentYear = date("Y");
-			$currentMonth = date("m");
+			$start = date_parse($this->started_hobby);
+			$current = date_parse(date("Y-m-d"));
 			
-			// Convert all date fields to integers
-			$currentYear += 0;
-			$currentMonth += 0;
-			$startYear += 0;
-			$startMonth += 0;
-			
-			if ( !($startYear >= 1970 && $startYear <= $currentYear) || 
-					!($startMonth >= 1 && $startMonth <= $currentMonth) ) {
+			if ( empty($start)||
+				!($start['year'] >= 1970) && ($start['year'] <= $current['year']) ) { //||
+				//date_diff(date_create($this->started_hobby), date_create(date("Y-m-d"))) <= 0) {
+					
 				$this->setError('started_hobby', 'HOBBY_DATE_INVALID');
+			} else {
+				$dateInterval = date_diff(date_create($this->started_hobby), date_create(date("Y-m-d")));
+				$days = $dateInterval->format('%d');
+				$days += 0;
+				
+				if ($days <= 0)
+					$this->setError('started_hobby', 'HOBBY_DATE_INVALID');
 			}
+			
+			
+// 			list($startYear, $startMonth, $startDate) = explode("-", $this->started_hobby, 3);
+// 			$currentYear = date("Y");
+// 			$currentMonth = date("m");
+// 			$currentDay = date("d");
+			
+// 			// Convert all date fields to integers
+// 			$currentYear += 0;
+// 			$currentMonth += 0;
+// 			$currentDate += 0;
+// 			$startYear += 0;
+// 			$startMonth += 0;
+// 			$startDay += 0;
+			
+// 			if ( !($startYear >= 1970 && $startYear <= $currentYear) ||
+// 					!checkdate($startMonth, $startDay, $startYear) ||
+// 					!($startMonth >= 1 && $startMonth <= 12)) {
+// 				$this->setError('started_hobby', 'HOBBY_DATE_INVALID');
+// 			}
 		}
 		
 	}

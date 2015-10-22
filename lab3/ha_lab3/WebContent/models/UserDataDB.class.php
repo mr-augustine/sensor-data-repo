@@ -72,12 +72,13 @@ class UserDataDB {
 	}
 	
 	public static function getUserDataRowSetsBy($type = null, $value = null) {
-		$allowedTypes = ['userId', 'user_name', 'skill_level', 'skill_areas', 'robot_name'];
+		$allowedTypes = ['userDataId', 'userId', 'user_name', 'skill_level', 'skill_areas', 'robot_name'];
 		$userDataRowSets = NULL;
 		
 		try {
 			$db = Database::getDB();
-			$query = "SELECT userDataId, userId, user_name, skill_level FROM UserData";
+			$query = "SELECT userDataId, userId, user_name, skill_level, profile_pic,
+					started_hobby, fav_color, url, phone FROM UserData";
 			
 			if (!is_null($type)) {
 				if (!in_array($type, $allowedTypes))
@@ -168,8 +169,10 @@ class UserDataDB {
 			
 			$checkUserData = UserDataDB::getUserDataBy('userDataId', $userData->getUserDataId());
 			
-			if (empty($checkUserData))
+			if (empty($checkUserData)) {
 				$userData->setError('userDataId', 'USER_DATA_DOES_NOT_EXIST');
+				return $userData;
+			}
 			if ($userData->getErrorCount() > 0)
 				return $userData;
 			
@@ -194,9 +197,9 @@ class UserDataDB {
 			
 			// Handle updates for the Skill Areas
 			// 1 - Delete all existing skill associations for the user
-			$deleteQuery = "DELETE from SkillAssocs WHERE userDataId = :$userDataId";
+			$deleteQuery = "DELETE from SkillAssocs WHERE userDataId = :userDataId";
 			$statement = $db->prepare($deleteQuery);
-			$statement->bindValue(":$userDataId", $userData->getUserDataId());
+			$statement->bindValue(":userDataId", $userData->getUserDataId());
 			$statement->execute();
 			$statement->closeCursor();
 			
@@ -216,6 +219,8 @@ class UserDataDB {
 		} catch (Exception $e) {
 			$userData->setError('userDataId', 'USER_DATA_COULD_NOT_BE_UPDATED');
 		}
+		
+		return $userData;
 	}
 }
 ?>

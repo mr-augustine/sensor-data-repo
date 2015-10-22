@@ -38,6 +38,13 @@ class SkillAssocs {
 		return $this->errors;
 	}
 	
+	public function getParameters() {
+		$paramArray = array("skillAssocId" => $this->skillAssocId,
+				"skillId" => $this->skillId, "userDataId" => $this->userDataId);
+		
+		return $paramArray;
+	}
+	
 	public function getUserDataId() {
 		return $this->userDataId;
 	}

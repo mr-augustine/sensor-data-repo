@@ -98,5 +98,31 @@ class SkillAssocsDBTest extends PHPUnit_Framework_TestCase {
 					'All returned SkillAssocs should have the specified userDataId');
 		}
 	}
+	
+	// The update feature probably should not exist for SkillAssocs
+// 	public function testUpdateSkillAssoc() {
+// 		$myDB = DBMaker::create('botspacetest');
+// 		Database::clearDB();
+// 		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
+// 		$testSkillAssocId = 1;
+// 		$testSkillId = 7;
+// 		$skillAssocs = SkillAssocsDB::getSkillAssocsBy('skillAssocId', $testSkillAssocId);
+// 		$skillAssoc = $skillAssocs[0];
+		
+// 		$params = $skillAssoc->getParameters();
+// 		$this->assertEquals($skillAssoc->getSkillId(), 1,
+// 				'Before the update it should have skillId == 1');
+		
+// 		$params['skillId'] = $testSkillId;
+// 		$newSkillAssoc = new SkillAssocs($params);
+// 		$newSkillAssoc->setSkillAssocId($testSkillAssocId);
+		
+// 		$skillAssoc = SkillAssocsDB::updateSkillAssoc($newSkillAssoc);
+		
+// 		$this->assertEquals($skillAssoc->getSkillId(), $testSkillId,
+// 				'After the update it should have the new skillId');
+// 		$this->assertTrue(empty($skillAssoc->getErrors()),
+// 				'The updated skill association should have no errors');
+// 	}
 }
 ?>
