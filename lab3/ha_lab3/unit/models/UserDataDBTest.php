@@ -135,9 +135,6 @@ class UserDataDBTest extends PHPUnit_Framework_TestCAse {
 		$newUserData->setUserDataId($testUserDataId);
 		
 		$userData = UserDataDB::updateUserData($newUserData);
-		
-		echo "userData error count: ".$userData->getErrorCount()."\n";
-		print_r($userData->getErrors());
 
 		$this->assertEquals($userData->getUserName(), 'jabituya2000',
 				'After the update it should have username jabituya2000');
