@@ -52,5 +52,34 @@ class SkillsDB {
 		
 		return $skills;
 	}
+	
+	public static function updateSkill($skill) {
+		try {
+			$db = Database::getDB();
+			
+			if (is_null($skill) || $skill->getErrorCount() > 0)
+				return $skill;
+			
+			$checkSkill = SkillsDB::getSkillsBy('skillId', $skill->getSkillId());
+			
+			if (empty($checkSkill))
+				$skill->setError('skillId', 'SKILL_DOES_NOT_EXIST');
+			if ($skill->getErrorCount() > 0)
+				return $skill;
+			
+			$query = "UPDATE Skills SET skill_name = :skill_name
+					WHERE skillId = :skillId";
+			
+			$statement = $db->prepare($query);
+			$statement->bindValue(":skill_name", $skill->getSkillName());
+			$statement->bindValue(":skillId", $skill->getSkillId());
+			$statement->execute();
+			$statement->closeCursor();
+		} catch (Exception $e) {
+			$skill->setError('skillId', 'SKILL_COULD_NOT_BE_UPDATED');
+		}
+		
+		return $skill;
+	}
 }
 ?>
