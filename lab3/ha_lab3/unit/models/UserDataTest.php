@@ -25,6 +25,30 @@ class UserDataTest extends PHPUnit_Framework_TestCase {
 				'It should create a valid UserData object when valid input is provided');
 	}
 	
+	public function testInsertDuplicateUserData() {
+		ob_start();
+		
+		$myDb = DBMaker::create('botspacetest');
+		Database::clearDB();
+		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
+		
+		$beforeCount = count(UserDataDB::getUserDataBy());
+		$userDataCopy = UserDataDB::getUserDataRowSetsBy('userDataId', 1);
+		$userDataCopy = $userDataCopy[0];
+		
+		$s1 = new UserData($userDataCopy);
+		$insertedUserData = UserDataDB::addUserData($s1);
+		
+		$this->assertGreaterThan(0, $insertedUserData->getErrorCount(),
+				'Duplicate attempt should return with an error');
+		
+		$afterCount = count(UserDataDB::getUserDataBy());
+		$this->assertEquals($afterCount, $beforeCount,
+				'The database should have the same number of elements after the insertion attempt');
+		
+		ob_get_clean();
+	}
+	
 	// Add tests for invalid fields
 }
 ?>
