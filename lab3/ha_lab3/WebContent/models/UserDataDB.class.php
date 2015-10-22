@@ -7,7 +7,6 @@ class UserDataDB {
 				profile_pic, started_hobby, fav_color, url, phone) VALUES
 				(:userId, :user_name, :skill_level, :profile_pic,
 				:started_hobby, :fav_color, :url, :phone)";
-		// TODO: Add a SkillAssoc query
 		// TODO: Add a Robots query
 		
 		try {
@@ -53,7 +52,7 @@ class UserDataDB {
 				
 				$skillArray = SkillsDB::getSkillsBy('skill_name', $skill);
 				$skillObject = $skillArray[0];
-				//echo "skill_name: ".$skillObject->getSkillName();
+
 				$skillstatement = $db->prepare($query);
 				$skillstatement->bindValue(":userDataId", $returnId);
 				$skillstatement->bindValue(":skillId", $skillObject->getSkillId());

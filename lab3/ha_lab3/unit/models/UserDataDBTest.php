@@ -127,20 +127,12 @@ class UserDataDBTest extends PHPUnit_Framework_TestCAse {
 		$this->assertEquals($userData->getUserName(), 'jabituya',
 				'Before the update it should have username jabituya');
 		
-// 		echo "userData params: "; print_r($params); echo "\n";
-// 		echo "userData error count = ".$userData->getErrorCount()."\n";
-// 		echo "error['started_hobby'] = ".$userData->getError('started_hobby')."\n";
-// 		echo "error['fav_color'] = ".$userData->getError('fav_color')."\n";
-		
 		$testUserDataRowsArray = UserDataDB::getUserDataRowSetsBy('userDataId', $testUserDataId);
 		$testUserDataRow = $testUserDataRowsArray[0];
-		//echo "userDataRow: "; print_r($testUserDataRow); echo "\n";
 		
 		$params['user_name'] = 'jabituya2000';
 		$newUserData = new UserData($params);
 		$newUserData->setUserDataId($testUserDataId);
-		
-		//echo "newUserData error count: ".$userData->getErrorCount();
 		
 		$userData = UserDataDB::updateUserData($newUserData);
 		

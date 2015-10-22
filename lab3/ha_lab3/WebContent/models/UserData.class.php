@@ -184,9 +184,6 @@ class UserData {
 			array("options"=>array("regexp" =>"/^#[0-9a-fA-F]{6}$/")) )) {
 			$this->setError('fav_color', 'FAV_COLOR_INVALID');
 		}
-		
-		// Removing the # prefix
-		//$this->fav_color = substr($this->fav_color, 1);
 	}
 	
 	private function validatePhone() {
@@ -288,26 +285,6 @@ class UserData {
 				if ($days <= 0)
 					$this->setError('started_hobby', 'HOBBY_DATE_INVALID');
 			}
-			
-			
-// 			list($startYear, $startMonth, $startDate) = explode("-", $this->started_hobby, 3);
-// 			$currentYear = date("Y");
-// 			$currentMonth = date("m");
-// 			$currentDay = date("d");
-			
-// 			// Convert all date fields to integers
-// 			$currentYear += 0;
-// 			$currentMonth += 0;
-// 			$currentDate += 0;
-// 			$startYear += 0;
-// 			$startMonth += 0;
-// 			$startDay += 0;
-			
-// 			if ( !($startYear >= 1970 && $startYear <= $currentYear) ||
-// 					!checkdate($startMonth, $startDay, $startYear) ||
-// 					!($startMonth >= 1 && $startMonth <= 12)) {
-// 				$this->setError('started_hobby', 'HOBBY_DATE_INVALID');
-// 			}
 		}
 		
 	}
