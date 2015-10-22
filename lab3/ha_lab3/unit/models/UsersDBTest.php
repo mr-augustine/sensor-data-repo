@@ -83,5 +83,30 @@ class UsersDBTest extends PHPUnit_Framework_TestCase {
   		$this->assertTrue(strcmp($user->getEmail(), $testUserEmail) == 0, 
   				'The database should return exactly one user with the provided email');;
   	}
+  	
+  	public function testUpdateUserEmail() {
+  		$myDB = DBMaker::create('botspacetest');
+  		Database::clearDB();
+  		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
+  		$testUserId = 1;
+  		$users = UsersDB::getUsersBy('userId', $testUserId);
+  		$user = $users[0];
+  		
+  		$params = $user->getParameters();
+  		$this->assertEquals($user->getEmail(), 'bjabituya@yahoo.com',
+  				'Before the update it should have email bjabituya@yahoo.com');
+  		
+  		$params['email'] = 'bjabituya2000@yahoo.com';
+  		$newUser = new User($params);
+  		$newUser->setUserId($testUserId);
+  		
+  		$user = UsersDB::updateUser($newUser);
+
+  		$this->assertEquals($user->getEmail(), 'bjabituya2000@yahoo.com',
+  				'After the update it should have email bjabituya2000@yahoo.com');
+  		$this->assertTrue(empty($user->getErrors()),
+  				'The updated user should have no errors');
+  		
+  	}
 }
 ?>

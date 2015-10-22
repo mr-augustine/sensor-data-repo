@@ -19,7 +19,7 @@ class LoginController {
 			LoginView::show();
 		else {
 			HomeView::show();
-			header('Location: http://'.$_SERVER["HTTP_HOST"].'/'.$_SESSION['base']);
+			header('Location: /'.$_SESSION['base']);
 			
 		}
 	}

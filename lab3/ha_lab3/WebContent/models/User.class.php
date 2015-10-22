@@ -6,6 +6,7 @@ class User {
 	private $errors;
 	private $formInput;
 	
+	private $userId;
 	private $email;
 	private $password;
 	
@@ -28,6 +29,10 @@ class User {
 		$this->errorCount ++;
 	}
 
+	public function setUserId($id) {
+		$this->userId = $id;
+	}
+	
 	public function getErrorCount() {
 		return $this->errorCount;
 	}
@@ -40,9 +45,16 @@ class User {
 		return $this->email;
 	}
 	
+	public function getUserId() {
+		return $this->userId;
+	}
+	
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("email" => $this->email);
+		$paramArray = array("email" => $this->email,
+				"password" => $this->password,
+				"userId" => $this->userId
+		);
 		
 		return $paramArray;
 	}
@@ -82,6 +94,7 @@ class User {
 		$this->errorCount = 0;
 		$errors = array();
 	 	$this->userName = "";
+	 	$this->password = "";
 	}
 
 	private function validateEmail() {

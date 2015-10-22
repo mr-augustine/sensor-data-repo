@@ -111,6 +111,36 @@ class UsersDB {
 		
 		return UsersDB::getUsersArray($userRows);
 	}
+	
+	public static function updateUser($user) {
+		try {
+			$db = Database::getDB();
+			
+			if (is_null($user) || $user->getErrorCount() > 0)
+				return $user;
+			
+			$checkUser = UsersDB::getUsersBy('userId', $user->getUserId());
+			
+			if (empty($checkUser))
+				$user->setError('userId', 'USER_DOES_NOT_EXIST');
+			if ($user->getErrorCount() > 0)
+				return $user;
+			
+			$query = "UPDATE Users SET email = :email, password = :password
+					WHERE userId = :userId";
+			
+			$statement = $db->prepare($query);
+			$statement->bindValue(":email", $user->getEmail());
+			$statement->bindValue(":password", $user->getPassword());
+			$statement->bindValue(":userId", $user->getUserId());
+			$statement->execute();
+			$statement->closeCursor();
+		} catch (Exception $e) {
+			$user->setError('userId', 'USER_COULD_NOT_BE_UPDATED');
+		}
+		
+		return $user;
+	}
 }
 
 ?>
