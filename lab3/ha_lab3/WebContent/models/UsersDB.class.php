@@ -17,7 +17,7 @@ class UsersDB {
 			$statement->bindValue(":password", $user->getPassword());
 			$statement->execute ();
 			$statement->closeCursor();
-			$returnId = $db->lastInsertId("userId");
+			$user->setUserId($db->lastInsertId("userId"));
 		} catch (Exception $e) { // Not permanent error handling
 			$user->setError('userId', 'USER_INVALID');
 		}
