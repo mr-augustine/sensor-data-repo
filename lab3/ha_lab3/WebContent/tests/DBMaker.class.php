@@ -43,7 +43,7 @@ class DBMaker {
   					userId			 int(11) NOT NULL COLLATE utf8_unicode_ci,
   					user_name		 varchar(30) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
   					skill_level		 varchar(30) NOT NULL COLLATE utf8_unicode_ci,
-  					profile_pic		 varchar(255) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  					profile_pic		 varchar(255) COLLATE utf8_unicode_ci,
   					started_hobby 	 DATE,
   					date_created	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   					fav_color		 char(7) NOT NULL COLLATE utf8_unicode_ci,

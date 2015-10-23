@@ -6,7 +6,7 @@ class SignupController {
 		$userData = null;
 		
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			//simpleEcho.php;
+			//print_r($_POST);
 			$formUser = new User($_POST);
 			$user = UsersDB::addUser($formUser);
 			

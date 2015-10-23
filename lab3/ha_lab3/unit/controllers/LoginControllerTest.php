@@ -44,7 +44,7 @@ class LoginControllerTest extends PHPUnit_Framework_TestCase {
 		$_SERVER['REQUEST_METHOD'] = "GET";
 		$_SERVER['HTTP_HOST'] = "localhost";
 		
-		$_SESSION = array("base" => "ha_labe");
+		$_SESSION = array("base" => "ha_lab3");
 		
 		LoginController::run();
 		$output = ob_get_clean ();

@@ -1,7 +1,7 @@
 <?php  
 class ProfileView {
 	
-  public static function show($userData) {  	
+  public static function show() {  	
 ?> 
     <!DOCTYPE html>
 	<html>
@@ -16,7 +16,7 @@ class ProfileView {
 	<a href="home">HOME</a><br><br>
 	
 	Here's the user!<br><br>
-	<?php echo $userData; ?>
+	<?php echo $_SESSION['userData']; ?>
 	
 	
 	<footer>

@@ -2,7 +2,7 @@
 	// Use an output buffer
 	ob_start();	
 	include("includer.php");
-	session_start();
+	//session_start();
 	$url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 	
 	// $ctrl_act_arg === Control, Action, Arguments
