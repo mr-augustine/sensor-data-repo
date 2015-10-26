@@ -98,9 +98,13 @@ class DBMaker {
 		                          (:userId, :email, :password)";
 			$st = $db->prepare ( $sql );
 			$st->execute (array (':userId' => 1, ':email' => 'bjabituya@yahoo.com', ':password' => 'wwwwwwww'));
-			$st->execute (array (':userId' => 2, ':email' => 'charlie.g@hotmail.com', ':password' => 'xxxxxxxx'));
-			$st->execute (array (':userId' => 3, ':email' => 'altars@gmail.com', ':password' => 'yyyyyyyy'));
-			$st->execute (array (':userId' => 4, ':email' => 'asuda@kenbishi.jp', ':password' => 'zzzzzzzz'));
+			$st->execute (array (':userId' => 2, ':email' => 'mwatney@mars.com', ':password' => 'aaaaaaaa'));
+			$st->execute (array (':userId' => 3, ':email' => 'ryan.stone@iss.gov', ':password' => 'bbbbbbbb'));
+			$st->execute (array (':userId' => 4, ':email' => 'jcoop@tps.gov', ':password' => 'cccccccc'));
+			$st->execute (array (':userId' => 5, ':email' => 'liz.shaw@lv223.com', ':password' => 'dddddddd'));
+			$st->execute (array (':userId' => 6, ':email' => 'charlie.g@hotmail.com', ':password' => 'xxxxxxxx'));
+			$st->execute (array (':userId' => 7, ':email' => 'altars@gmail.com', ':password' => 'yyyyyyyy'));
+			$st->execute (array (':userId' => 8, ':email' => 'asuda@kenbishi.jp', ':password' => 'zzzzzzzz'));
 
 			// Populate the UserData table
 			$sql = "INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
@@ -108,6 +112,14 @@ class DBMaker {
 			$st = $db->prepare( $sql );
 			$st->execute (array (':userDataId' => 1, ':userId' => 1, ':user_name' => 'jabituya', ':skill_level' => "advanced", ':profile_pic' => 'none.jpg',
 					':started_hobby' => '2015-10-17 07:38:46', ':fav_color' => '#008000', ':url' => 'http://www.google.com', ':phone' => '210-555-9090'));
+			$st->execute (array (':userDataId' => 2, ':userId' => 2, ':user_name' => 'mwatney', ':skill_level' => "novice", ':profile_pic' => 'none.jpg',
+					':started_hobby' => '2015-10-26 12:00:00', ':fav_color' => '#ff8000', ':url' => 'http://www.strandedonmars.com', ':phone' => '210-555-9090'));
+			$st->execute (array (':userDataId' => 3, ':userId' => 3, ':user_name' => 'ryan.stone', ':skill_level' => "advanced", ':profile_pic' => 'none.jpg',
+					':started_hobby' => '2015-10-26 12:00:01', ':fav_color' => '#004080', ':url' => 'http://www.ihatespace.com', ':phone' => '210-555-9090'));
+			$st->execute (array (':userDataId' => 4, ':userId' => 4, ':user_name' => 'cooper', ':skill_level' => "advanced", ':profile_pic' => 'none.jpg',
+					':started_hobby' => '2015-10-26 12:00:02', ':fav_color' => '#c0c0c0', ':url' => 'http://www.si.edu', ':phone' => '210-555-9090'));
+			$st->execute (array (':userDataId' => 5, ':userId' => 5, ':user_name' => 'liz.shaw', ':skill_level' => "novice", ':profile_pic' => 'none.jpg',
+					':started_hobby' => '2015-10-26 12:00:03', ':fav_color' => '#008080', ':url' => 'http://www.weylandindustries.com', ':phone' => '210-555-9090'));
 			
 			// Populate the SkillAssocs table
 			$sql = "INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
@@ -116,6 +128,16 @@ class DBMaker {
 			$st->execute (array (':skillAssocId' => 1, ':userDataId' => 1, 'skillId' => 1));
 			$st->execute (array (':skillAssocId' => 2, ':userDataId' => 1, 'skillId' => 2));
 			$st->execute (array (':skillAssocId' => 3, ':userDataId' => 1, 'skillId' => 8));
+			$st->execute (array (':skillAssocId' => 4, ':userDataId' => 2, 'skillId' => 1));
+			$st->execute (array (':skillAssocId' => 5, ':userDataId' => 2, 'skillId' => 12));
+			$st->execute (array (':skillAssocId' => 6, ':userDataId' => 3, 'skillId' => 9));
+			$st->execute (array (':skillAssocId' => 7, ':userDataId' => 3, 'skillId' => 10));
+			$st->execute (array (':skillAssocId' => 8, ':userDataId' => 4, 'skillId' => 11));
+			$st->execute (array (':skillAssocId' => 9, ':userDataId' => 4, 'skillId' => 3));
+			$st->execute (array (':skillAssocId' => 10, ':userDataId' => 4, 'skillId' => 5));
+			$st->execute (array (':skillAssocId' => 11, ':userDataId' => 4, 'skillId' => 7));
+			$st->execute (array (':skillAssocId' => 12, ':userDataId' => 5, 'skillId' => 4));
+			$st->execute (array (':skillAssocId' => 13, ':userDataId' => 5, 'skillId' => 8));
 			
 		} catch ( PDOException $e ) {
 			echo $e->getMessage (); // not final error handling
