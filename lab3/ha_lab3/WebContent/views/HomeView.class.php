@@ -11,7 +11,7 @@ class HomeView {
   	public static function showDetails() {
   		$base = $_SESSION['base'];
   		
-  		echo '<img src="resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">';
+  		echo '<img src="/'.$base.'/resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">';
 		
   		if (HomeView::userLoggedIn())
   			HomeView::showHobbyistGreeting($_SESSION['user']);
