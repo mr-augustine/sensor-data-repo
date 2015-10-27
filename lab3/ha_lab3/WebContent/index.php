@@ -9,7 +9,7 @@
 	list($fill, $base, $ctrl_act_args) =
 		explode('/', $url, 3) + array("", "", "");
 	list($control, $action, $arguments) =
-		explode('_', $ctrl_act_args, 3) + array("", "", "");
+		explode('/', $ctrl_act_args, 3) + array("", "", "");
 	
 	$_SESSION['base'] = $base;
 	$_SESSION['control'] = $control;
@@ -30,6 +30,12 @@
 			break;
 		case "mystery":
 			RobotProfileController::run();
+			break;
+		case "create":
+			CreateView::show();
+			break;
+		case "show":
+			ShowView::show();
 			break;
 		default:
 			HomeView::show(array(null));
