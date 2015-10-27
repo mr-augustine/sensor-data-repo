@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'\..\..\WebContent\models\UserData.class.php';
 require_once dirname(__FILE__).'\..\..\WebContent\models\UserDataDB.class.php';
 require_once dirname(__FILE__).'\..\..\WebContent\tests\DBMaker.class.php';
 
-class UserDataDBTest extends PHPUnit_Framework_TestCAse {
+class UserDataDBTest extends PHPUnit_Framework_TestCase {
 	
 	public function testGetAllUserData() {
 		$myDb = DBMaker::create('botspacetest');

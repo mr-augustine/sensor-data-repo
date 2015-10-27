@@ -3,7 +3,7 @@ class UserController {
 	
 	public static function run() {
 		$action = (array_key_exists('action', $_SESSION)) ? $_SESSION['action'] : "";
-		$arguments = $_SESSION['arguments'];
+		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : "";
 		
 		switch ($action) {
 			case "create":
@@ -16,7 +16,8 @@ class UserController {
 					
 					UserView::showAll();
 				} else {
-					$_SESSION['user'] = UsersDB::getUsersBy('userId', $arguments);
+					$user = UsersDB::getUsersBy('userId', $arguments);
+					$_SESSION['user'] = $user[0];
 					self::show();
 				}
 				break;

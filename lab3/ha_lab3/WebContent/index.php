@@ -47,7 +47,7 @@
 			SkillController::run();
 			break;
 		case "skillassoc":
-			SkillAssocController:run();
+			SkillAssocController::run();
 			break;
 		case "robotdata":
 			RobotDataController::run();
