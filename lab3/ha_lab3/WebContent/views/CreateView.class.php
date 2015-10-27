@@ -13,10 +13,10 @@ class CreateView {
 		
 		echo '<h2>Create botspace objects</h2>';
 		echo '<ul>';
-		echo '<li> <a href="/'.$base.'/users/create">A new user</a> (User.class)</li>';
+		echo '<li> <a href="/'.$base.'/user/create">A new user</a> (User.class)</li>';
 		echo '<li> <a href="/'.$base.'/userdata/create">A new user data entry</a> (UserData.class)</li>';
 		echo '<li> A new skill (admin only)</li>';
-		echo '<li> <a href="/'.$base.'/skillassocs/create">A new skill association</a> (SkillAssoc.class)</li>';
+		echo '<li> <a href="/'.$base.'/skillassoc/create">A new skill association</a> (SkillAssoc.class)</li>';
 		echo '<li> <a href="/'.$base.'/robotdata/create">A new robot data entry</a> (RobotData.class)</li>';
 		echo '</ul>';
 	}
