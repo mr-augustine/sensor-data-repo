@@ -16,8 +16,8 @@ class UserController {
 					
 					UserView::showAll();
 				} else {
-					$user = UsersDB::getUsersBy('userId', $arguments);
-					$_SESSION['user'] = $user[0];
+					$users = UsersDB::getUsersBy('userId', $arguments);
+					$_SESSION['user'] = $users[0];
 					self::show();
 				}
 				break;
@@ -30,11 +30,42 @@ class UserController {
 	}
 	
 	public static function show() {
+		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : 0;
+		$user = $_SESSION['user'];
 		
+		if (!is_null($user)) {
+			$_SESSION['user'] = $user;
+			
+			$userDataArray = UserDataDB::getUserDataBy('userId', $user->getUserId());
+			$userData = $userDataArray[0];
+			$_SESSION['userData'] = $userData;
+			
+			$skillAssocs = SkillAssocsDB::getSkillAssocsBy('userDataId', $userData->getUserDataId());
+			$_SESSION['skillAssocs'] = $skillAssocs;
+			
+			// The robot data section might look something like this:
+			//$robotDataArray = RobotDataDB::getRobotDataBy('creator', $user->getUserId());
+			//$_SESSION['robotData'] = $robotDataArray;
+			
+			UserView::show();
+		} else {
+			HomeView::show();
+		}
 	}
 	
 	public static function newUser() {
+		$user = null;
 		
+		if ($_SEVER["REQUEST_METHOD"] == "POST")
+			$user = new User($_POST);
+		
+		if (is_null($user) || $user->errorCount() != 0) {
+			$_SESSION['user'] = $user;
+			UserView::show();
+		} else {
+			HomeView::show();
+			header('Location: /'.$_SESSION['base']);
+		}
 	}
 	
 	public static function updateUser() {
