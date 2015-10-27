@@ -64,7 +64,6 @@ class UserDataDB {
 			$userData->setUserDataId($returnId);
 		} catch (Exception $e) { // Not permanent error handling
 			$userData->setError('userDataId', 'USER_DATA_INVALID');
-			echo $e->getMessage();
 		}
 		
 		return $userData;

@@ -13,7 +13,7 @@ class UserDataDBTest extends PHPUnit_Framework_TestCAse {
 		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
 		$usersData = UserDataDB::getUserDataBy();
 		
-		$this->assertEquals(1, count($usersData), 
+		$this->assertEquals(5, count($usersData), 
 				'It should fetch all of the user data in the test database');
 	}
 	
@@ -23,7 +23,7 @@ class UserDataDBTest extends PHPUnit_Framework_TestCAse {
 		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
 		
 		// UserData is not associated with userId yet
-		$validTest = array("userId" => 3, "user_name" => "altars2000", "skill_level" => "novice",
+		$validTest = array("userId" => 7, "user_name" => "altars2000", "skill_level" => "novice",
 				"skill_areas" => array("programming", "ultrasonic", "wiring"),
 				"profile_pic" => "no-photo.jpg", "started_hobby" => "2015-10-01",
 				"fav_color" => "#00ff00", "url" => "http://www.askjeeves.com",
@@ -33,6 +33,7 @@ class UserDataDBTest extends PHPUnit_Framework_TestCAse {
 		$beforeCount = count(UserDataDB::getUserDataBy());
 		$newUserData = UserDataDB::addUserData($s1);
 
+		print_r($s1->getErrors());
 		$this->assertEquals(0, $s1->getErrorCount(),
 				'The inserted user data should have no errors');
 		

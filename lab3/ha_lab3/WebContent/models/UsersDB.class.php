@@ -11,11 +11,11 @@ class UsersDB {
 			if (is_null($user) || $user->getErrorCount() > 0)
 				return $user;
 			
-			$db = Database::getDB ();
-			$statement = $db->prepare ($query);
+			$db = Database::getDB();
+			$statement = $db->prepare($query);
 			$statement->bindValue(":email", $user->getEmail());
 			$statement->bindValue(":password", $user->getPassword());
-			$statement->execute ();
+			$statement->execute();
 			$statement->closeCursor();
 			$user->setUserId($db->lastInsertId("userId"));
 		} catch (Exception $e) { // Not permanent error handling
@@ -24,42 +24,26 @@ class UsersDB {
 		
 		return $user;
 	}
-	
-	// Returns all rows in the Users table as an array of arrays 
-	public static function getAllUsers() {
-	   $query = "SELECT * FROM Users";
-	   $users = array();
-	   
-	   try {
-	      $db = Database::getDB();
-	      $statement = $db->prepare($query);
-	      $statement->execute();
-	      $users = UsersDB::getUsersArray ($statement->fetchAll(PDO::FETCH_ASSOC));
-	      $statement->closeCursor();
-		} catch (PDOException $e) { // Not permanent error handling
-			echo "<p>Error getting all users " . $e->getMessage () . "</p>";
-		}
 		
-		return $users;
-	}
-	
 	// Returns the rowsets of Users whose $type field has value $value
 	// Rowsets will contain either a single column or all columns from the Users table
-	public static function getUserRowSetsBy($type, $value, $column) {
+	public static function getUserRowSetsBy($type = null, $value = null) {
 		$allowedTypes = ["userId", "email"];
-		$allowedColumns = ["userId", "email", "*"];
-		$userRowSets = NULL;
+		$userRowSets = array();
 	
 		try {
-			if (!in_array($type, $allowedTypes))
-				throw new PDOException("$type not an allowed search criterion for User");
-			elseif (!in_array($column, $allowedColumns))
-			throw new PDOException("$column not a column of User");
-				
-			$query = "SELECT $column FROM Users WHERE ($type = :$type)";
 			$db = Database::getDB();
-			$statement = $db->prepare($query);
-			$statement->bindParam(":$type", $value);
+			$query = "SELECT userId, email, password FROM Users";
+			
+			if (!is_null($type)) {
+				if (!in_array($type, $allowedTypes))
+					throw new PDOException("$type not an allowed search criterion for User");
+			
+				$query = $query . " WHERE ($type = :$type)";
+				$statement = $db->prepare($query);
+				$statement->bindParam(":$type", $value);
+			} else 
+				$statement = $db->prepare($query);
 			$statement->execute();
 			$userRowSets = $statement->fetchAll(PDO::FETCH_ASSOC);
 			$statement->closeCursor();
@@ -84,8 +68,8 @@ class UsersDB {
 	}
 	
 	// Returns the userId of the user whose $type field has value $value
-	public static function getUserValuesBy($type, $value, $column) {
-		$userRows = UsersDB::getUserRowSetsBy($type, $value, $column);
+	public static function getUserValuesBy($type = null, $value = null, $column) {
+		$userRows = UsersDB::getUserRowSetsBy($type, $value);
 	
 		return UsersDB::getUserValues($userRows, $column);
 	}
@@ -98,6 +82,7 @@ class UsersDB {
 			// Convert the array of arrays into an array of Users
 			foreach ($rowSets as $userRow) {
 				$user = new User($userRow);
+				$user->setUserId($userRow['userId']);
 				array_push ($users, $user);
 			}
 		}
@@ -106,8 +91,8 @@ class UsersDB {
 	}
 	
 	// Returns a User object whose $type field has value $value
-	public static function getUsersBy($type, $value) {
-		$userRows = UsersDB::getUserRowSetsBy($type, $value, '*');
+	public static function getUsersBy($type = null, $value = null) {
+		$userRows = UsersDB::getUserRowSetsBy($type, $value);
 		
 		return UsersDB::getUsersArray($userRows);
 	}

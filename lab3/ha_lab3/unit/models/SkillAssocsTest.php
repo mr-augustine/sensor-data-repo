@@ -6,7 +6,7 @@ class SkillAssocsTest extends PHPUnit_Framework_TestCase {
 	
 	public function testValidSkillAssocsCreate() {
 		$validSkillId = 11;
-		$validUserDataId = 3;
+		$validUserDataId = 14;
 		$s1 = new SkillAssocs($validUserDataId, $validSkillId);
 		
 		$this->assertTrue(is_a($s1, 'SkillAssocs') && $s1->getErrorCount() == 0, 
@@ -15,7 +15,7 @@ class SkillAssocsTest extends PHPUnit_Framework_TestCase {
 	
 	public function testInvalidSkillIdSkillAssocsCreate() {
 		$invalidSkillId = -11;
-		$validUserDataId = 3;
+		$validUserDataId = 14;
 		$s1 = new SkillAssocs($validUserDataId, $invalidSkillId);
 		
 		$this->assertTrue(!empty($s1->getError('skillId')) &&

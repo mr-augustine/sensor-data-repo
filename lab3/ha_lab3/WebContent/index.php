@@ -37,6 +37,21 @@
 		case "show":
 			ShowView::show();
 			break;
+		case "user":
+			UserController::run();
+			break;
+		case "userdata":
+			UserDataController::run();
+			break;
+		case "skill":
+			SkillController::run();
+			break;
+		case "skillassoc":
+			SkillAssocController:run();
+			break;
+		case "robotdata":
+			RobotDataController::run();
+			break;
 		default:
 			HomeView::show(array(null));
 	};
