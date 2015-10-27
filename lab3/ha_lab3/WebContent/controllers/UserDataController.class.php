@@ -1,5 +1,5 @@
 <?php
-class SkillController {
+class UserDataController {
 	
 	public static function run() {
 		$action = (array_key_exists('action', $_SESSION)) ? $_SESSION['action'] : "";
@@ -7,23 +7,23 @@ class SkillController {
 		
 		switch ($action) {
 			case "create":
-				self::newSkill();
+				self::newUserData();
 				break;
 			case "show":
 				if ($arguments == 'all') {
-					$_SESSION['skills'] = SkillsDB::getSkillsBy();
-					$_SESSION['headertitle'] = "botspace skills";
+					$_SESSION['userData'] = UserDataDB::getUserDataBy();
+					$_SESSION['headertitle'] = "botspace user data";
 					
-					SkillView::showAll();
+					UserDataView::showAll();
 				} else {
-					$skills = SkillsDB::getSkillsBy('skillId', $arguments);
-					$_SESSION['skill'] = $skills[0];
+					$userData = UserDataDB::getUserDataBy('userDataId', $arguments);
+					$_SESSION['userData'] = $userData[0];
 					self::show();
 				}
 				break;
 			case "update":
 				echo "Update";
-				self::updateUser();
+				self::updateUserData();
 				break;
 			default:
 		}
@@ -33,12 +33,12 @@ class SkillController {
 		
 	}
 	
-	public static function newSkill() {
-		// Are we there yet?
+	public static function newUserData() {
+		
 	}
 	
-	public static function updateSkill() {
-		// Do you really want to update a Skill?
+	public static function updateUserData() {
+		
 	}
 }
 
