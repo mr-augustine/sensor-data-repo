@@ -81,7 +81,33 @@ class UserView {
 	}
 	
 	public static function showNew() {
+		$user = (array_key_exists('user', $_SESSION)) ? $_SESSION['user'] : null;
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
+		$_SESSION['headertitle'] = "botspace User Creator";
+		MasterView::showHeader();
 		
+		echo '<h1>Botspace registration</h1>';
+		
+		echo '<form action="/'.$base.'/user/create/new" method="POST">';
+		if (!is_null($user) && array_key_exists('userId', $user->getErrors()))
+			echo 'Error: '.$user->getError('userId')."<br>";
+		
+		echo 'Email: <input type="text" name="email"';
+			if (!is_null($user)) { echo 'value = "'.$user->getEmail().'"'; }
+		echo 'tabindex="1" required>'."\n";
+		echo '<span class="error">';
+			if (!is_null($user)) { echo $user->getError('email'); }
+		echo '</span><br><br>'."\n";
+		
+		echo 'Password: <input type="password" name="password" tabIndex="2" required>'."\n";
+		echo '<span class="error">'."\n";
+			if (!is_null($user)) { echo $user->getError('password'); }
+		echo '</span><br><br>'."\n";
+		
+		echo '<p><input type="submit" name="submit" value="Submit">';
+		echo '</form>';
+		
+		MasterView::showFooter();
 	}
 	
 	public static function showUpdate() {

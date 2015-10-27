@@ -56,15 +56,22 @@ class UserController {
 	public static function newUser() {
 		$user = null;
 		
-		if ($_SEVER["REQUEST_METHOD"] == "POST")
+		if ($_SERVER["REQUEST_METHOD"] == "POST")
 			$user = new User($_POST);
 		
-		if (is_null($user) || $user->errorCount() != 0) {
-			$_SESSION['user'] = $user;
-			UserView::show();
+		$_SESSION['user'] = $user;
+		
+		if (is_null($user) || $user->getErrorCount() != 0) {
+			//$_SESSION['user'] = $user;
+			UserView::showNew();
 		} else {
+			$newUser = UsersDB::addUser($user);
+			
+			if ($newUser->getErrorCount() == 0)
+				$_SESSION['user'] = $newUser;
+			
 			HomeView::show();
-			header('Location: /'.$_SESSION['base']);
+			//header('Location: /'.$_SESSION['base']);
 		}
 	}
 	
