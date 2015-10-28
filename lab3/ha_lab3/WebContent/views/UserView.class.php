@@ -111,7 +111,49 @@ class UserView {
 	}
 	
 	public static function showUpdate() {
+		$users = (array_key_exists('users', $_SESSION)) ? $_SESSION['users'] : null;
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
+		$_SESSION['headertitle'] = "botspace User Update";
+		MasterView::showHeader();
 		
+		echo '<h1>Update a User entry</h1>';
+		
+		if (is_null($users) || empty($users) || is_null($users[0])) {
+			echo '<section>users does not exist</section>';
+			return;
+		}
+		
+		$user = $users[0];
+		
+		if ($user->getErrors() > 0) {
+			$errors = $user->getErrors();
+			echo '<section><p>Errors:<br>';
+			
+			foreach ($errors as $key => $value)
+				echo $value . "<br>";
+			
+			echo '</p></section>';
+		}
+		
+		echo '<section><form method="POST" action="/'.$base.
+				'/user/update/'.$user->getUserId().'">';
+		echo '<p>Email: <input type="text" name="email"';
+		if (!is_null($user))
+			echo 'value="'.$user->getEmail().'"';
+		echo '><span class="error">';
+		if (!is_null($user))
+			echo $user->getError('email');
+		echo '</span></p>';
+
+		echo '<p>Password: <input type="password" name="password"><span class="error">';
+		if (!is_null($user))
+			echo $user->getError('password');
+		echo '</span></p>';
+		
+		echo '<input type="submit" value="Submit">';
+		echo '</form></section>';
+		
+		MasterView::showFooter();
 	}
 }
 

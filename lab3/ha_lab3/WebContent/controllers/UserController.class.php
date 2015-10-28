@@ -76,7 +76,34 @@ class UserController {
 	}
 	
 	public static function updateUser() {
+		$users = UsersDB::getUsersBy('userId', $_SESSION['arguments']);
 		
+		if (empty($users)) {
+			HomeView::show();
+			header('Location: /'.$_SESSION['base']);
+		} elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
+			$_SESSION['users'] = $users;
+			UserView::showUpdate();
+		} else {
+			$parms = $users[0]->getParameters();
+			$parms['email'] = (array_key_exists('email', $_POST)) ?
+				$_POST['email'] : "";
+			$parms['password'] = (array_key_exists('password', $_POST)) ?
+				$_POST['password'] : "";
+			
+			$newUser = new User($parms);
+			$newUser->setUserId($users[0]->getUserId());
+			$user = UsersDB::updateUser($newUser);
+			
+			if ($user->getErrorCount() != 0) {
+				$_SESSION['users'] = array($newUser);
+				return;
+				UserView::showUpdate();
+			} else {
+				HomeView::show();
+				header('Location: /'.$_SESSION['base']);
+			}
+		}
 	}
 }
 
