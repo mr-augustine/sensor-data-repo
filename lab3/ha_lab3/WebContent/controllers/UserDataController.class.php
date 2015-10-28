@@ -68,7 +68,49 @@ class UserDataController {
 	}
 	
 	public static function updateUserData() {
+		$userDataArray = UserDataDB::getUserDataBy('userDataId', $_SESSION['arguments']);
 		
+		if (empty($userDataArray)) {
+			HomeView::show();
+			header('Location: /'.$_SESSION['base']);
+		} elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
+			$_SESSION['userData'] = $userDataArray[0];
+			UserDataView::showUpdate();
+		} else {
+			$userData = $userDataArray[0];
+			$parms = $userData->getParameters();
+			$parms['userId'] = (array_key_exists('userId', $_POST)) ?
+				$_POST['userId'] : $userData->getUserId();
+			$parms['user_name'] = (array_key_exists('user_name', $_POST)) ?
+				$_POST['user_name'] : "";
+			$parms['skill_level'] = (array_key_exists('skill_level', $_POST)) ?
+				$_POST['skill_level'] : "";
+			$parms['skill_areas'] = (array_key_exists('skill_areas', $_POST)) ?
+				$_POST['skill_areas'] : array();
+			$parms['profile_pic'] = (array_key_exists('profile_pic', $_POST)) ?
+				$_POST['profile_pic'] : "";
+			$parms['started_hobby'] = (array_key_exists('started_hobby', $_POST)) ?
+				$_POST['started_hobby'] : "";
+			$parms['fav_color'] = (array_key_exists('fav_color', $_POST)) ?
+				$_POST['fav_color'] : "";
+			$parms['url'] = (array_key_exists('url', $_POST)) ?
+				$_POST['url'] : "";
+			$parms['phone'] = (array_key_exists('phone', $_POST)) ?
+				$_POST['phone'] : "";
+			
+			$newUserData = new UserData($parms);
+			$newUserData->setUserDataId($userData->getUserDataId());
+			$userDataEntry = UserDataDB::updateUserData($newUserData);
+			
+			if ($userDataEntry->getErrorCount() != 0) {
+				$_SESSION['userData'] = array($newUserData);
+				//return;
+				UserDataView::showUpdate();
+			} else {
+				HomeView::show();
+				header('Location: /'.$_SESSION['base']);
+			}
+		}
 	}
 }
 
