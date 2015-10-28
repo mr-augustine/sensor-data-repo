@@ -46,7 +46,25 @@ class UserDataController {
 	}
 	
 	public static function newUserData() {
+		$userData = null;
+		$newUserData = null;
 		
+		if ($_SERVER["REQUEST_METHOD"] == "POST")
+			$userData = new UserData($_POST);
+		
+		$_SESSION['userData'] = $userData;
+		
+		if (is_null($userData) || $userData->getErrorCount() != 0)
+			UserDataView::showNew();
+		else {
+			$newUserData = UserDataDB::addUserData($userData);
+			
+			if (!is_null($newUserData) && $newUserData->getErrorCount() == 0)
+				$_SESSION['userData'] = $newUserData;
+			
+			HomeView::show();
+			//header('Location: /'.$_SESSION['base']);
+		}
 	}
 	
 	public static function updateUserData() {
