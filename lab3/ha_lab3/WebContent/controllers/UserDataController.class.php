@@ -30,7 +30,19 @@ class UserDataController {
 	}
 	
 	public static function show() {
+		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : 0;
+		$userData = $_SESSION['userData'];
 		
+		if (!is_null($userData)) {
+			$_SESSION['userData'] = $userData;
+			
+			$skillAssocs = SkillAssocsDB::getSkillAssocsBy('userDataId', $userData->getUserDataId());
+			$_SESSION['skillAssocs'] = $skillAssocs;
+			
+			UserDataView::show();
+		} else {
+			HomeView::show();
+		}
 	}
 	
 	public static function newUserData() {

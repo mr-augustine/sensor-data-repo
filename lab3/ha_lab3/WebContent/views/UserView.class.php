@@ -86,7 +86,7 @@ class UserView {
 		$_SESSION['headertitle'] = "botspace User Creator";
 		MasterView::showHeader();
 		
-		echo '<h1>Botspace registration</h1>';
+		echo '<h1>Create a new User</h1>';
 		
 		echo '<form action="/'.$base.'/user/create/new" method="POST">';
 		if (!is_null($user) && array_key_exists('userId', $user->getErrors()))
