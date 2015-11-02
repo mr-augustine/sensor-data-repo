@@ -1,0 +1,37 @@
+EMAIL_EMPTY Your email cannot be empty or only contain whitespace
+EMAIL_INVALID Your email is invalid
+EMAIL_PASSWORD_COMBO_INVALID Your username or password is incorrect
+USER_COULD_NOT_BE_UPDATED The user could not be updated
+USER_DOES_NOT_EXIST A user with this id does not exist
+USER_DATA_COULD_NOT_BE_UPDATED The user data could not be updated
+USER_DATA_DOES_NOT_EXIST A user data entry with this id does not exist
+USER_DATA_ID_EMPTY The user data id cannot be empty
+USER_DATA_ID_INVALID The user data id is invalid
+USER_DATA_INVALID UserData could not be created
+USER_ID_EMPTY The user id cannot be empty
+USER_ID_INVALID The user id is invalid
+USER_INVALID User could not be created
+USER_NAME_EMPTY Your username cannot be empty or only contain whitespace
+USER_NAME_TOO_SHORT Your username is too short
+USER_NAME_HAS_INVALID_CHARS Your username can only contain letters, numbers, dashes and underscores
+SKILL_AREA_INVALID Skill Area could not be created
+SKILL_ASSOC_INVALID Skill Association could not be created
+SKILL_ID_INVALID Your skill id is invalid
+SKILL_ID_EMPTY The skill id cannot be empty
+SKILL_LEVEL_INVALID Your skill level is invalid
+SKILL_LEVEL_NOT_SET Your skill level must be set
+SKILL_NAME_EMPTY Your skill name cannot be empty
+PASSWORD_EMPTY Your password cannot be empty
+PASSWORD_TOO_SHORT Your password is too short
+PROFILE_PIC_WRONG_TYPE Your picture is not a valid type
+HOBBY_DATE_EMPTY Your hobby date is not set
+HOBBY_DATE_FORMAT_INVALID Your date format is invalid
+HOBBY_DATE_INVALID Your date is invalid
+FAV_COLOR_EMPTY Your favorite color is not set
+FAV_COLOR_INVALID Your favorite color is invalid
+URL_INVALID Your URL is invalid
+PHONE_NUMBER_INVALID Your phone number is invalid
+ROBOT_NAME_EMPTY Your robot name cannot be empty or only contain whitespace
+ROBOT_CREATOR_EMPTY Your creator name cannot be empty or only contain whitespace
+ROBOT_STATUS_EMPTY Your status cannot be empty or only contain whitespace
+ROBOT_STATUS_INVALID Your status is invalid
