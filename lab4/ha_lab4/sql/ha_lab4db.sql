@@ -1,7 +1,7 @@
-/* Create the ha_lab3db database and supporting tables */
-DROP DATABASE if EXISTS ha_lab3db;
-CREATE DATABASE ha_lab3db;
-USE ha_lab3db;
+/* Create the ha_lab4db database and supporting tables */
+DROP DATABASE if EXISTS ha_lab4db;
+CREATE DATABASE ha_lab4db;
+USE ha_lab4db;
 
 DROP TABLE if EXISTS Users;
 CREATE TABLE Users (
