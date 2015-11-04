@@ -4,6 +4,7 @@ class HomeView {
   	public static function show() {  
   		$_SESSION['headertitle'] = "botspace";
   		MasterView::showHeader();
+  		MasterView::showNavBar();
   		HomeView::showDetails();
   		MasterView::showFooter();
   	}
@@ -58,7 +59,7 @@ GREETING;
   	}
   	
   	public static function userLoggedIn() {
-  		return (array_key_exists("user", $_SESSION) && !is_null($_SESSION['user']));
+  		return (array_key_exists("authenticatedUser", $_SESSION) && !is_null($_SESSION['authenticatedUser']));
   	}
 }
 ?>

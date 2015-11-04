@@ -3,6 +3,7 @@ class LoginController {
 
 	public static function run() {
 		$user = null;
+		
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$user = new User($_POST);
 			$users = UsersDB::getUsersBy('email', $user->getEmail());
@@ -18,6 +19,7 @@ class LoginController {
 		if (is_null($user) || $user->getErrorCount() != 0)
 			LoginView::show();
 		else {
+			$_SESSION['authenticatedUser'] = $user;
 			HomeView::show();
 			//header('Location: /'.$_SESSION['base']);
 		}
