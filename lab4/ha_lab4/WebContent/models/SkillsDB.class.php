@@ -26,8 +26,10 @@ class SkillsDB {
 				$query = $query . " WHERE ($type = :$type)";
 				$statement = $db->prepare($query);
 				$statement->bindParam(":$type", $value);
-			} else
+			} else {
+				$query = $query . " ORDER BY skillId ASC";
 				$statement = $db->prepare($query);
+			}
 
 			$statement->execute();
 			$skillRows = $statement->fetchAll(PDO::FETCH_ASSOC);

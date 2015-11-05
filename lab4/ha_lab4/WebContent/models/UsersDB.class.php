@@ -42,8 +42,11 @@ class UsersDB {
 				$query = $query . " WHERE ($type = :$type)";
 				$statement = $db->prepare($query);
 				$statement->bindParam(":$type", $value);
-			} else 
+			} else {
+				$query = $query . " ORDER BY userId ASC";
 				$statement = $db->prepare($query);
+			}
+			
 			$statement->execute();
 			$userRowSets = $statement->fetchAll(PDO::FETCH_ASSOC);
 			$statement->closeCursor();

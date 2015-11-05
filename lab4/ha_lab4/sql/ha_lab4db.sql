@@ -99,6 +99,12 @@ INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, s
 	(4, 4, 'cooper', 'advanced', 'none.jpg', '2015-10-26 12:00:02', '#c0c0c0', 'http://www.si.edu', '210-555-9090');
 INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
 	(5, 5, 'liz.shaw', 'novice', 'none.jpg', '2015-10-26 12:00:03', '#008080', 'http://www.weylandindustries.com', '210-555-9090');
+INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
+	(6, 6, 'charlie.g', 'advanced', 'none.jpg', '2012-09-09 12:00:04', '#800080', 'http://www.knightindustries.com', '210-555-4321');
+INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
+	(7, 7, 'altars', 'expert', 'none.jpg', '1980-03-12 12:00:05', '#8000ff', 'http://www.monolithrobots.com', '210-555-7654');
+INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
+	(8, 8, 'asuda0x1', 'expert', 'none.jpg', '1970-01-05 12:00:06', '#0080c0', 'http://www.defenseministry.jp', '210-999-9999');
 
 INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
 	(1, 1, 1);
@@ -126,3 +132,35 @@ INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
 	(12, 5, 4);
 INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
 	(13, 5, 8);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(14, 6, 4);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(15, 6, 8);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(16, 6, 11);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(17, 6, 9);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(18, 6, 6);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(19, 7, 8);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(20, 7, 1);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(21, 8, 2);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(22, 8, 5);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(23, 8, 12);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(24, 8, 10);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(25, 8, 11);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(26, 8, 4);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(27, 8, 9);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(28, 8, 7);
+INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
+	(29, 8, 1);
