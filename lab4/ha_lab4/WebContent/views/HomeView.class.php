@@ -3,6 +3,8 @@ class HomeView {
 
   	public static function show() {  
   		$_SESSION['headertitle'] = "botspace";
+  		$_SESSION['styles'] = array('jumbotron.css');
+  		
   		MasterView::showHeader();
   		MasterView::showNavBar();
   		HomeView::showDetails();
@@ -12,12 +14,22 @@ class HomeView {
   	public static function showDetails() {
   		$base = $_SESSION['base'];
   		
-  		echo '<img src="/'.$base.'/resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">';
+  		echo '<div class="jumbotron">';
+  		echo '<div class="container">';
+
+  		echo '<img class="logo" src="/'.$base.'/resources/images/botspace-badge.png" alt="botspace badge">';
+  		echo '<br><br>';
+  		echo '<p><strong>Botspace</strong> is the free, simple, and structured way to share your robot projects with a community of peers.</p>';
+  		echo '<p>Talk to other hobbyists about their creations, or ask for help with your own. Botspace is a community to help you make your robots awesome!</p>';
+  		echo '</div>';
+  		echo '</div>';
+  		
+  		//echo '<img src="/'.$base.'/resources/images/botspace-logo.png" alt="botspace logo" style="width:627px;height:126px;">';
 		
-  		if (HomeView::userLoggedIn())
+  		/*if (HomeView::userLoggedIn())
   			HomeView::showHobbyistGreeting($_SESSION['user']);
   		else 
-  			HomeView::showGuestGreeting();
+  			HomeView::showGuestGreeting();*/
   		
   		echo '<aside><section>';
   		echo '<h2>Robot Showcase</h2>';
@@ -27,7 +39,7 @@ class HomeView {
   		echo '<li><a href="">Robot 3</a></li>';
   		echo '</ul></section>';
   		echo '<section>';
-  		echo '<h2>Hobbyist Showcase</h2>';
+  		echo '<h2>Newest Members</h2>';
   		echo '<ul>';
   		echo '<li><a href="">Human 1</a></li>';
   		echo '<li><a href="">Human 2</a></li>';
