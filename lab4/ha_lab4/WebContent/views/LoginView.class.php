@@ -17,10 +17,14 @@ class LoginView {
   		echo '<section>'."\n";
 		echo '<h1>Log into botspace</h1>'."\n\n";
 		echo '<form action="login" method="post">'."\n";
+		
+		echo '<span class="error">';
+		if (!is_null($user)) { echo $user->getError('userName'); }
+		echo '</span>'."\n";
+		
 		echo '<p>'."\n";
 		echo 'email<br>'."\n";
-		
-		echo '<input type="text" name="email"'."\n"; 
+		echo '<input type="email" name="email"'."\n"; 
 		if (!is_null($user)) {echo 'value = "'. $user->getEmail() .'"';}
 		echo 'tabindex="1" required>'."\n";
 		echo '<span class="error">'."\n";
