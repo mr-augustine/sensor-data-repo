@@ -1,27 +1,6 @@
 <?php
 class MasterView {
 
-	private static $STD_FOOTER = <<<EOT
-	<footer>
-		<hr>
-	
-		<nav>
-		<a href="">Tour</a> |
-		<a href="">About</a> |
-		<a href="">Help</a> |
-		<a href="">Terms</a> |
-		<a href="">Privacy</a>
-		 | <a href="tests.html">TESTS</a>
-		 | <a href="create">CREATE</a>
-		 | <a href="show">SHOW</a>
-		</nav>
-		
-		<p>Copyright 2015</p>
-	</footer>
-EOT;
-// The HEREDOC terminator must not be indented
-// TODO Can't use variables within HEREDOC for initializing class properties
-	
 	public static function showHeader() {
 		echo '<!DOCTYPE html lang="en"><html><head>';
 		echo '<meta charset="utf-8">';
@@ -29,6 +8,7 @@ EOT;
 		echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">';
 		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">';
+		echo '<link rel="stylesheet" href="css\site.css">';
 		echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>';
 		echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>';
 		
@@ -97,7 +77,7 @@ EOT;
 		// Show the login and signup buttons
 		else {
 			echo '<form class="navbar-form navbar-right"
-						method="post" action="/'.$base.'/login">';
+						method="get" action="/'.$base.'/login">';
 			//echo '<div class="form-group">';
 			echo '<button type="submit" class="btn btn-success">Log in</button>';
 			//echo '</div>';
@@ -116,12 +96,34 @@ EOT;
 	}
 
 	public static function showFooter() {
-		$footer = (array_key_exists('footertitle', $_SESSION))?
-			$_SESSION['footertitle']:"";
-		echo $footer;
-		echo '<footer>'."\n";
-		echo MasterView::$STD_FOOTER."\n";
-		echo "\t</body>\n</html>";	
+// 		$footer = (array_key_exists('footertitle', $_SESSION))?
+// 			$_SESSION['footertitle']:"";
+// 		echo $footer;
+// 		echo '<footer>'."\n";
+// 		echo MasterView::$STD_FOOTER."\n";
+// 		echo "\t</body>\n</html>";
+		
+		$base = (array_key_exists('base', $_SESSION))? $_SESSION['base']: "";
+		
+		echo '<hr>';
+		echo '<footer>';
+
+		echo '<ul>';
+		echo '<li>&copy; 2015 botspace</li>';
+		echo '<li><a href="/'.$base.'/terms.html">Terms</a></li>';
+		echo '<li><a href="/'.$base.'/privacy.html">Privacy</a></li>';
+		echo '<li><a href="/'.$base.'/help.html">Help</a></li>';
+		echo '</ul>';
+		
+		echo '<a href="/'.$base.'"><span class="botspace-mini" title="botspace"></span></a>';
+		
+		echo '<ul class="footer-right">';
+		echo '<li><a href="/'.$base.'/tests.html">TESTS</a></li>';
+		echo '<li><a href="/'.$base.'/create">CREATE</a></li>';
+		echo '<li><a href="/'.$base.'/show">SHOW</a></li>';
+		echo '</ul>';
+
+		echo '</footer>';
      }
 }
 ?>

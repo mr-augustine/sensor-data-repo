@@ -3,7 +3,9 @@ class LoginView {
 	
   	public static function show() {
   		$_SESSION['headertitle'] = "Log into botspace";
+  		
   		MasterView::showHeader();
+  		MasterView::showNavBar();
   		LoginView::showDetails();
   		MasterView::showFooter();
   	}
@@ -11,9 +13,8 @@ class LoginView {
   	public static function showDetails() {
   		$user = (array_key_exists('user', $_SESSION))?$_SESSION['user']:null;
   		$base = (array_key_exists('base', $_SESSION))?$_SESSION['base']:"";
-  		
-    	echo '<img src="resources/images/botspace-logo.png" alt="bostpace logo" style="width:627px;height:126px;">'."\n";
-		echo '<section>'."\n";
+
+  		echo '<section>'."\n";
 		echo '<h1>Log into botspace</h1>'."\n\n";
 		echo '<form action="login" method="post">'."\n";
 		echo '<p>'."\n";
