@@ -13,7 +13,7 @@ class UserDataDBTest extends PHPUnit_Framework_TestCase {
 		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
 		$usersData = UserDataDB::getUserDataBy();
 		
-		$this->assertEquals(5, count($usersData), 
+		$this->assertEquals(8, count($usersData), 
 				'It should fetch all of the user data in the test database');
 	}
 	

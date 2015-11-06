@@ -24,7 +24,7 @@ class LoginView {
 		
 		echo '<p>'."\n";
 		echo 'email<br>'."\n";
-		echo '<input type="email" name="email"'."\n"; 
+		echo '<input type="email" name="email" autofocus '."\n"; 
 		if (!is_null($user)) {echo 'value = "'. $user->getEmail() .'"';}
 		echo 'tabindex="1" required>'."\n";
 		echo '<span class="error">'."\n";

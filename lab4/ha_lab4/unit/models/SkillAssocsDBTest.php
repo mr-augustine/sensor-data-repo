@@ -13,7 +13,7 @@ class SkillAssocsDBTest extends PHPUnit_Framework_TestCase {
 		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
 		$skillAssocs = SkillAssocsDB::getSkillAssocsBy();
 
-		$this->assertEquals(13, count($skillAssocs),
+		$this->assertEquals(29, count($skillAssocs),
 				'It should fetch all of the skill associations in the test database');
 	}
 	

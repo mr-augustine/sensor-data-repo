@@ -84,6 +84,17 @@ class UsersDBTest extends PHPUnit_Framework_TestCase {
   				'The database should return exactly one user with the provided email');;
   	}
   	
+  	public function testGetNonexistentUserByUserId() {
+  		$myDB = DBMaker::create('botspacetest');
+  		Database::clearDB();
+  		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
+  		$testUserId = 0;
+  		$users = UsersDB::getUsersBy('userId', $testUserId);
+  		
+  		$this->assertEquals(count($users), 0,
+  				'The database should return zero results');
+  	}
+  	
   	public function testUpdateUserEmail() {
   		$myDB = DBMaker::create('botspacetest');
   		Database::clearDB();
