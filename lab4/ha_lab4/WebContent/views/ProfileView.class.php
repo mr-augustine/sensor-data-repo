@@ -18,7 +18,7 @@ class ProfileView {
 	
 	
 	public static function showDetails() {
-		
+		UserDataView::showDetails();
 	}
 //     <!DOCTYPE html>
 // 	<html>

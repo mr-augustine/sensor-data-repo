@@ -93,7 +93,9 @@ class UsersDB {
 		return $users;
 	}
 	
-	// Returns a User object whose $type field has value $value
+	// Returns an array of Users that meet the criteria specified. Typically
+	// this function will return an array with one element if successful.
+	// If unsuccessful, this function returns an empty array.
 	public static function getUsersBy($type = null, $value = null) {
 		$userRows = UsersDB::getUserRowSetsBy($type, $value);
 		
