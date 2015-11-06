@@ -3,7 +3,10 @@ class SignupView {
 	
 	public static function show($user, $userData) {
 		$_SESSION['headertitle'] = "Sign up for a botspace account";
+		$_SESSION['styles'] = array('signup.css');
+		
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		SignupView::showDetails($user, $userData);
 		MasterView::showFooter();
 	}
@@ -11,26 +14,24 @@ class SignupView {
 	public static function showDetails($user, $userData) {
   		$base = (array_key_exists('base', $_SESSION))?$_SESSION['base']:"";
   		
-		echo '<img src="resources/images/botspace-logo.png" alt="bostpace logo" style="width:627px;height:126px;">'."\n";
-	
 		echo '<section>'."\n";
 		echo '<h1>Create an account</h1>'."\n";
 		echo '<form action="signup" method="post">'."\n";
-		echo 'Name:       <input type="text" name="user_name"'; 
+		echo 'Name: <input type="text" name="user_name"'; 
 			if (!is_null($userData)) { echo 'value = "'. $userData->getUserName() .'"'; }
 		echo 'tabindex="1" required>'."\n";
 		echo '<span class="error">'."\n";
 			if (!is_null($userData)) { echo $userData->getError('user_name'); }
 		echo '</span><br><br>'."\n";
 			
-		echo 'Email:      <input type="email" name="email"'; 
+		echo 'Email: <input type="email" name="email"'; 
 			if (!is_null($user)) { echo 'value = "'. $user->getEmail() .'"'; }
 		echo 'tabindex="2" required>'."\n";
 		echo '<span class="error">'."\n";
 			if (!is_null($user)) { echo $user->getError('email'); }
 		echo '</span><br><br>'."\n";
 			
-		echo 'Password:   <input type="password" name="password" tabindex="3" required>'."\n";
+		echo 'Password: <input type="password" name="password" tabindex="3" required>'."\n";
 		echo '<span class="error">'."\n";
 			if (!is_null($user)) { echo $user->getError('password'); }
 		echo '</span><br><br>'."\n";

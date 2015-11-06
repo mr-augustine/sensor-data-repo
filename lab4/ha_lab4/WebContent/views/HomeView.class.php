@@ -9,6 +9,7 @@ class HomeView {
   		MasterView::showNavBar();
   		HomeView::showDetails();
   		MasterView::showFooter();
+  		MasterView::showPageEnd();
   	}
   	
   	public static function showDetails() {
