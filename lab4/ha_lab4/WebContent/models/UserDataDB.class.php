@@ -1,20 +1,23 @@
 <?php
 class UserDataDB {
 
-	// Inserts a UserData object into the UserData table and returns the userDataId
+	// Inserts a UserData object into the UserData table and returns the
+	// UserData with the userDataId property set, if successful; otherwise, 
+	// returns the UserData unchanged. Sets a userDataId error if there is 
+	// a db issue.
 	public static function addUserData($userData) {
 		$query = "INSERT INTO UserData (userId, user_name, skill_level,  
 				profile_pic, started_hobby, fav_color, url, phone) VALUES
 				(:userId, :user_name, :skill_level, :profile_pic,
 				:started_hobby, :fav_color, :url, :phone)";
-		// TODO: Add a Robots query
+		// TODO: Add a functionalized RobotData INSERT query
+		// TODO: Functionalize the SkillAssoc INSERT query
 		
 		try {
 			// check null and check for errors
 			// check for User by given userId; throw exception if non-existent
 			if (is_null($userData) || $userData->getErrorCount() > 0)
-				throw new PDOException("Invalid UserData object can't be inserted: "/*.$userData->getErrorCount()." "
-						.print_r($userData->getErrors(), true)*/);
+				throw new PDOException("Invalid UserData object can't be inserted: ");
 			
 			$newUserId = $userData->getUserId();
 			
@@ -42,13 +45,14 @@ class UserDataDB {
 			$statement->closeCursor();
 			$returnId = $db->lastInsertId("userDataId");
 			
+			// Handle skill area associations separately since they're going into a different table
 			$query = "INSERT INTO SkillAssocs (userDataId, skillId) VALUES
 					(:userDataId, :skillId)";
-			// Handle skill area associations separately since they're going into a different table
 			// TODO: Review this for instances where this can go wrong
 
 			foreach ($userData->getSkillAreas() as $skill) {
-				// Translate the skill to a skillId, then create a skill association
+				// Translate the skill (a string) to a skillId (an integer), 
+				// then create a skill association
 				
 				$skillArray = SkillsDB::getSkillsBy('skill_name', $skill);
 				$skillObject = $skillArray[0];
@@ -69,9 +73,11 @@ class UserDataDB {
 		return $userData;
 	}
 	
+	// Returns an array of the rows from the UserData table whose $type field
+	// has value $value. Throws an exception if unsuccessful.
 	public static function getUserDataRowSetsBy($type = null, $value = null) {
 		$allowedTypes = ['userDataId', 'userId', 'user_name', 'skill_level', 'skill_areas', 'robot_name'];
-		$userDataRowSets = NULL;
+		$userDataRowSets = array();
 		
 		try {
 			$db = Database::getDB();
@@ -100,14 +106,15 @@ class UserDataDB {
 		return $userDataRowSets;
 	}
 	
-	
+	// Returns an array of UserData that meet the criteria specified.
+	// If unsuccessful, this function returns an empty array.
 	public static function getUserDataBy($type = null, $value = null) {
 		$userDataRows = UserDataDB::getUserDataRowSetsBy($type, $value);
 		
 		return UserDataDB::getUserDataArray($userDataRows);
 	}
 	
-	
+	// Returns an array of UserData objects extracted from $rowSets
 	public static function getUserDataArray($rowSets) {
 		$usersData = array();
 		
@@ -143,12 +150,14 @@ class UserDataDB {
 		return $usersData;
 	}
 	
-	public static function getUserDataValuesBy($column, $type = null, $value = null) {
+	// Returns the $column of UserData whose $type matches $value
+	public static function getUserDataValuesBy($type = null, $value = null, $column) {
 		$userDataRows = UserDataDB::getUserDataRowSetsBy($type, $value);
 		
 		return UserDataDB::getUserDataValues($userDataRows, $column);
 	}
 	
+	// Returns an array of values from the $column extracted from $rowSets
 	public static function getUserDataValues($rowSets, $column) {
 		$userDataValues = array();
 		
@@ -160,6 +169,7 @@ class UserDataDB {
 		return $userDataValues;
 	}
 	
+	// Updates a UserData entry in the UserData table, and updates the associated Skills
 	public static function updateUserData($userData) {
 		try {
 			$db = Database::getDB();
@@ -195,6 +205,8 @@ class UserDataDB {
 			$statement->execute();
 			$statement->closeCursor();
 			
+			// FIXME: If this strategy is performed a lot, the SkillAssoc table
+			// may end up with gaps in its skillAssocId numbering sequence.
 			// Handle updates for the Skill Areas
 			// 1 - Delete all existing skill associations for the user
 			$deleteQuery = "DELETE from SkillAssocs WHERE userDataId = :userDataId";

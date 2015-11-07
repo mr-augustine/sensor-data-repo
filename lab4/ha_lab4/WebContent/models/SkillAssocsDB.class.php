@@ -1,6 +1,10 @@
 <?php
 class SkillAssocsDB {
 	
+	// Inserts a SkillAssoc object into the SkillAssocs table and returns 
+	// the SkillAssoc with the skillAssocId property set, if successful; 
+	// otherwise, returns the SkillAssoc unchanged. Sets a skillAssocId error 
+	// if there is a db issue.
 	public static function addSkillAssoc($skillAssoc) {
 		$query = "INSERT INTO SkillAssocs (skillId, userDataId)
 				VALUES (:skillId, :userDataId)";
@@ -24,12 +28,17 @@ class SkillAssocsDB {
 		return $skillAssoc;
 	}
 	
+	// Returns an array of SkillAssocs that meet the criteria specified. Typically
+	// this function will return an array with one element if successful.
+	// If unsuccessful, this function returns an empty array.
 	public static function getSkillAssocsBy($type = null, $value = null) {
 		$skillAssocsRows = SkillAssocsDB::getSkillAssocsRowsBy($type, $value);
 		
 		return SkillAssocsDB::getSkillAssocsArray($skillAssocsRows);
 	}
 	
+	// Returns an array of the rows from the SkillAssocs table whose $type field
+	// has value $value. Throws an exception if unsuccessful.
 	public static function getSkillAssocsRowsBy($type, $value) {
 		$allowedTypes = ["skillAssocId", "skillId", "userDataId"];
 		$skillAssocsRows = array();
@@ -60,6 +69,7 @@ class SkillAssocsDB {
 		return $skillAssocsRows;
 	}
 	
+	// Returns an array of SkillAssoc objects extracted from $rowSets
 	public static function getSkillAssocsArray($skillAssocsRows) {
 		$skillAssocs = array();
 		

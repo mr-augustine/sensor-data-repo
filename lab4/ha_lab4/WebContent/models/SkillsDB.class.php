@@ -5,12 +5,17 @@ class SkillsDB {
 		// NOT SUPPORTED YET
 	}
 	
+	// Returns an array of Skills that meet the criteria specified. Typically
+	// this function will return an array with one element if successful.
+	// If unsuccessful, this function returns an empty array.
 	public static function getSkillsBy($type = null, $value = null) {
 		$skillRows = SkillsDB::getSkillsRowsBy($type, $value);
 		
 		return SkillsDB::getSkillsArray($skillRows);
 	}
 	
+	// Returns an array of the rows from the Skills table whose $type field
+	// has value $value. Throws an exception if unsuccessful.
 	public static function getSkillsRowsBy($type, $value) {
 		$allowedTypes = ["skillId", "skill_name"];
 		$skillRows = array();
@@ -41,6 +46,7 @@ class SkillsDB {
 		return $skillRows;
 	}
 	
+	// Returns an array of Skill objects extracted from $rowSets
 	public static function getSkillsArray($rows) {
 		$skills = array();
 		

@@ -2,7 +2,8 @@
 class UsersDB {
 	
 	// Inserts a User object into the Users table and returns the User
-	// with the userId property set, if successful
+	// with the userId property set, if successful; otherwise, returns
+	// the User unchanged. Sets a userId error if there is a db issue.
 	public static function addUser($user) {
 		$query = "INSERT INTO Users (email, password)
 		                      VALUES(:email, :password)";
@@ -25,8 +26,8 @@ class UsersDB {
 		return $user;
 	}
 		
-	// Returns the rowsets of Users whose $type field has value $value
-	// Rowsets will contain either a single column or all columns from the Users table
+	// Returns an array of the rows from the Users table whose $type field 
+	// has value $value. Throws an exception if unsuccessful.
 	public static function getUserRowSetsBy($type = null, $value = null) {
 		$allowedTypes = ["userId", "email"];
 		$userRowSets = array();
@@ -50,14 +51,14 @@ class UsersDB {
 			$statement->execute();
 			$userRowSets = $statement->fetchAll(PDO::FETCH_ASSOC);
 			$statement->closeCursor();
-		} catch (PDOException $e) { // Not permanent error handling
+		} catch (Exception $e) { // Not permanent error handling
 			echo "<p>Error getting user rows by $type: " . $e->getMessage() . "</p>";
 		}
 	
 		return $userRowSets;
 	}
 	
-	// Returns values in the $column extracted from $rowSets as an array
+	// Returns an array of values from the $column extracted from $rowSets
 	public static function getUserValues($rowSets, $column) {
 		$userValues = array();
 		//print_r($rowSets);
@@ -70,7 +71,7 @@ class UsersDB {
 		return $userValues;
 	}
 	
-	// Returns the userId of the user whose $type field has value $value
+	// Returns the $column of Users whose $type matches $value
 	public static function getUserValuesBy($type = null, $value = null, $column) {
 		$userRows = UsersDB::getUserRowSetsBy($type, $value);
 	
@@ -102,6 +103,7 @@ class UsersDB {
 		return UsersDB::getUsersArray($userRows);
 	}
 	
+	// Updates a User entry in the Users table
 	public static function updateUser($user) {
 		try {
 			$db = Database::getDB();
