@@ -1,3 +1,5 @@
+CREATOR_ID_EMPTY Ihre Creator ID darf nicht leer sein
+CREATOR_ID_INVALID Ihre Creator ID ist ungültig
 EMAIL_EMPTY Ihre E-Mail kann nicht leer sein oder Leerzeichen enthalten nur
 EMAIL_INVALID Ihre E-Mail ist ungültig 
 EMAIL_PASSWORD_COMBO_INVALID Ihr Benutzername oder Passwort ist nicht korrekt
@@ -31,6 +33,8 @@ FAV_COLOR_EMPTY Ihre Lieblingsfarbe ist nicht gesetzt
 FAV_COLOR_INVALID Ihre Lieblingsfarbe ist ungültig
 URL_INVALID Ihre URL ist ungültig
 PHONE_NUMBER_INVALID Ihre Telefonnummer ist ungültig
+ROBOT_ID_EMPTY Ihr Roboter-ID darf nicht leer sein
+ROBOT_ID_INVALID Ihr Roboter-ID ist ungültig
 ROBOT_NAME_EMPTY Ihr Roboter Name darf nicht leer sein oder Leerzeichen enthalten nur
 ROBOT_CREATOR_EMPTY Ihr Schöpfer Name darf nicht leer sein oder Leerzeichen enthalten nur
 ROBOT_STATUS_EMPTY Ihr Status kann nicht leer sein oder Leerzeichen enthalten nur

@@ -9,6 +9,7 @@ require_once dirname (__FILE__).'\..\..\WebContent\views\LoginView.class.php';
 require_once dirname (__FILE__).'\..\..\WebContent\views\MasterView.class.php';
 require_once dirname (__FILE__).'\..\..\WebContent\views\ProfileView.class.php';
 require_once dirname (__FILE__).'\..\..\WebContent\views\SignupView.class.php';
+require_once dirname (__FILE__).'\..\..\WebContent\views\UserDataView.class.php';
 require_once dirname (__FILE__).'\..\..\WebContent\tests\DBMaker.class.php';
 
 class SignupControllerTest extends PHPUnit_Framework_TestCase {
@@ -36,7 +37,7 @@ class SignupControllerTest extends PHPUnit_Framework_TestCase {
 			"phone" => "123-456-7890"
 		);
 		
-		$_SESSION = array("base" => "ha_lab3");
+		$_SESSION = array("base" => "ha_lab4");
 		
 		SignupController::run();
 		$output = ob_get_clean();
