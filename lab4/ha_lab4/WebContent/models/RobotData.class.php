@@ -9,7 +9,7 @@ class RobotData {
 	
 	private $robotId;
 	private $robot_name;
-	private $creator;
+	private $creators;
 	private $status;
 	
 	public function __construct($formInput = null) {
@@ -35,6 +35,10 @@ class RobotData {
 		$this->robotId = $id;
 	}
 	
+	public function setCreators($creators) {
+		$this->creators = $creators;
+	}
+	
 	public function getRobotId() {
 		return $this->robotId;
 	}
@@ -47,8 +51,8 @@ class RobotData {
 		return $this->errors;
 	}
 
-	public function getCreator() {
-		return $this->creator;
+	public function getCreators() {
+		return $this->creators;
 	}
 	
 	public function getRobotName() {
@@ -63,7 +67,7 @@ class RobotData {
 		// Return data fields as an associative array
 		$paramArray = array("robotId" => $this->robotId,
 				"robot_name" => $this->robot_name,
-				"creator" => $this->creator,
+				"creators" => $this->creators,
 				"status" => $this->status
 		);
 		
@@ -71,7 +75,7 @@ class RobotData {
 	}
 
 	public function __toString() {
-		$str = "[RobotData] {Name: ".$this->robot_name.", Creator: ".$this->creator.", Status: ".$this->status."}";
+		$str = "[RobotData] {Name: ".$this->robot_name.", Creators: ".$this->creators.", Status: ".$this->status."}";
 		return $str;
 	}
 	
@@ -79,9 +83,23 @@ class RobotData {
 		// Extract a stripped value from the form array
 		$value = "";
 		if (isset($this->formInput[$valueName])) {
-			$value = trim($this->formInput[$valueName]);
-			$value = stripslashes ($value);
-			$value = htmlspecialchars ($value);
+			
+			if (!is_array($this->formInput[$valueName])) {
+				$value = trim($this->formInput[$valueName]);
+				$value = stripslashes ($value);
+				$value = htmlspecialchars ($value);
+			} else {
+				$value = array();
+				
+				foreach ($this->formInput[$valueName] as $arrayValue) {
+					$tempValue = trim($arrayValue);
+					$tempValue = stripslashes($arrayValue);
+					$tempValue = htmlspecialchars($arrayValue);
+					
+					array_push($value, $tempValue);
+				}
+			}
+			
 			return $value;
 		}
 	}
@@ -93,7 +111,7 @@ class RobotData {
 			$this->initializeEmpty();
 		else { 	 
 		   	$this->validateName();
-		   	$this->validateCreator();
+		   	$this->validateCreators();
 		   	$this->validateStatus();
 		}
 	}
@@ -102,7 +120,7 @@ class RobotData {
 		$this->errorCount = 0;
 		$errors = array();
 	 	$this->robot_name = "";
-	 	$this->creator = "";
+	 	$this->creators = array();
 	 	$this->status = "";
 	}
 
@@ -113,11 +131,15 @@ class RobotData {
 			$this->setError('robot_name', 'ROBOT_NAME_EMPTY');
 	}
 	
-	private function validateCreator() {
-		$this->creator = $this->extractForm('creator');
+	private function validateCreators() {
+		$this->creators = $this->extractForm('creators');
 	
-		if (empty($this->creator))
-			$this->setError('creator', 'ROBOT_CREATOR_EMPTY');
+		foreach ($this->creators as $creatorId) {
+			if (empty($creatorId))
+				$this->setError('creator', 'ROBOT_CREATOR_EMPTY');
+			elseif (!is_numeric($creatorId) || $creatorId <= 0)
+				$this->setError('creator', 'ROBOT_CREATOR_INVALID');
+		}
 	}
 	
 	private function validateStatus() {

@@ -45,6 +45,24 @@ CREATE TABLE SkillAssocs (
   FOREIGN KEY (userDataId) REFERENCES UserData(userDataId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE if EXISTS RobotData;
+CREATE TABLE RobotData (
+  robotId		 	 int(11) NOT NULL AUTO_INCREMENT,
+  robot_name		 varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  status			 varchar(30) NOT NULL COLLATE utf8_unicode_ci,
+  PRIMARY KEY (robotId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE if EXISTS RobotAssocs;
+CREATE TABLE RobotAssocs (
+  robotAssocId		 int(11) NOT NULL AUTO_INCREMENT,
+  robotId			 int(11) NOT NULL,
+  creatorId			 int(11) NOT NULL,
+  PRIMARY KEY (robotAssocId),
+  FOREIGN KEY (robotId) REFERENCES RobotData(robotId),
+  FOREIGN KEY (creatorId) REFERENCES UserData(userDataId)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 INSERT INTO Skills (skillId, skill_name) VALUES
 	(1, 'system-design');
 INSERT INTO Skills (skillId, skill_name) VALUES

@@ -37,5 +37,6 @@ ROBOT_ID_EMPTY Ihr Roboter-ID darf nicht leer sein
 ROBOT_ID_INVALID Ihr Roboter-ID ist ungültig
 ROBOT_NAME_EMPTY Ihr Roboter Name darf nicht leer sein oder Leerzeichen enthalten nur
 ROBOT_CREATOR_EMPTY Ihr Schöpfer Name darf nicht leer sein oder Leerzeichen enthalten nur
+ROBOT_CREATOR_INVALID Der Ersteller-ID ist ungültig
 ROBOT_STATUS_EMPTY Ihr Status kann nicht leer sein oder Leerzeichen enthalten nur
 ROBOT_STATUS_INVALID Ihr Status ist ungültig
