@@ -99,6 +99,28 @@ class SkillAssocsDBTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 	
+	public function testInsertDuplicateSkillAssoc() {
+		$myDB = DBMaker::create('botspacetest');
+		Database::clearDB();
+		$db = Database::getDB('botspacetest', 'C:\xampp\myConfig.ini');
+		
+		$beforeCount = count(SkillAssocsDB::getSkillAssocsBy());
+		$skillAssocCopy = SkillAssocsDB::getSkillAssocsRowsBy('skillAssocId', 4);
+		$skillAssocCopy = $skillAssocCopy[0];
+		
+		$s1 = new SkillAssocs($skillAssocCopy);
+		$dupSkillAssoc = SkillAssocsDB::addSkillAssoc($s1);
+		
+		$afterCount = count(SkillAssocsDB::getSkillAssocsBy());
+		
+		$this->assertTrue(!empty($dupSkillAssoc->getError('skillAssocId')) &&
+				(strcmp(Messages::getError('SKILL_ASSOC_INVALID'), $s1->getError('skillAssocId')) == 0),
+				'It should have a skillAssocId error if the skill association is a duplicate');
+		
+		$this->assertEquals($afterCount, $beforeCount,
+				'There should be no additional skill associations entries after the insertion attempt');
+	}
+	
 	// The update feature probably should not exist for SkillAssocs
 // 	public function testUpdateSkillAssoc() {
 // 		$myDB = DBMaker::create('botspacetest');
