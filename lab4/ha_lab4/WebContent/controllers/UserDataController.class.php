@@ -37,7 +37,17 @@ class UserDataController {
 			$_SESSION['userData'] = $userData;
 			
 			$skillAssocs = SkillAssocsDB::getSkillAssocsBy('userDataId', $userData->getUserDataId());
-			$_SESSION['skillAssocs'] = $skillAssocs;
+			
+			$skills = array();
+			
+			foreach ($skillAssocs as $skillAssoc) {
+				$skillsArray = SkillsDB::getSkillsBy('skillId', $skillAssoc->getSkillId());
+				$skill = $skillsArray[0];
+				array_push($skills, $skill);
+			}
+			
+			//$_SESSION['skillAssocs'] = $skillAssocs;
+			$_SESSION['skills'] = $skills;
 			
 			UserDataView::show();
 		} else {

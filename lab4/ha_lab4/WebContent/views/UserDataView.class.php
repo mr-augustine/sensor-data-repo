@@ -48,7 +48,8 @@ class UserDataView {
 	
 	public static function showDetails() {
 		$userData = (array_key_exists('userData', $_SESSION)) ? $_SESSION['userData'] : null;
-		$skillAssocs = (array_key_exists('skillAssocs', $_SESSION)) ? $_SESSION['skillAssocs'] : array();
+		//$skillAssocs = (array_key_exists('skillAssocs', $_SESSION)) ? $_SESSION['skillAssocs'] : array();
+		$skills = (array_key_exists('skills', $_SESSION)) ? $_SESSION['skills'] : array();
 		
 		if (is_null($userData))
 			echo '<p>Unknown user data</p>';
@@ -61,11 +62,17 @@ class UserDataView {
 			echo 'Skill Level:   '.$userData->getSkillLevel().'<br><br>'."\n";
 			echo 'Skills:        ';
 			
-			foreach ($skillAssocs as $skillAssoc) {
-				$skills = SkillsDB::getSkillsBy('skillId', $skillAssoc->getSkillId());
-				$skill = $skills[0];
-				echo $skill->getSkillName()."  ";
+			// FIXME: Don't allow a View to make DB calls; do this in the Controller instead
+// 			foreach ($skillAssocs as $skillAssoc) {
+// 				$skills = SkillsDB::getSkillsBy('skillId', $skillAssoc->getSkillId());
+// 				$skill = $skills[0];
+// 				echo $skill->getSkillName()."  ";
+// 			}
+
+			foreach ($skills as $skill) {
+				echo $skill->getSkillName()." ";
 			}
+			
 			echo "<br><br>";
 			echo 'Profile Pic:   '.$userData->getProfilePic().'<br><br>'."\n";
 			echo 'Started Hobby: '.$userData->getStartedHobby().'<br><br>'."\n";
