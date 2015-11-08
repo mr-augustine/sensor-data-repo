@@ -42,7 +42,8 @@ CREATE TABLE SkillAssocs (
   userDataId		 int(11) NOT NULL,
   PRIMARY KEY (skillAssocId),
   FOREIGN KEY (skillId) REFERENCES Skills(skillId),
-  FOREIGN KEY (userDataId) REFERENCES UserData(userDataId)
+  FOREIGN KEY (userDataId) REFERENCES UserData(userDataId),
+  CONSTRAINT sid_udid UNIQUE (skillId, userDataId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE if EXISTS RobotData;
@@ -60,7 +61,8 @@ CREATE TABLE RobotAssocs (
   creatorId			 int(11) NOT NULL,
   PRIMARY KEY (robotAssocId),
   FOREIGN KEY (robotId) REFERENCES RobotData(robotId),
-  FOREIGN KEY (creatorId) REFERENCES UserData(userDataId)
+  FOREIGN KEY (creatorId) REFERENCES UserData(userDataId),
+  CONSTRAINT rid_cid UNIQUE (robotId, creatorId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO Skills (skillId, skill_name) VALUES

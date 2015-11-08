@@ -33,6 +33,8 @@ FAV_COLOR_EMPTY Your favorite color is not set
 FAV_COLOR_INVALID Your favorite color is invalid
 URL_INVALID Your URL is invalid
 PHONE_NUMBER_INVALID Your phone number is invalid
+ROBOT_ASSOC_INVALID RobotAssoc could not be created
+ROBOT_DATA_INVALID RobotData could not be created
 ROBOT_ID_EMPTY Your robot id cannot be empty
 ROBOT_ID_INVALID Your robot id is invalid
 ROBOT_NAME_EMPTY Your robot name cannot be empty or only contain whitespace
