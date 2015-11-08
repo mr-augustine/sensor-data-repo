@@ -33,7 +33,6 @@ class UserDataDBTest extends PHPUnit_Framework_TestCase {
 		$beforeCount = count(UserDataDB::getUserDataBy());
 		$newUserData = UserDataDB::addUserData($s1);
 
-		print_r($s1->getErrors());
 		$this->assertEquals(0, $s1->getErrorCount(),
 				'The inserted user data should have no errors');
 		

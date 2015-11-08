@@ -114,7 +114,7 @@ class SkillAssocsDBTest extends PHPUnit_Framework_TestCase {
 		$afterCount = count(SkillAssocsDB::getSkillAssocsBy());
 		
 		$this->assertTrue(!empty($dupSkillAssoc->getError('skillAssocId')) &&
-				(strcmp(Messages::getError('SKILL_ASSOC_INVALID'), $s1->getError('skillAssocId')) == 0),
+				(strcmp(Messages::getError('SKILL_ASSOC_INVALID'), $dupSkillAssoc->getError('skillAssocId')) == 0),
 				'It should have a skillAssocId error if the skill association is a duplicate');
 		
 		$this->assertEquals($afterCount, $beforeCount,

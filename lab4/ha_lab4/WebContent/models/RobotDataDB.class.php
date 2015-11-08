@@ -45,7 +45,7 @@ class RobotDataDB {
 				
 				$query = $query . " WHERE ($type = :$type)";
 				$statement = $db->prepare($query);
-				$statement->bindParam(":type", $value);
+				$statement->bindParam(":$type", $value);
 			} else {
 				$query = $query . " ORDER BY robotId ASC";
 				$statement = $db->prepare($query);
