@@ -75,6 +75,28 @@ class DBMaker {
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" );
 			$st->execute();
 			
+			$st = $db->prepare ( "DROP TABLE if EXISTS RobotData" );
+			$st->execute();
+			$st = $db->prepare ( "CREATE TABLE RobotData (
+					robotId		 	 int(11) NOT NULL AUTO_INCREMENT,
+  					robot_name		 varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+  					status			 varchar(30) NOT NULL COLLATE utf8_unicode_ci,
+  					PRIMARY KEY (robotId)
+			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" );
+			$st->execute();
+			
+			$st = $db->prepare ( "DROP TABLE if EXISTS RobotAssocs" );
+			$st->execute();
+			$st = $db->prepare ( "CREATE TABLE RobotAssocs (
+					robotAssocId		 int(11) NOT NULL AUTO_INCREMENT,
+  					robotId			 	 int(11) NOT NULL,
+  					creatorId			 int(11) NOT NULL,
+  					PRIMARY KEY 		 (robotAssocId),
+  					FOREIGN KEY (robotId) REFERENCES RobotData(robotId),
+  					FOREIGN KEY (creatorId) REFERENCES UserData(userDataId)
+			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" );
+			$st->execute();
+			
 			// Populate the Skills table
 			$sql = "INSERT INTO Skills (skillId, skill_name) VALUES
 						(:skillId, :skill_name)";
@@ -160,6 +182,14 @@ class DBMaker {
 			$st->execute (array (':skillAssocId' => 27, ':userDataId' => 8, 'skillId' => 9));
 			$st->execute (array (':skillAssocId' => 28, ':userDataId' => 8, 'skillId' => 7));
 			$st->execute (array (':skillAssocId' => 29, ':userDataId' => 8, 'skillId' => 1));
+			
+			$sql = "INSERT INTO RobotData (robotId, robot_name, status) VALUES
+						(:robotId, :robot_name, :status)";
+			$st = $db->prepare( $sql );
+			$st->execute (array (':robotId' => 1, ':robot_name' => "TARS", ':status' => "in-development"));
+			$st->execute (array (':robotId' => 2, ':robot_name' => "KIPP", ':status' => "retired"));
+			$st->execute (array (':robotId' => 3, ':robot_name' => "CASE", ':status' => "design"));
+			
 		} catch ( PDOException $e ) {
 			echo $e->getMessage (); // not final error handling
 		}

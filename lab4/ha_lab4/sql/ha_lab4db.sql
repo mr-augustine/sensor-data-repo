@@ -182,3 +182,10 @@ INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
 	(28, 8, 7);
 INSERT INTO SkillAssocs (skillAssocId, userDataId, skillId) VALUES
 	(29, 8, 1);
+	
+INSERT INTO RobotData (robotId, robot_name, status) VALUES
+	(1, "TARS", "in-development");
+INSERT INTO RobotData (robotId, robot_name, status) VALUES
+	(2, "KIPP", "retired");
+INSERT INTO RobotData (robotId, robot_name, status) VALUES
+	(3, "CASE", "design");
