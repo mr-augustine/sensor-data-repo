@@ -190,6 +190,13 @@ class DBMaker {
 			$st->execute (array (':robotId' => 2, ':robot_name' => "KIPP", ':status' => "retired"));
 			$st->execute (array (':robotId' => 3, ':robot_name' => "CASE", ':status' => "design"));
 			
+			$sql = "INSERT INTO RobotAssocs (robotAssocId, robotId, creatorId) VALUES
+						(:robotAssocId, :robotId, :creatorId)";
+			$st = $db->prepare( $sql );
+			$st->execute (array (':robotAssocId' => 1, ':robotId' => 1, ':creatorId' => 7));
+			$st->execute (array (':robotAssocId' => 2, ':robotId' => 2, ':creatorId' => 4));
+			$st->execute (array (':robotAssocId' => 3, ':robotId' => 3, ':creatorId' => 4));
+			
 		} catch ( PDOException $e ) {
 			echo $e->getMessage (); // not final error handling
 		}

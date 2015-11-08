@@ -69,7 +69,7 @@ class SkillAssocsDB {
 		return $skillAssocsRows;
 	}
 	
-	// Returns an array of SkillAssoc objects extracted from $rowSets
+	// Returns an array of SkillAssoc objects extracted from $skillAssocsRows
 	public static function getSkillAssocsArray($skillAssocsRows) {
 		$skillAssocs = array();
 		

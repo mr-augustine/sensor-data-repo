@@ -189,3 +189,10 @@ INSERT INTO RobotData (robotId, robot_name, status) VALUES
 	(2, "KIPP", "retired");
 INSERT INTO RobotData (robotId, robot_name, status) VALUES
 	(3, "CASE", "design");
+	
+INSERT INTO RobotAssocs (robotAssocId, robotId, creatorId) VALUES
+	(1, 1, 7);
+INSERT INTO RobotAssocs (robotAssocId, robotId, creatorId) VALUES
+	(2, 2, 4);
+INSERT INTO RobotAssocs (robotAssocId, robotId, creatorId) VALUES
+	(3, 3, 4);

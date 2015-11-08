@@ -75,17 +75,12 @@ class RobotDataDB {
 		
 		if (!empty($rowSets)) {
 			foreach ($rowSets as $robotDataRow) {
-				// FIXME: ALSO GRAB THE CREATORS!
-				// placeholder follows
-				$robotDataRow['creators'] = array();
+				$robotDataRow['creators'] = RobotAssocsDB::getRobotAssocValuesBy('robotId', $robotDataRow['robotId'], "creatorId");
 				
 				$robotData = new RobotData($robotDataRow);
-				
 				$robotId = $robotDataRow['robotId'];
 				$robotData->setRobotId($robotId);
-				
-				
-				
+
 				array_push($robotsData, $robotData);
 			}
 		}
