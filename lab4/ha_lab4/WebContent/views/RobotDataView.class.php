@@ -50,6 +50,7 @@ class RobotDataView {
 	public static function showDetails() {
 		$robotData = (array_key_exists('robotData', $_SESSION)) ? $_SESSION['robotData'] : array();
 		$creators = (array_key_exists('creators', $_SESSION)) ? $_SESSION['creators'] : array();
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
 		
 		if (is_null($robotData))
 			echo '<p>Unknown robot data</p>';
@@ -62,9 +63,8 @@ class RobotDataView {
 			echo 'Status: '.$robotData->getStatus().'<br><br>'."\n";
 			echo 'Creators: ';
 			
-			// TODO: Turn these into links to the users' profiles
 			foreach ($creators as $creator) {
-				echo $creator->getUserName()." ";
+				echo '<a href="/'.$base.'/user/show/'.$creator->getUserDataId().'">'.$creator->getUserName().'</a>&nbsp'."\n";
 			}
 			
 			echo "<br><br>"."\n";

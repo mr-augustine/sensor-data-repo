@@ -65,7 +65,6 @@ class RobotDataController {
 		
 		// Create an array of UserData objects based on the array of creatorIds
 		if (!is_null($robotData)) {
-			//$robotAssocs = RobotAssocsDB::getRobotAssocsBy('creatorId', $robotData->getCreatorId());
 			$creators = array();
 			
 			foreach ($robotData->getCreators() as $creatorId) {
@@ -73,14 +72,7 @@ class RobotDataController {
 				$userData = $userDataArray[0];
 				array_push($creators, $userData);
 			}
-			
-// 			foreach ($robotAssocs as $robotAssoc) {
-// 				$creatorsArray = UserDataDB::getUserDataBy('userDataId', $robotAssoc->getCreatorId());
-// 				$creator = $creatorsArray[0];
-// 				array_push($creators, $creator);
-// 			}
-			
-			//$_SESSION['robotAssocs'] = $robotAssocs;
+
 			$_SESSION['creators'] = $creators;
 			
 			RobotDataView::show();
