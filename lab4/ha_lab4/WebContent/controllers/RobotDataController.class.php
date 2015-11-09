@@ -11,13 +11,43 @@ class RobotDataController {
 				break;
 			case "show":
 				if ($arguments == 'all') {
-					$_SESSION['robotData'] = RobotDataDB::getRobotDataBy();
-					$_SESSION['headertitle'] = "botspace robot data";
+					$allRobotData = RobotDataDB::getRobotDataBy();
+					$allCreators = array();
 					
+					// Retrieve the creators for each robot
+					foreach ($allRobotData as $robotData) {
+						$robotsCreatorsUserData = array();
+						
+						foreach ($robotData->getCreators() as $userDataId) {
+							$creatorsArray = UserDataDB::getUserDataBy('userDataId', $userDataId);
+							$creator = $creatorsArray[0];
+							
+							array_push($robotsCreatorsUserData, $creator);
+						}
+						
+						array_push($allCreators, $robotsCreatorsUserData);
+					}
+					
+					$_SESSION['robotData'] = $allRobotData;
+					$_SESSION['creators'] = $allCreators;
+					$_SESSION['headertitle'] = "botspace robot data";
+
 					RobotDataView::showAll();
 				} else {
-					$robotData = RobotDataDB::getRobotDataBy('robotDataId', $arguments);
-					$_SESSION['robotData'] = $robotData[0];
+					$robotDataArray = RobotDataDB::getRobotDataBy('robotId', $arguments);
+					$robotData = $robotDataArray[0];
+					$creators = array();
+					
+					foreach ($robotData->getCreators() as $userDataId) {
+						$creatorsArray = UserDataDB::getUserDataBy('userDataId', $userDataId);
+						$creator = $creatorsArray[0];
+						
+						array_push($creators, $creator);
+					}
+					
+					$_SESSION['robotData'] = $robotData;
+					$_SESSION['creators'] = $creators;
+					
 					self::show();
 				}
 				break;
@@ -33,15 +63,22 @@ class RobotDataController {
 		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : 0;
 		$robotData = $_SESSION['robotData'];
 		
+		// Create an array of UserData objects based on the array of creatorIds
 		if (!is_null($robotData)) {
-			$robotAssocs = RobotAssocsDB::getRobotAssocsBy('creatorId', $robotData->getCreatorId());
+			//$robotAssocs = RobotAssocsDB::getRobotAssocsBy('creatorId', $robotData->getCreatorId());
 			$creators = array();
 			
-			foreach ($robotAssocs as $robotAssoc) {
-				$creatorsArray = UserDataDB::getUserDataBy('userDataId', $robotAssoc->getCreatorId());
-				$creator = $creatorsArray[0];
-				array_push($creators, $creator);
+			foreach ($robotData->getCreators() as $creatorId) {
+				$userDataArray = UserDataDB::getUserDataBy('userDataId', $creatorId);
+				$userData = $userDataArray[0];
+				array_push($creators, $userData);
 			}
+			
+// 			foreach ($robotAssocs as $robotAssoc) {
+// 				$creatorsArray = UserDataDB::getUserDataBy('userDataId', $robotAssoc->getCreatorId());
+// 				$creator = $creatorsArray[0];
+// 				array_push($creators, $creator);
+// 			}
 			
 			//$_SESSION['robotAssocs'] = $robotAssocs;
 			$_SESSION['creators'] = $creators;

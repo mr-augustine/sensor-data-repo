@@ -20,6 +20,7 @@ class LoginController {
 			LoginView::show();
 		else {
 			$_SESSION['authenticatedUser'] = $user;
+			$_SESSION['authenticated'] = true;
 			HomeView::show();
 			//header('Location: /'.$_SESSION['base']);
 		}
