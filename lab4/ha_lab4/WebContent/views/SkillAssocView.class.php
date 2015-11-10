@@ -26,7 +26,7 @@ class SkillAssocView {
 		echo "<h1>botspace skill associations list</h1>";
 		echo "<table>";
 		echo "<thead>";
-		echo "<tr><th>skillAssocId</th><th>userDataId</th><th>skillId</th><th>Show</th><th>Update</th></tr>";
+		echo "<tr><th>skillAssocId</th><th>userDataId</th><th>skillId</th>"; //<th>Show</th><th>Update</th></tr>";
 		echo "</thead>";
 		
 		echo "<tbody>";
@@ -35,8 +35,8 @@ class SkillAssocView {
 			echo '<td>'.$skillAssoc->getSkillAssocId().'</td>';
 			echo '<td>'.$skillAssoc->getUserDataId().'</td>';
 			echo '<td>'.$skillAssoc->getSkillId().'</td>';
-			echo '<td><a href="/'.$base.'/skillassoc/show/'.$skillAssoc->getSkillAssocId().'">Show</a></td>';
-			echo '<td><a href="/'.$base.'/skillassoc/update/'.$skillAssoc->getSkillAssocId().'">Update</a></td>';
+			//echo '<td><a href="/'.$base.'/skillassoc/show/'.$skillAssoc->getSkillAssocId().'">Show</a></td>';
+			//echo '<td><a href="/'.$base.'/skillassoc/update/'.$skillAssoc->getSkillAssocId().'">Update</a></td>';
 			echo '</tr>';
 		}
 		echo "</tbody>";
