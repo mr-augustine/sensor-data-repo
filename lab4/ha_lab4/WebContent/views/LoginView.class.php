@@ -3,11 +3,13 @@ class LoginView {
 	
   	public static function show() {
   		$_SESSION['headertitle'] = "Log into botspace";
+  		$_SESSION['styles'] = array('site.css');
   		
   		MasterView::showHeader();
   		MasterView::showNavBar();
   		LoginView::showDetails();
   		MasterView::showFooter();
+  		MasterView::showPageEnd();
   	}
 
   	public static function showDetails() {

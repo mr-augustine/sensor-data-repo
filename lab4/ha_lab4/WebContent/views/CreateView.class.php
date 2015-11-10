@@ -3,9 +3,12 @@ class CreateView {
 	
 	public static function show() {
 		$_SESSION['headertitle'] = "Create botspace objects";
+		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		CreateView::showDetails();
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showDetails() {

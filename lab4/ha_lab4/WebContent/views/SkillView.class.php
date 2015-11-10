@@ -3,15 +3,22 @@ class SkillView {
 	
 	public static function show() {
 		$_SESSION['headertitle'] = "Skill details";
+		$_SESSION['styles'] = array('site.css');
+		
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		SkillView::showDetails();
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showAll() {
+		$_SESSION['styles'] = array('site.css');
+		
 		if (array_key_exists('headertitle', $_SESSION)) {
 			MasterView::showHeader();
 		}
+		MasterView::showNavBar();
 		
 		$skills = (array_key_exists('skills', $_SESSION)) ? $_SESSION['skills'] : array();
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
@@ -35,6 +42,7 @@ class SkillView {
 		echo "</table>";
 		
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showDetails() {

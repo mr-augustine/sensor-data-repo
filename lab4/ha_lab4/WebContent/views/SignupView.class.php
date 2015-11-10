@@ -3,12 +3,13 @@ class SignupView {
 	
 	public static function show($user, $userData) {
 		$_SESSION['headertitle'] = "Sign up for a botspace account";
-		$_SESSION['styles'] = array('signup.css');
+		$_SESSION['styles'] = array('site.css', 'signup.css');
 		
 		MasterView::showHeader();
 		MasterView::showNavBar();
 		SignupView::showDetails($user, $userData);
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 
 	public static function showDetails($user, $userData) {

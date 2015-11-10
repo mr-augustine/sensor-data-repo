@@ -3,15 +3,19 @@ class RobotDataView {
 	
 	public static function show() {
 		$_SESSION['headertitle'] = "RobotData details";
+		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
 		RobotDataView::showDetails();
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showAll() {
+		$_SESSION['styles'] = array('site.css');
 		if (array_key_exists('headertitle', $_SESSION)) {
 			MasterView::showHeader();
 		}
+		MasterView::showNavBar();
 		
 		$robotData = (array_key_exists('robotData', $_SESSION)) ? $_SESSION['robotData'] : array();
 		$creators = (array_key_exists('creators', $_SESSION)) ? $_SESSION['creators'] : array();
@@ -45,6 +49,7 @@ class RobotDataView {
 		echo "</table>\n";
 		
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showDetails() {
@@ -77,7 +82,9 @@ class RobotDataView {
 		$robotData = (array_key_exists('robotData', $_SESSION)) ? $_SESSION['robotData'] : null;
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
 		$_SESSION['headertitle'] = "botspace RobotData Creator";
+		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		
 		echo '<h1>Create a new RobotData entry</h1>';
 		
@@ -126,6 +133,9 @@ class RobotDataView {
 		echo '&nbsp&nbsp';
 		echo '<a href="/'.$base.'/robotdata/show/all">Cancel</a><br>';
 		echo '</form>';
+		
+		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showUpdate() {

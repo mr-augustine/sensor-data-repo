@@ -8,6 +8,7 @@ class ProfileView {
 		
 		$name = $userName."'s ";
 		$_SESSION['headertitle'] = ($name != "'s ") ? $name." profile" : "Profile";
+		$_SESSION['styles'] = array('site.css');
 		
 		MasterView::showHeader();
 		MasterView::showNavBar();

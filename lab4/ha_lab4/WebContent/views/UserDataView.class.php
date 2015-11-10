@@ -3,15 +3,22 @@ class UserDataView {
 	
 	public static function show() {
 		$_SESSION['headertitle'] = "UserData details";
+		$_SESSION['styles'] = array('site.css');
+		
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		UserDataView::showDetails();
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showAll() {
+		$_SESSION['styles'] = array('site.css');
+		
 		if (array_key_exists('headertitle', $_SESSION)) {
 			MasterView::showHeader();
 		}
+		MasterView::showNavBar();
 		
 		$userData = (array_key_exists('userData', $_SESSION)) ? $_SESSION['userData'] : array();
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
@@ -44,6 +51,7 @@ class UserDataView {
 		echo "</table>";
 		
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showDetails() {
@@ -91,7 +99,9 @@ class UserDataView {
 		$skillAssocs = (array_key_exists('skillAssocs', $_SESSION)) ? $_SESSION['skillAssocs'] : array();
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
 		$_SESSION['headertitle'] = "botspace UserData Creator";
+		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		
 		// First find some available userIds to associate the new UserData with
 		$users = UsersDB::getUsersBy();
@@ -251,6 +261,9 @@ class UserDataView {
 		
 		echo '<p><input type="submit" name="submit" value="Submit">';
 		echo '</form>';
+		
+		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showUpdate() {
@@ -258,7 +271,9 @@ class UserDataView {
 		$skillAssocs = (array_key_exists('skillAssocs', $_SESSION)) ? $_SESSION['skillAssocs'] : array();
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
 		$_SESSION['headertitle'] = "botspace UserData Update";
+		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		
 		echo '<h1>Update a UserData entry</h1>';
 		
@@ -418,6 +433,7 @@ class UserDataView {
 		echo '</form>';
 		
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 }
 

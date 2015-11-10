@@ -3,15 +3,22 @@ class UserView {
 	
 	public static function show() {
 		$_SESSION['headertitle'] = "User details";
+		$_SESSION['styles'] = array('site.css');
+		
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		UserView::showDetails();
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showAll() {
+		$_SESSION['styles'] = array('site.css');
+		
 		if (array_key_exists('headertitle', $_SESSION)) {
 			MasterView::showHeader();
 		}
+		MasterView::showNavBar();
 		
 		$users = (array_key_exists('users', $_SESSION)) ? $_SESSION['users'] : array();
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
@@ -35,6 +42,7 @@ class UserView {
 		echo "</table>";
 		
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showDetails() {
@@ -84,7 +92,9 @@ class UserView {
 		$user = (array_key_exists('user', $_SESSION)) ? $_SESSION['user'] : null;
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
 		$_SESSION['headertitle'] = "botspace User Creator";
+		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		
 		echo '<h1>Create a new User</h1>';
 		
@@ -108,13 +118,16 @@ class UserView {
 		echo '</form>';
 		
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 	
 	public static function showUpdate() {
 		$users = (array_key_exists('users', $_SESSION)) ? $_SESSION['users'] : null;
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
 		$_SESSION['headertitle'] = "botspace User Update";
+		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
+		MasterView::showNavBar();
 		
 		echo '<h1>Update a User entry</h1>';
 		
@@ -154,6 +167,7 @@ class UserView {
 		echo '</form></section>';
 		
 		MasterView::showFooter();
+		MasterView::showPageEnd();
 	}
 }
 
