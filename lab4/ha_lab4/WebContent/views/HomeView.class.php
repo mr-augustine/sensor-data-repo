@@ -36,15 +36,39 @@ class HomeView {
   		echo '<section>';
   		echo '<h2>Newest Members</h2>';
   		echo '<ul>';
-  		echo '<li><a href="">Human 1</a></li>';
-  		echo '<li><a href="">Human 2</a></li>';
-  		echo '<li><a href="">Human 3</a></li>';
+  		
+  		$newestMembers = self::getLastNRegisteredUsers(0);
+  		
+  		if (count($newestMembers) == 0) {
+  			echo '<li>No Members Available Yet</li>';
+  		} else {
+  		
+	  		foreach ($newestMembers as $member) {
+	  			echo '<li><a href="/'.$base.'/userdata/show/'.$member->getUserDataId().'">'.
+	    			$member->getUserName().'</a></li>';
+	  		}
+  		}
+  		
   		echo '</ul></section>';
   		echo '<aside>';
   	}
   	
   	public static function userLoggedIn() {
   		return (array_key_exists("authenticatedUser", $_SESSION) && !is_null($_SESSION['authenticatedUser']));
+  	}
+  	
+  	public static function getLastNRegisteredUsers($n) {
+  		$lastNUsers = array();
+  		
+  		try {
+  			$registeredUsers = UserDataDB::getUserDataBy();
+  		
+  			$lastNUsers = array_slice($registeredUsers, -$n, $n);
+  		} catch (Exception $e) {
+  			return $lastNUsers;
+  		}
+  		
+  		return $lastNUsers;
   	}
 }
 ?>

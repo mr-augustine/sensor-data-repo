@@ -120,7 +120,7 @@ INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, s
 INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
 	(5, 5, 'liz.shaw', 'novice', 'none.jpg', '2015-10-26 12:00:03', '#008080', 'http://www.weylandindustries.com', '210-555-9090');
 INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
-	(6, 6, 'charlie.g', 'advanced', 'none.jpg', '2012-09-09 12:00:04', '#800080', 'http://www.knightindustries.com', '210-555-4321');
+	(6, 6, 'charlie-g', 'advanced', 'none.jpg', '2012-09-09 12:00:04', '#800080', 'http://www.knightindustries.com', '210-555-4321');
 INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES
 	(7, 7, 'altars', 'expert', 'none.jpg', '1980-03-12 12:00:05', '#8000ff', 'http://www.monolithrobots.com', '210-555-7654');
 INSERT INTO UserData (userDataId, userId, user_name, skill_level, profile_pic, started_hobby, fav_color, url, phone) VALUES

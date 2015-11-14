@@ -142,7 +142,7 @@ class DBMaker {
 					':started_hobby' => '2015-10-26 12:00:02', ':fav_color' => '#c0c0c0', ':url' => 'http://www.si.edu', ':phone' => '210-555-9090'));
 			$st->execute (array (':userDataId' => 5, ':userId' => 5, ':user_name' => 'liz.shaw', ':skill_level' => "novice", ':profile_pic' => 'none.jpg',
 					':started_hobby' => '2015-10-26 12:00:03', ':fav_color' => '#008080', ':url' => 'http://www.weylandindustries.com', ':phone' => '210-555-9090'));
-			$st->execute (array (':userDataId' => 6, ':userId' => 6, ':user_name' => 'charlie.g', ':skill_level' => "advanced", ':profile_pic' => 'none.jpg',
+			$st->execute (array (':userDataId' => 6, ':userId' => 6, ':user_name' => 'charlie-g', ':skill_level' => "advanced", ':profile_pic' => 'none.jpg',
 					':started_hobby' => '2012-09-09 12:00:04', ':fav_color' => '#800080', ':url' => 'http://www.knightindustries.com', ':phone' => '210-555-4321'));
 			$st->execute (array (':userDataId' => 7, ':userId' => 7, ':user_name' => 'altars', ':skill_level' => "expert", ':profile_pic' => 'none.jpg',
 					':started_hobby' => '1980-03-12 12:00:05', ':fav_color' => '#8000ff', ':url' => 'http://www.monolithrobots.com', ':phone' => '210-555-7654'));
@@ -172,7 +172,7 @@ class DBMaker {
 			$st->execute (array (':skillAssocId' => 17, ':userDataId' => 6, 'skillId' => 9));
 			$st->execute (array (':skillAssocId' => 18, ':userDataId' => 6, 'skillId' => 6));
 			$st->execute (array (':skillAssocId' => 19, ':userDataId' => 7, 'skillId' => 1));
-			$st->execute (array (':skillAssocId' => 20, ':userDataId' => 7, 'skillId' => 1));
+			$st->execute (array (':skillAssocId' => 20, ':userDataId' => 7, 'skillId' => 8));
 			$st->execute (array (':skillAssocId' => 21, ':userDataId' => 8, 'skillId' => 2));
 			$st->execute (array (':skillAssocId' => 22, ':userDataId' => 8, 'skillId' => 5));
 			$st->execute (array (':skillAssocId' => 23, ':userDataId' => 8, 'skillId' => 12));
