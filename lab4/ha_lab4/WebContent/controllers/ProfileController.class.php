@@ -12,8 +12,10 @@ class ProfileController {
 				if (count($users) > 0) {
 					$user = $users[0];
 					
-					self::setProfileDataForUser($user->getUserId());
-					ProfileView::show();
+					if (self::setProfileDataForUser($user->getUserId()) == true)
+						ProfileView::show();
+					else
+						HomeView::show();
 				}
 
 // 				$user = null;
@@ -77,8 +79,15 @@ class ProfileController {
 					return $retVal;
 			}
 			
-			// TODO: Fetch the user's robots from the Robots table
+			$robotAssocs = RobotAssocsDB::getRobotAssocsBy('creatorId', $userData->getUserDataId());
 			$userRobots = array();
+			
+			foreach ($robotAssocs as $robotAssoc) {
+				$robotArray = RobotDataDB::getRobotDataBy('robotId', $robotAssoc->getRobotId());
+				
+				if (count($robotArray) > 0)
+					array_push($userRobots, $robotArray[0]);
+			}
 			
 			$_SESSION['user'] = $user;
 			$_SESSION['userData'] = $userData;

@@ -71,7 +71,7 @@ class UserDataView {
 				echo '<a class="btn btn-primary" ';
 				echo 'role="button" ';
 				echo 'href="/'.$base.'/userdata/update/'.$userData->getUserDataId().'" ';
-				echo '>Edit</a>';
+				echo '>Edit Profile</a>';
 				echo '</p>';
 			}
 			

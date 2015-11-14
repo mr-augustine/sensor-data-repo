@@ -32,7 +32,7 @@ class RobotDataDB {
 	// Returns an array of the rows from the RobotData table whose $type field
 	// has value $value. Throws an exception if unsuccessful.
 	public static function getRobotDataRowSetsBy($type = null, $value = null) {
-		$allowedTypes = ['robotId', 'robotId', 'robot_name', 'status'];
+		$allowedTypes = ['robotId', 'robot_name', 'status'];
 		$robotDataRowSets = array();
 		
 		try {

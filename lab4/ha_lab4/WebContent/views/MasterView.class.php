@@ -60,7 +60,7 @@ class MasterView {
 		if (!is_null($authenticatedUser)) {
 			
 			echo '<ul class="nav navbar-nav">';
-			echo '<li class="active"><a href="/'.$base.'/user/show/'.
+			echo '<li class="active"><a href="/'.$base.'/profile/show/'.
 					$authenticatedUserId.'">Profile</a></li>';
 			echo '</ul>';
 			

@@ -319,7 +319,7 @@ class UserData {
 		} elseif (strlen($this->user_name) < self::$MIN_USERNAME_LENGTH) {
 			$this->setError('user_name', 'USER_NAME_TOO_SHORT');
 		} elseif (!filter_var($this->user_name, FILTER_VALIDATE_REGEXP,
-			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
+			array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_.])+$/i")) )) {
 			$this->setError('user_name', 'USER_NAME_HAS_INVALID_CHARS');
 		}
 	}

@@ -24,7 +24,7 @@ class UserDataController {
 				}
 				break;
 			case "update":
-				echo "Update";
+				//echo "Update";
 				self::updateUserData();
 				break;
 			default:
