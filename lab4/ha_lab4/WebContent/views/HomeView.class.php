@@ -40,11 +40,7 @@ class HomeView {
     				$robot->getRobotName().'</a></li>';
   			}
   		}
-  		
-//   		echo '<li><a href="">Robot 1</a></li>';
-//   		echo '<li><a href="">Robot 2</a></li>';
-//   		echo '<li><a href="">Robot 3</a></li>';	
-  		
+  		  		
   		echo '</ul></section>';
   		echo '<section>';
   		echo '<h2>Newest Members</h2>';
@@ -66,6 +62,8 @@ class HomeView {
   		echo '<aside>';
   	}
   	
+  	// TODO: put this and other helper functions in a separate class since they
+  	// will be called by other classes
   	public static function userLoggedIn() {
   		return (array_key_exists("authenticatedUser", $_SESSION) && !is_null($_SESSION['authenticatedUser']));
   	}

@@ -9,6 +9,8 @@ class UserDataController {
 			case "create":
 				self::newUserData();
 				break;
+			// FIXME: $_SESSION['userData'] can refer to either a single object
+			// or an array of objects. Give them separate keys
 			case "show":
 				if ($arguments == 'all') {
 					$_SESSION['userData'] = UserDataDB::getUserDataBy();

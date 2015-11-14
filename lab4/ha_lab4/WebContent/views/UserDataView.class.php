@@ -44,7 +44,9 @@ class UserDataView {
 			echo '<td>'.$data->getUrl().'</td>';
 			echo '<td>'.$data->getPhone().'</td>';
 			echo '<td><a href="/'.$base.'/userdata/show/'.$data->getUserDataId().'">Show</a></td>';
-			echo '<td><a href="/'.$base.'/userdata/update/'.$data->getUserDataId().'">Update</a></td>';
+			
+			if (self::CurrentUserCanEditProfileWithUserDataId($data->getUserDataId()))
+				echo '<td><a href="/'.$base.'/userdata/update/'.$data->getUserDataId().'">Update</a></td>';
 			echo '</tr>';
 		}
 		echo "</tbody>";
@@ -56,26 +58,28 @@ class UserDataView {
 	
 	public static function showDetails() {
 		$userData = (array_key_exists('userData', $_SESSION)) ? $_SESSION['userData'] : null;
-		//$skillAssocs = (array_key_exists('skillAssocs', $_SESSION)) ? $_SESSION['skillAssocs'] : array();
 		$skills = (array_key_exists('skills', $_SESSION)) ? $_SESSION['skills'] : array();
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
 		
 		if (is_null($userData))
 			echo '<p>Unknown user data</p>';
 		else {
 			echo '<h1>UserData for userId #'.$userData->getUserId().'</h1>';
 			
+			if (self::CurrentUserCanEditProfileWithUserDataId($userData->getUserId())) {
+				echo '<p>';
+				echo '<a class="btn btn-primary" ';
+				echo 'role="button" ';
+				echo 'href="/'.$base.'/userdata/update/'.$userData->getUserDataId().'" ';
+				echo '>Edit</a>';
+				echo '</p>';
+			}
+			
 			echo '<section>';
 			echo '<fieldset><legend>User Data</legend>';
 			echo 'Username:      '.$userData->getUserName().'<br><br>'."\n";
 			echo 'Skill Level:   '.$userData->getSkillLevel().'<br><br>'."\n";
 			echo 'Skills:        ';
-			
-			// FIXME: Don't allow a View to make DB calls; do this in the Controller instead
-// 			foreach ($skillAssocs as $skillAssoc) {
-// 				$skills = SkillsDB::getSkillsBy('skillId', $skillAssoc->getSkillId());
-// 				$skill = $skills[0];
-// 				echo $skill->getSkillName()."  ";
-// 			}
 
 			foreach ($skills as $skill) {
 				echo $skill->getSkillName()." ";
@@ -434,6 +438,24 @@ class UserDataView {
 		
 		MasterView::showFooter();
 		MasterView::showPageEnd();
+	}
+	
+	public static function CurrentUserCanEditProfileWithUserDataId($id) {
+		$canEdit = false;
+		$authenticatedUser = null;
+		
+		if (array_key_exists("authenticated", $_SESSION) &&
+				$_SESSION['authenticated'] == true &&
+				array_key_exists("authenticatedUser", $_SESSION) &&
+				!is_null($_SESSION['authenticatedUser'])) {
+			
+			$authenticatedUser = $_SESSION['authenticatedUser'];
+		
+			if ($authenticatedUser->getUserId() == $id)
+				$canEdit = true;
+		}
+		
+		return $canEdit;
 	}
 }
 
