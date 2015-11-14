@@ -14,6 +14,7 @@ class HomeView {
   	
   	public static function showDetails() {
   		$base = $_SESSION['base'];
+  		$_SESSION['footertitle'] = 'test username/pass = mwatney@mars.com/aaaaaaaa';
   		
   		echo '<div class="jumbotron">';
   		echo '<div class="container">';

@@ -96,9 +96,9 @@ class MasterView {
 	}
 
 	public static function showFooter() {
-// 		$footer = (array_key_exists('footertitle', $_SESSION))?
-// 			$_SESSION['footertitle']:"";
-// 		echo $footer;
+		$footer = (array_key_exists('footertitle', $_SESSION))?
+			$_SESSION['footertitle']:"";
+		echo $footer;
 // 		echo '<footer>'."\n";
 // 		echo MasterView::$STD_FOOTER."\n";
 // 		echo "\t</body>\n</html>";
