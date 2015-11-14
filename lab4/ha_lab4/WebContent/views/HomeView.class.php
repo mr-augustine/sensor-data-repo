@@ -29,15 +29,28 @@ class HomeView {
   		echo '<aside><section>';
   		echo '<h2>Robot Showcase</h2>';
   		echo '<ul>';
-  		echo '<li><a href="">Robot 1</a></li>';
-  		echo '<li><a href="">Robot 2</a></li>';
-  		echo '<li><a href="">Robot 3</a></li>';
+  		
+  		$newestRobots = self::getLastNCreatedRobots(3);
+  		
+  		if (count($newestRobots) == 0) {
+  			echo '<li>No Robots Available Yet</li>';
+  		} else {
+  			foreach ($newestRobots as $robot) {
+  				echo '<li><a href="/'.$base.'/robotdata/show/'.$robot->getRobotId().'">'.
+    				$robot->getRobotName().'</a></li>';
+  			}
+  		}
+  		
+//   		echo '<li><a href="">Robot 1</a></li>';
+//   		echo '<li><a href="">Robot 2</a></li>';
+//   		echo '<li><a href="">Robot 3</a></li>';	
+  		
   		echo '</ul></section>';
   		echo '<section>';
   		echo '<h2>Newest Members</h2>';
   		echo '<ul>';
   		
-  		$newestMembers = self::getLastNRegisteredUsers(0);
+  		$newestMembers = self::getLastNRegisteredUsers(3);
   		
   		if (count($newestMembers) == 0) {
   			echo '<li>No Members Available Yet</li>';
@@ -69,6 +82,20 @@ class HomeView {
   		}
   		
   		return $lastNUsers;
+  	}
+  	
+  	public static function getLastNCreatedRobots($n) {
+  		$lastNRobots = array();
+  		
+  		try {
+  			$robots = RobotDataDB::getRobotDataBy();
+  			
+  			$lastNRobots = array_slice($robots, -$n, $n);
+  		} catch (Exception $e) {
+  			return $lastRobots;
+  		}
+  		
+  		return $lastNRobots;
   	}
 }
 ?>
