@@ -122,10 +122,10 @@ class RobotDataView {
 			$creators = $robotData->getCreators();
 			
 			foreach ($creators as $creator) {
-				echo '<input type="text" name="creators[]" value="'.$creator.'" required><br>'."\n";
+				echo '<input type="text" name="creatorNames[]" value="'.$creator.'" required><br>'."\n";
 			}
 		} else {
-			echo '<input type="text" name="creators[]" value="" required>'."\n";
+			echo '<input type="text" name="creatorNames[]" value="" tabindex="3" required>'."\n";
 		}
 		
 		echo '<br><br>';

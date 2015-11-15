@@ -85,15 +85,33 @@ class RobotDataController {
 		$robotData = null;
 		$newRobotData = null;
 		
-		if ($_SERVER["REQUEST_METHOD"] == "POST")
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			$creatorIds = array();
+			
+			foreach ($_POST['creatorNames'] as $creatorName) {
+				$creatorArray = UserDataDB::getUserDataBy('user_name', $creatorName);
+				
+				if (count($creatorArray) >= 1) {				
+					$creator = $creatorArray[0];
+					array_push($creatorIds, $creator->getUserDataId());
+				}
+			}
+			
+			$_POST['creators'] = $creatorIds;
+			
 			$robotData = new RobotData($_POST);
-		
+		}
 		$_SESSION['robotData'] = $robotData;
 		
 		if (is_null($robotData) || $robotData->getErrorCount() != 0)
 			RobotDataView::showNew();
 		else {
 			$newRobotData = RobotDataDB::addRobotData($robotData);
+			
+			foreach ($robotData->getCreators() as $creatorId) {
+				$robotAssoc = new RobotAssoc($robotData->getRobotId(), $creatorId);
+				$newRobotAssoc = RobotAssocsDB::addRobotAssoc($robotAssoc);
+			}
 			
 			if (!is_null($newRobotData) && $newRobotData->getErrorCount() == 0)
 				$_SESSION['robotData'] = $newRobotData;
