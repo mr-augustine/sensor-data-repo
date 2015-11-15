@@ -29,14 +29,33 @@ class ProfileView {
 			echo '<h1>Profile for '.$userData->getUserName().'</h1>';
 				
 			echo '<section>';
+			// TODO: put this function into a separate class
+			if (UserDataView::CurrentUserCanEditProfileWithUserDataId($userData->getUserId())) {
+				echo '<p>';
+				echo '<a class="btn btn-primary" ';
+				echo 'role="button" ';
+				echo 'href="/'.$base.'/user/update/'.$userData->getUserDataId().'" ';
+				echo '>Edit Credentials</a>';
+				echo '</p>';
+			}
 			echo '<fieldset><legend>Login Info</legend>';
 			echo 'Email:         '.$user->getEmail().'<br><br>'."\n";
 				
 			echo 'Password:      '.$user->getPassword().'<br><br>'."\n";
 			echo '</fieldset><br>';
 			echo '</section>';
-				
+			
+			
 			echo '<section>';
+			// TODO: put this function into a separate class
+			if (UserDataView::CurrentUserCanEditProfileWithUserDataId($userData->getUserId())) {
+				echo '<p>';
+				echo '<a class="btn btn-primary" ';
+				echo 'role="button" ';
+				echo 'href="/'.$base.'/userdata/update/'.$userData->getUserDataId().'" ';
+				echo '>Edit Profile Data</a>';
+				echo '</p>';
+			}
 			echo '<fieldset><legend>User Data</legend>';
 			echo 'Username:      '.$userData->getUserName().'<br><br>'."\n";
 			echo 'Skill Level:   '.$userData->getSkillLevel().'<br><br>'."\n";
