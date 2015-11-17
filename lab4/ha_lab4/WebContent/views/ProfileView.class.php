@@ -41,7 +41,7 @@ class ProfileView {
 			echo '<fieldset><legend>Login Info</legend>';
 			echo 'Email:         '.$user->getEmail().'<br><br>'."\n";
 				
-			echo 'Password:      '.$user->getPassword().'<br><br>'."\n";
+			echo 'Password:      '.'********';//$user->getPassword().'<br><br>'."\n";
 			echo '</fieldset><br>';
 			echo '</section>';
 			
