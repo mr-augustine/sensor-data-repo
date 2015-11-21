@@ -22,39 +22,6 @@
 		case "login":
 			LoginController::run();
 			break;
-		case "logout":
-			LogoutController::run();
-			break;
-		case "signup":
-			SignupController::run();
-			break;
-		case "profile":
-			ProfileController::run();
-			break;
-		case "mystery":
-			RobotProfileController::run();
-			break;
-		case "create":
-			CreateView::show();
-			break;
-		case "show":
-			ShowView::show();
-			break;
-		case "user":
-			UserController::run();
-			break;
-		case "userdata":
-			UserDataController::run();
-			break;
-		case "skill":
-			SkillController::run();
-			break;
-		case "skillassoc":
-			SkillAssocController::run();
-			break;
-		case "robotdata":
-			RobotDataController::run();
-			break;
 		default:
 			HomeView::show(array(null));
 	};
