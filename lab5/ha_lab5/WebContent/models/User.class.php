@@ -89,6 +89,8 @@ class User {
 		$this->errors = array();
 		
 		if (!is_null($this->formInput)) {
+			$this->user_id = "";
+
 			$this->validateUsername();
 			$this->validatePassword();
 		} else {

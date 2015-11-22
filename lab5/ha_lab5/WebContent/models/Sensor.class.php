@@ -127,6 +127,9 @@ class Sensor {
 		$this->errors = array();
 		
 		if (!is_null($this->formInput)) {
+			$this->sensor_id = "";
+			$this->measurements = array();
+			
 			$this->validateSensorName();
 			$this->validateSensorType();
 			$this->validateSensorUnits();

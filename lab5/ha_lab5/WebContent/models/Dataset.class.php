@@ -103,6 +103,10 @@ class Dataset {
 		$this->errors = array();
 		
 		if (!is_null($this->formInput)) {
+			$this->dataset_id = "";
+			$this->sensors = array();
+			$this->date_created = "";
+			
 			$this->validateDatasetName();
 			$this->validateDescription();
 		} else {
@@ -121,7 +125,7 @@ class Dataset {
 	}
 	
 	private function validateDatasetName() {
-		$this->dataset_name = $this->getFormInput('dataset_name');
+		$this->dataset_name = $this->extractForm('dataset_name');
 		
 		// Not empty
 		if (empty($this->dataset_name))
@@ -133,13 +137,13 @@ class Dataset {
 			$this->setError('dataset_name', 'DATASET_NAME_TOO_LONG');
 		// Valid chars
 		else if (!filter_var($this->dataset_name, FILTER_VALIDATE_REGEXP,
-				array('options' => array('regexp' => "/^([a-zA-Z0-9\-\_.])+$/i")) )) {
+				array('options' => array('regexp' => "/^([a-zA-Z0-9\-\_. ])+$/i")) )) {
 			$this->setError('dataset_name', 'DATASET_NAME_INVALID_CHARS');	
 		}
 	}
 	
 	private function validateDescription() {
-		$this->description = $this->getFormInput('description');
+		$this->description = $this->extractForm('description');
 		
 		// Within length constraint
 		if (!empty($this->description)) {
