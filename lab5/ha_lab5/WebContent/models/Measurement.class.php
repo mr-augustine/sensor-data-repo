@@ -2,6 +2,10 @@
 include_once("Messages.class.php");
 
 class Measurement {
+	public static $VALID_IMAGE_TYPES = array('COLOR', 'INFRARED', 'GRAYSCALE');
+	public static $VALID_BINARY_VALUES = array('YES', 'NO', 'TRUE', 'FALSE', '1', '0', 'ON', 'OFF');
+	public static $VALID_DIRECTIONS = array('FORWARD', 'REVERSE', 'LEFT', 'RIGHT', 'NORTH', 'SOUTH', 'EAST', 'WEST');
+	
 	private $errorCount;
 	private $errors;
 	private $formInput;
@@ -128,13 +132,110 @@ class Measurement {
 			$sensorType = $this->extractForm('sensorType');
 			
 			switch ($sensorType) {
-				case "good":
-					//something
+				case 'ALTITUDE':
+					if (!$this->validAltitudeValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_ALTITUDE');
+					break;
+				case 'BINARY':
+					if (!$this->validBinaryValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_BINARY');
+					break;
+				case 'COUNT':
+					if (!$this->validCountValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_COUNT');
+					break;
+				case 'DIRECTION':
+					if (!$this->validDirectionValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_DIRECTION');
+					break;
+				case 'DISTANCE':
+					if (!$this->validDistanceValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_DISTANCE');
+					break;
+				case 'HEADING':
+					if (!$this->validHeadingValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_HEADING');
+					break;
+				case 'IMAGE':
+					if (!$this->validImageValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_IMAGE');
+					break;
+				case 'LATITUDE':
+					if (!$this->validLatitudeValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_LATITUDE');
+					break;
+				case 'LONGITUDE':
+					if (!$this->validLongitudeValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_LONGITUDE');
+					break;
+				case 'RANGE':
+					if (!$this->validRangeValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_RANGE');
+					break;
+				case 'RATE':
+					if (!$this->validRateValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_RATE');
 					break;
 				default:
 					$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID');
 			}
 		}
+	}
+	
+	private function validAltitudeValue($altitude) {
+		// Numeric and non-negative
+		return (is_numeric($altitude) && $altitude >= 0);
+	}
+	
+	private function validBinaryValue($binary) {
+		// Within list of accepted binary values
+		return (in_array($binary, self::VALID_BINARY_VALUES));
+	}
+	
+	private function validCountValue($count) {
+		// Numeric and non-negative
+		return (is_numeric($count) && $count >= 0);
+	}
+	
+	private function validDirectionValue($direction) {
+		// Within list of accepted direction values
+		// Forward, reverse, left, right, NSEW
+		return (in_array($direction, self::VALID_DIRECTIONS));
+	}
+	
+	private function validDistanceValue($distance) {
+		// Numeric
+		return (is_numeric($distance));
+	}
+	
+	private function validHeadingValue($heading) {
+		// Numeric and within range 0..360 exclusive
+		return (is_numeric($heading) && $heading >= 0 && $heading <= 360);
+	}
+	
+	private function validImageValue($image) {
+		// Within list of accepted image types
+		return (in_array($image, self::VALID_IMAGE_TYPES));
+	}
+
+	private function validLatitudeValue($latitude) {
+		// Numeric and within range -90..90 inclusive
+		return (is_numeric($latitude) && $latitude >= -90 && $latitude <= 90);
+	}
+	
+	private function validLongitudeValue($longitude) {
+		// Numeric and within range -180..180 inclusive
+		return (is_numeric($longitude) && $longitude >= -180 && $longitude <= 180);
+	}
+
+	private function validRangeValue($range) {
+		// Numeric and non-negative
+		return (is_numeric($range) && $range >= 0);
+	}
+	
+	private function validRateValue($rate) {
+		// Numeric
+		return (is_numeric($rate));
 	}
 	
 	private function validateMeasurementTimestamp() {
@@ -149,15 +250,15 @@ class Measurement {
 				if (empty($this->measurement_timestamp))
 					$this->setError('measurement_timestamp', 'MEASUREMENT_TIMESTAMP_EMPTY');
 				// Timestamp Format
-				else if (!timestampFormatValid($this->measurement_timestamp)) {
+				else if (!$this->validTimestampFormat($this->measurement_timestamp)) {
 					$this->setError('measurement_timestamp', 'MEASUREMENT_TIMESTAMP_FORMAT_INVALID');			
 				}
 				// Timestamp represents a legitimate point in time
-				else if (!timestampValueValid($this->measurement_timestamp)) {
+				else if (!$this->validTimestampValue($this->measurement_timestamp)) {
 					$this->setError('measurement_timestamp', 'MEASUREMENT_TIMESTAMP_VALUE_INVALID');
 				}
 				// Timestamp fall between Epoch and the current time
-				else if (!timestampWithinValidRange($this->measurement_timestamp)) {
+				else if (!$this->timestampWithinValidRange($this->measurement_timestamp)) {
 					$this->setError('measurement_timestamp', 'MEASUREMENT_TIMESTAMP_RANGE_INVALID');
 				}
 				break;
@@ -171,7 +272,7 @@ class Measurement {
 		}
 	}
 
-	private function timestampFormatValid($date) {
+	private function validTimestampFormat($date) {
 		// yyyy-dd-mm hh-mm-ss[.uuuuuu]
 		$validTimestampFormatRegex = "/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}?(\.\d{1,6})$/";
 		
@@ -180,17 +281,18 @@ class Measurement {
 			array('options' => array('regexp' => $validTimestampFormatRegex)));
 	}
 	
-	private function timestampValueValid($timestamp) {
+	private function validTimestampValue($timestamp) {
 		$measuredTimestamp = date_parse($timestamp);
 		
 		return ($measuredTimestamp['error_count'] == 0);
 	}
 	
 	private function timestampWithinValidRange($timestamp) {
+		$measuredTimestamp = date_parse($timestamp);
 		$currentTimestamp = date_parse(date('Y'));
 		
 		// Return False if the specified timestamp occurs before Epoch year
-		if (!($year >= 1970 && $year <= $currentTimestamp['year']))
+		if (!($measuredTimestamp['year'] >= 1970 && $measuredTimestamp <= $currentTimestamp['year']))
 			return false;
 		
 		$dateInterval = date_diff(date_create($timestamp), date_create(date('Y-M-D H:i:s.u')));
