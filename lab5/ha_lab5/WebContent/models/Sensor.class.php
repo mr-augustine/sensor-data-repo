@@ -2,7 +2,7 @@
 include_once("Messages.class.php");
 
 class Sensor {
-	public static $MAX_DESCRIPTION_LENGTH = 255;
+	public static $MAX_DESCRIPTION_LENGTH = 128;
 	public static $MAX_SENSOR_NAME_LENGTH = 32;
 	public static $MIN_SENSOR_NAME_LENGTH = 4;
 	public static $VALID_SENSOR_TYPES = array('ALTITUDE', 'BINARY', 'COUNT',

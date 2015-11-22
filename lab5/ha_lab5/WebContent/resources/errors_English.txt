@@ -1,3 +1,8 @@
+DATASET_DESCRIPTION_TOO_LONG The dataset description is too long
+DATASET_NAME_EMPTY The dataset name cannot be empty
+DATASET_NAME_INVALID_CHARS The dataset name contains invalid characters
+DATASET_NAME_TOO_LONG The dataset name is too long
+DATASET_NAME_TOO_SHORT The dataset name is too short
 MEASUREMENT_ID_EMPTY The measurement id cannot be empty
 MEASUREMENT_ID_INVALID The measurement id is invalid
 MEASUREMENT_INDEX_EMPTY The measurement index cannot be empty

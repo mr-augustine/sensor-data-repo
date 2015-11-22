@@ -99,7 +99,7 @@ class Measurement {
 	
 	private function initialize() {
 		$this->errorCount = 0;
-		$errors = array();
+		$this->errors = array();
 		
 		if (!is_null($this->formInput)) {
 			$this->validateMeasurementIndex();
