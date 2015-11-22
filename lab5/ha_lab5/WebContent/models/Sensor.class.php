@@ -5,6 +5,15 @@ class Sensor {
 	public static $MAX_DESCRIPTION_LENGTH = 255;
 	public static $MAX_SENSOR_NAME_LENGTH = 32;
 	public static $MIN_SENSOR_NAME_LENGTH = 4;
+	public static $VALID_SENSOR_TYPES = array('ALTITUDE', 'BINARY', 'COUNT',
+		'DIRECTION', 'DISTANCE', 'HEADING', 'IMAGE', 'LATITUDE', 'LONGITUDE',
+		'RANGE', 'RATE', 'TEMPERATURE');
+	public static $VALID_SENSOR_UNITS = array('FEET', 'METERS', 'MILES', 'KILOMETERS',
+		'INCHES', 'CENTIMETERS', 'YES-NO', 'TRUE-FALSE', '1-0', 'ON-OFF',
+		'DEGREES', 'DDMS', 'COLOR', 'GRAYSCALE', 'INFRARED', 'MILES-PER-HOUR',
+		'METERS-PER-SECOND', 'RADIANS', 'DEGREES-FAHRENHEIT', 'DEGREES-CELCIUS');
+	public static $VALID_SENSOR_SEQUENCE_TYPES = array('TIME-CODED', 'SEQUENTIAL');
+	
 	private $errorCount;
 	private $errors;
 	private $formInput;
@@ -118,7 +127,11 @@ class Sensor {
 		$this->errors = array();
 		
 		if (!is_null($this->formInput)) {
-			
+			$this->validateSensorName();
+			$this->validateSensorType();
+			$this->validateSensorUnits();
+			$this->validateSequenceType();
+			$this->validateDescription();
 		} else {
 			$this->initializeEmpty();
 		}
@@ -143,14 +156,15 @@ class Sensor {
 		if (empty($this->sensor_name))
 			$this->setError('sensor_name', 'SENSOR_NAME_EMPTY');
 		// Meets length constraints (min & max)
-		else if (strlen($this->sensor_name) < self::MIN_SENSOR_NAME_LENGTH)
+		else if (strlen($this->sensor_name) < self::$MIN_SENSOR_NAME_LENGTH)
 			$this->setError('sensor_name', 'SENSOR_NAME_TOO_SHORT');
-		else if (strlen($this->sensor_name) > self::MAX_SENSOR_NAME_LENGTH)
+		else if (strlen($this->sensor_name) > self::$MAX_SENSOR_NAME_LENGTH)
 			$this->setError('sensor_name', 'SENSOR_NAME_TOO_LONG');
 		// Only valid chars
 		else if (!filter_var($this->sensor_name, FILTER_VALIDATE_REGEXP,
-				array('options' => array('regexp' => "/^([a-zA-Z0-9\-\_.])+$/i")) ))
+				array('options' => array('regexp' => "/^([a-zA-Z0-9\-\_.])+$/i")) )) {
 			$this->setError('sensor_name', 'SENSOR_NAME_INVALID_CHARS');
+		}
 	}
 	
 	private function validateSensorType() {
@@ -160,7 +174,7 @@ class Sensor {
 		if (empty($this->sensor_type))
 			$this->setError('sensor_type', 'SENSOR_TYPE_EMPTY');
 		// Within the list of accepted sensor types
-		else if (!in_array($this->sensor_type, self::VALID_SENSOR_TYPES))
+		else if (!in_array($this->sensor_type, self::$VALID_SENSOR_TYPES))
 			$this->setError('sensor_type', 'SENSOR_TYPE_INVALID');
 	}
 	
@@ -171,7 +185,7 @@ class Sensor {
 		if (empty($this->sensor_units))
 			$this-setError('sensor_units', 'SENSOR_UNITS_EMPTY');
 		// Within the list of accepted sensor units
-		else if (!in_array($this->sensor_units, self::VALID_SENSOR_UNITS))
+		else if (!in_array($this->sensor_units, self::$VALID_SENSOR_UNITS))
 			$this->setError('sensor_units', 'SENSOR_UNITS_INVALID');
 		// Sensor Unit & Sensor Type pair are legit
 		// TODO: Define the Sensor Type/Unit constraint
@@ -184,7 +198,7 @@ class Sensor {
 		if (empty($this->sequence_type))
 			$this->setError('sequence_type', 'SENSOR_SEQUENCE_TYPE_EMPTY');
 		// Within the list of accepted sequence types (time-coded, sequential)
-		if (!in_array($this->sequence_type, self::VALID_SENSOR_SEQUENCE_TYPES))
+		if (!in_array($this->sequence_type, self::$VALID_SENSOR_SEQUENCE_TYPES))
 			$this->setError('sequence_type', 'SENSOR_SEQUENCE_TYPE_INVALID');
 	}
 	
@@ -193,7 +207,7 @@ class Sensor {
 		
 		// Within the length constraint
 		if (!empty($this->description)) {
-			if (strlen($this->description) > self::MAX_DESCRIPTION_LENGTH)
+			if (strlen($this->description) > self::$MAX_DESCRIPTION_LENGTH)
 				$this->setError('description', 'SENSOR_DESCRIPTION_TOO_LONG');
 		}
 	}
