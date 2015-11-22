@@ -1,6 +1,8 @@
 <?php
 include_once("Messages.class.php");
 
+// TODO: Add a maximum password length and add to the password validation
+// TODO: Add a maximum username length and add to the username validation
 class User {
 	private static $MIN_PASSWORD_LENGTH = 8;
 	private static $MIN_USERNAME_LENGTH = 6;
