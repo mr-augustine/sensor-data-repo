@@ -1,4 +1,7 @@
 DATASET_DESCRIPTION_TOO_LONG The dataset description is too long
+DATASET_COULD_NOT_BE_UPDATED The dataset could not be updated
+DATASET_DOES_NOT_EXIST The dataset with the specified id does not exist
+DATASET_INVALID Dataset could not be created
 DATASET_NAME_EMPTY The dataset name cannot be empty
 DATASET_NAME_INVALID_CHARS The dataset name contains invalid characters
 DATASET_NAME_TOO_LONG The dataset name is too long
