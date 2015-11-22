@@ -1,5 +1,7 @@
 MEASUREMENT_ID_EMPTY The measurement id cannot be empty
 MEASUREMENT_ID_INVALID The measurement id is invalid
+MEASUREMENT_INDEX_EMPTY The measurement index cannot be empty
+MEASUREMENT_INDEX_INVALID The measurement index is invalid
 MEASUREMENT_TIMESTAMP_EMPTY The measurement timestamp cannot be empty
 MEASUREMENT_TIMESTAMP_INVALID The measurement timestamp is invalid
 MEASUREMENT_TIMESTAMP_FORMAT_INVALID The measurement timestamp must be in the format YYYY-MM-DD HH:MM:SS[.uuuuuu]
@@ -7,4 +9,16 @@ MEASUREMENT_TIMESTAMP_RANGE_INVALID The measurement timestamp must occur between
 MEASUREMENT_TIMESTAMP_VALUE_INVALID The measurement timestamp is invalid
 MEASUREMENT_VALUE_EMPTY The measurement value cannot be empty
 MEASUREMENT_VALUE_INVALID The measurement value is invalid
+MEASUREMENT_VALUE_INVALID_ALTITUDE The altitude value must be non-negative
+MEASUREMENT_VALUE_INVALID_BINARY The binary value is not recognized
+MEASUREMENT_VALUE_INVALID_COUNT The count value must be non-negative
+MEASUREMENT_VALUE_INVALID_DIRECTION The direction value is not recognized
+MEASUREMENT_VALUE_INVALID_DISTANCE The distance value must be numeric
+MEASUREMENT_VALUE_INVALID_HEADING The heading value must be between 0 and 360 inclusive
+MEASUREMENT_VALUE_INVALID_IMAGE The image type is not recognized
+MEASUREMENT_VALUE_INVALID_LATITUDE The latitude must be between -90 and 90 inclusive
+MEASUREMENT_VALUE_INVALID_LONGITUDE The longitude must be between -180 and 180 inclusive
+MEASUREMENT_VALUE_INVALID_RANGE The range value must be non-negative
+MEASUREMENT_VALUE_INVALID_RATE The rate value must be numeric
+MEASUREMENT_VALUE_INVALID_TEMPERATURE The temperature value must be numeric
 SENSOR_ID_INVALID The sensor id is invalid

@@ -57,7 +57,7 @@ class Measurement {
 							"measurement_timestamp" => $this->measurement_timestamp,
 							"sensor_id" => $this->sensor_id);
 		
-		return paramArray;
+		return $paramArray;
 	}
 	
 	public function __toString() {
@@ -106,15 +106,15 @@ class Measurement {
 	}
 	
 	private function validateMeasurementIndex() {
-		$this->measurement_index = $this->extractForm('measurement_id');
+		$this->measurement_index = $this->extractForm('measurement_index');
 		
 		// Not empty
 		if (empty($this->measurement_index))
-			$this->setError('measurement_id', 'MEASUREMENT_ID_EMPTY');
-		// Numeric & Non-negative
+			$this->setError('measurement_index', 'MEASUREMENT_INDEX_EMPTY');
+		// Numeric & Greater than 0
 		else if (!is_numeric($this->measurement_index) ||
-				$this->measurement_index < 0) {
-			$this->setError('measurement_id', 'MEASUREMENT_ID_INVALID');	
+				$this->measurement_index < 1) {
+			$this->setError('measurement_index', 'MEASUREMENT_INDEX_INVALID');	
 		}
 
 	}
@@ -175,6 +175,10 @@ class Measurement {
 				case 'RATE':
 					if (!$this->validRateValue($this->measurement_value))
 						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_RATE');
+					break;
+				case 'TEMPERATURE':
+					if (!$this->validTemperatureValue($this->measurement_value))
+						$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID_TEMPERATURE');
 					break;
 				default:
 					$this->setError('measurement_value', 'MEASUREMENT_VALUE_INVALID');
@@ -238,6 +242,11 @@ class Measurement {
 		return (is_numeric($rate));
 	}
 	
+	private function validTemperatureValue($temperature) {
+		// Numeric
+		return (is_numeric($temperature));
+	}
+	
 	private function validateMeasurementTimestamp() {
 		// Needs the context of what sequence type is being used
 		// Maybe passed through the form by the Controller: formInput['sequenceType']
@@ -274,7 +283,7 @@ class Measurement {
 
 	private function validTimestampFormat($date) {
 		// yyyy-dd-mm hh-mm-ss[.uuuuuu]
-		$validTimestampFormatRegex = "/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}?(\.\d{1,6})$/";
+		$validTimestampFormatRegex = "/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}(\.\d{1,6})?$/";
 		
 		return filter_var($this->measurement_timestamp,
 			FILTER_VALIDATE_REGEXP,
@@ -289,18 +298,18 @@ class Measurement {
 	
 	private function timestampWithinValidRange($timestamp) {
 		$measuredTimestamp = date_parse($timestamp);
-		$currentTimestamp = date_parse(date('Y'));
+		$currentTimestamp = date_parse(date('Y-m-d'));
 		
 		// Return False if the specified timestamp occurs before Epoch year
-		if (!($measuredTimestamp['year'] >= 1970 && $measuredTimestamp <= $currentTimestamp['year']))
+		if (!($measuredTimestamp['year'] >= 1970 && $measuredTimestamp['year'] <= $currentTimestamp['year']))
 			return false;
 		
-		$dateInterval = date_diff(date_create($timestamp), date_create(date('Y-M-D H:i:s.u')));
+		$dateInterval = date_diff(date_create($timestamp), date_create(date('Y-m-d H:i:s.u')));
 		$daysDifference = $dateInterval->format('%d');
 		$daysDifference += 0;
 		
 		// Return True if current date follows the specified $timestamp
-		return ($days >= 0);
+		return ($daysDifference >= 0);
 	}
 	
 	private function validateSensorId() {
