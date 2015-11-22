@@ -3,6 +3,8 @@ include_once("Messages.class.php");
 
 class User {
 	private static $MIN_PASSWORD_LENGTH = 8;
+	private static $MIN_USERNAME_LENGTH = 6;
+	
 	private $errorCount;
 	private $errors;
 	private $formInput;
@@ -110,7 +112,7 @@ class User {
 		else if (strlen($this->username) < self::$MIN_USERNAME_LENGTH)
 			$this->setError('username', 'USERNAME_TOO_SHORT');
 		// Only valid chars {letters, numbers, dashes, underscores, periods}
-		else if (!filtervar($this->username, FILTER_VALIDATE_REGEXP,
+		else if (!filter_var($this->username, FILTER_VALIDATE_REGEXP,
 				array('options' => array('regexp' => "/^([a-zA-Z0-9\-\_.])+$/i")) )) {
 			$this->setError('username', 'USERNAME_INVALID_CHARS');	
 		}
@@ -126,7 +128,7 @@ class User {
 		else if (strlen($this->password) < self::$MIN_PASSWORD_LENGTH)
 			$this->setError('password', 'PASSWORD_TOO_SHORT');
 		// Only valid chars {letters, numbers, dashes, underscores, periods}
-		else if (!filtervar($this->password, FILTER_VALIDATE_REGEXP,
+		else if (!filter_var($this->password, FILTER_VALIDATE_REGEXP,
 				array('options' => array('regexp' => "/^([a-zA-Z0-9\-\_.!@#$%^&*<>?:;|+=])+$/i")))) {
 			$this->setError('password', 'PASSWORD_INVALID_CHARS');
 		}

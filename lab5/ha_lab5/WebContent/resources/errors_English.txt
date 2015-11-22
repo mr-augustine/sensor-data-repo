@@ -22,4 +22,10 @@ MEASUREMENT_VALUE_INVALID_LONGITUDE The longitude must be between -180 and 180 i
 MEASUREMENT_VALUE_INVALID_RANGE The range value must be non-negative
 MEASUREMENT_VALUE_INVALID_RATE The rate value must be numeric
 MEASUREMENT_VALUE_INVALID_TEMPERATURE The temperature value must be numeric
+PASSWORD_EMPTY The password cannot be empty
+PASSWORD_INVALID_CHARS The password contains invalid characters
+PASSWORD_TOO_SHORT The password must be at least 8 characters long
 SENSOR_ID_INVALID The sensor id is invalid
+USERNAME_EMPTY The username cannot be empty
+USERNAME_INVALID_CHARS The username contains invalid characters
+USERNAME_TOO_SHORT The username is too short
