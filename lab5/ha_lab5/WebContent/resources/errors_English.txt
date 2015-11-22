@@ -1,0 +1,10 @@
+MEASUREMENT_ID_EMPTY The measurement id cannot be empty
+MEASUREMENT_ID_INVALID The measurement id is invalid
+MEASUREMENT_TIMESTAMP_EMPTY The measurement timestamp cannot be empty
+MEASUREMENT_TIMESTAMP_INVALID The measurement timestamp is invalid
+MEASUREMENT_TIMESTAMP_FORMAT_INVALID The measurement timestamp must be in the format YYYY-MM-DD HH:MM:SS[.uuuuuu]
+MEASUREMENT_TIMESTAMP_RANGE_INVALID The measurement timestamp must occur between Jan. 1, 1970 and now
+MEASUREMENT_TIMESTAMP_VALUE_INVALID The measurement timestamp is invalid
+MEASUREMENT_VALUE_EMPTY The measurement value cannot be empty
+MEASUREMENT_VALUE_INVALID The measurement value is invalid
+SENSOR_ID_INVALID The sensor id is invalid
