@@ -2,6 +2,7 @@ MEASUREMENT_ID_EMPTY The measurement id cannot be empty
 MEASUREMENT_ID_INVALID The measurement id is invalid
 MEASUREMENT_INDEX_EMPTY The measurement index cannot be empty
 MEASUREMENT_INDEX_INVALID The measurement index is invalid
+MEASUREMENT_INVALID Measurement could not be created
 MEASUREMENT_TIMESTAMP_EMPTY The measurement timestamp cannot be empty
 MEASUREMENT_TIMESTAMP_INVALID The measurement timestamp is invalid
 MEASUREMENT_TIMESTAMP_FORMAT_INVALID The measurement timestamp must be in the format YYYY-MM-DD HH:MM:SS[.uuuuuu]

@@ -50,6 +50,22 @@ class Measurement {
 		$this->measurement_id = $id;
 	}
 	
+	public function getMeasurementIndex() {
+		return $this->measurement_index;
+	}
+	
+	public function getMeasurementValue() {
+		return $this->measurement_value;
+	}
+	
+	public function getMeasurementTimestamp() {
+		return $this->measurement_timestamp;
+	}
+	
+	public function getSensorId() {
+		return $this->sensor_id;
+	}
+	
 	public function getParameters() {
 		$paramArray = array("measurement_id" => $this->measurement_id,
 							"measurement_index" => $this->measurement_index,
