@@ -6,13 +6,16 @@ USE ha_lab5db;
 DROP TABLE if EXISTS Users;
 CREATE TABLE Users (
     user_id         int(11) NOT NULL AUTO_INCREMENT,
-    password        varchar(255) COLLATE utf8_unicode_ci,
+    password        varchar(255) NOT NULL COLLATE utf8_unicode_ci,
     PRIMARY KEY (user_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE if EXISTS DataSets;
 CREATE TABLE DataSets (
     dataset_id      int(11) NOT NULL AUTO_INCREMENT,
+    dataset_name    varchar(32) NOT NULL COLLATE utf8_unicode_ci,
+    description     varchar(255) COLLATE utf8_unicode_ci,
+    date_created    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (dataset_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

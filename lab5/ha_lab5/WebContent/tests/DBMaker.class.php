@@ -38,6 +38,9 @@ class DBMaker {
 			$st->execute();
 			$st = $db->prepare("CREATE TABLE DataSets (
     			dataset_id      int(11) NOT NULL AUTO_INCREMENT,
+				dataset_name    varchar(32) NOT NULL COLLATE utf8_unicode_ci,
+    			description     varchar(255) COLLATE utf8_unicode_ci,
+    			date_created    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     			PRIMARY KEY (dataset_id)
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 			$st->execute();
