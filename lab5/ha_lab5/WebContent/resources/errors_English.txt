@@ -44,6 +44,9 @@ SENSOR_TYPE_EMPTY The sensor type cannot be empty
 SENSOR_TYPE_INVALID The sensor type is invalid
 SENSOR_UNITS_EMPTY The sensor units cannot be empty
 SENSOR_UNITS_INVALID The sensor units are invalid
+USER_COULD_NOT_BE_UPDATED The user could not be updated
+USER_DOES_NOT_EXIST The user with the specified id does not exist
+USER_INVALID User could not be created
 USERNAME_EMPTY The username cannot be empty
 USERNAME_INVALID_CHARS The username contains invalid characters
 USERNAME_TOO_SHORT The username is too short
