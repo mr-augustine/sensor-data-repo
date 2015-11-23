@@ -33,8 +33,11 @@ MEASUREMENT_VALUE_INVALID_TEMPERATURE The temperature value must be numeric
 PASSWORD_EMPTY The password cannot be empty
 PASSWORD_INVALID_CHARS The password contains invalid characters
 PASSWORD_TOO_SHORT The password must be at least 8 characters long
+SENSOR_COULD_NOT_BE_UPDATED The sensor could not be updated
 SENSOR_DESCRIPTION_TOO_LONG The sensor description is too long
+SENSOR_DOES_NOT_EXIST The sensor with the specified id does not exist
 SENSOR_ID_INVALID The sensor id is invalid
+SENSOR_INVALID Sensor could not be created
 SENSOR_NAME_EMPTY The sensor name cannot be empty
 SENSOR_NAME_INVALID_CHARS The sensor name contains invalid characters
 SENSOR_NAME_TOO_SHORT The sensor name is too short
