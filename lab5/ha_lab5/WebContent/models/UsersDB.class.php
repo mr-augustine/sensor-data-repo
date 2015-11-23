@@ -110,7 +110,7 @@ class UsersDB {
 			if (is_null($user) || $user->getErrorCount() > 0)
 				return $user;
 
-			$checkUser = UsersDB::getUsersDB('user_id', $user->getUserId());
+			$checkUser = UsersDB::getUsersBy('user_id', $user->getUserId());
 
 			if (empty($checkUser))
 				$user->setError('user_id', 'USER_DOES_NOT_EXIST');
