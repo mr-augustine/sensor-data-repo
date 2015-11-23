@@ -6,7 +6,7 @@ class Sensor {
 	public static $MAX_SENSOR_NAME_LENGTH = 32;
 	public static $MIN_SENSOR_NAME_LENGTH = 4;
 	public static $VALID_SENSOR_TYPES = array('ALTITUDE', 'BINARY', 'COUNT',
-		'DIRECTION', 'DISTANCE', 'HEADING', 'IMAGE', 'LATITUDE', 'LONGITUDE',
+		'DIRECTION', 'DISTANCE', 'HEADING', 'IMAGING', 'LATITUDE', 'LONGITUDE',
 		'RANGE', 'RATE', 'TEMPERATURE');
 	public static $VALID_SENSOR_UNITS = array('FEET', 'METERS', 'MILES', 'KILOMETERS',
 		'INCHES', 'CENTIMETERS', 'YES-NO', 'TRUE-FALSE', '1-0', 'ON-OFF',
@@ -19,6 +19,7 @@ class Sensor {
 	private $formInput;
 	
 	private $sensor_id;
+	private $dataset_id;
 	private $sensor_name;
 	private $sensor_type;
 	private $sensor_units;
@@ -61,6 +62,10 @@ class Sensor {
 		$this->sensor_id = $id;
 	}
 	
+	public function getDatasetId() {
+		return $this->dataset_id;
+	}
+	
 	public function getSensorName() {
 		return $this->sensor_name;
 	}
@@ -91,6 +96,7 @@ class Sensor {
 	
 	public function getParameters() {
 		$paramArray = array('sensor_id' => $this->sensor_id,
+							'dataset_id' => $this->dataset_id,
 							'sensor_name' => $this->sensor_name,
 							'sensor_type' => $this->sensor_type,
 							'sensor_units' => $this->sensor_units,
@@ -102,7 +108,8 @@ class Sensor {
 	}
 	
 	public function __toString() {
-		$objectString = "[Sensor] {id: ".$this->sensor_id.", name: ".
+		$objectString = "[Sensor] {id: ".$this->sensor_id.", dataset_id: ".
+		$this->dataset_id.", name: ".
 		$this->sensor_name.", type: ".$this->sensor_type.", units: ".
 		$this->sensor_units.", sequence: ".$this->sequence_type.", description: ".
 		$this->description.", measurements: ".print_r($this->measurements, true)."}";
@@ -130,6 +137,7 @@ class Sensor {
 			$this->sensor_id = "";
 			$this->measurements = array();
 			
+			$this->validateDatasetId();
 			$this->validateSensorName();
 			$this->validateSensorType();
 			$this->validateSensorUnits();
@@ -144,12 +152,24 @@ class Sensor {
 		$this->errorCount = 0;
 		$this->errors = array();
 		$this->sensor_id = "";
+		$this->dataset_id = "";
 		$this->sensor_name = "";
 		$this->sensor_type = "";
 		$this->sensor_units = "";
 		$this->sequence_type = "";
 		$this->description = "";
 		$this->measurements = array();
+	}
+	
+	private function validateDatasetId() {
+		$this->dataset_id = $this->extractForm('dataset_id');
+		
+		// Not empty
+		if (empty($this->dataset_id))
+			$this->setError('dataset_id', 'DATASET_ID_EMPTY');
+		// Numeric and greater than 0
+		else if (!(is_numeric($this->dataset_id) && $this->dataset_id > 0))
+			$this->setError('dataset_id', 'DATASET_ID_INVALID');
 	}
 	
 	private function validateSensorName() {

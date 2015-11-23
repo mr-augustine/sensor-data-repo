@@ -6,8 +6,8 @@ class SensorsDB {
 	// otherwise, returns the Sensor unchanged. Sets a sensor_id error
 	// if there is a db issue.
 	public static function addSensor($sensor) {
-		$query = "INSERT INTO Sensors (sensor_name, sensor_type, sensor_units,
-				sequence_type, description) VALUES (:sensor_name, :sensor_type,
+		$query = "INSERT INTO Sensors (dataset_id, sensor_name, sensor_type, sensor_units,
+				sequence_type, description) VALUES (:dataset_id, :sensor_name, :sensor_type,
 				:sensor_units, :sequence_type, :description)";
 		
 		try {
@@ -16,6 +16,7 @@ class SensorsDB {
 			
 			$db = Database::getDB();
 			$statement = $db->prepare($query);
+			$statement->bindValue(':dataset_id', $sensor->getDatasetId());
 			$statement->bindValue(':sensor_name', $sensor->getSensorName());
 			$statement->bindValue(':sensor_type', $sensor->getSensorType());
 			$statement->bindValue(':sensor_units', $sensor->getSensorUnits());
@@ -44,12 +45,12 @@ class SensorsDB {
 	// Returns an array of the rows from the Sensors table whose $type
 	// field has value $value. Throws an exception if unsuccessful.
 	public static function getSensorRowsBy($type = null, $value = null) {
-		$allowedTypes = ['sensor_id', 'sensor_name'];
+		$allowedTypes = ['sensor_id', 'dataset_id', 'sensor_name'];
 		$sensorRows = array();
 		
 		try {
 			$db = Database::getDB();
-			$query = "SELECT sensor_id, sensor_name, sensor_type, sensor_units, 
+			$query = "SELECT sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, 
 					sequence_type, description FROM Sensors";
 			
 			if (!is_null($type)) {
@@ -58,7 +59,7 @@ class SensorsDB {
 				
 				$query = $query . " WHERE ($type = :$type)";
 				$statement = $db->prepare($query);
-				$statment->bindParam(":$type", $value);
+				$statement->bindParam(":$type", $value);
 			} else {
 				$statement = $db->prepare($query);
 			}
@@ -67,7 +68,7 @@ class SensorsDB {
 			$sensorRows = $statement->fetchAll(PDO::FETCH_ASSOC);
 			$statement->closeCursor();
 		} catch (Exception $e) {
-			echo "<p>Error getting dataset rows by $type: ".$e->getMessage()."</p>";
+			echo "<p>Error getting sensor rows by $type: ".$e->getMessage()."</p>";
 		}
 		
 		return $sensorRows;
@@ -115,6 +116,7 @@ class SensorsDB {
 	}
 	
 	// Updates a Sensor entry in the Sensors table
+	// At this time, the dataset_id should not be modifiable
 	public static function updateSensor($sensor) {
 		try {
 			$db = Database::getDB();
@@ -133,15 +135,17 @@ class SensorsDB {
 			
 			$query = "UPDATE Sensors SET sensor_name = :sensor_name,
 					sensor_type = :sensor_type, sensor_units = :sensor_units,
-					sequence_type = :sequence_type, description = :description";
+					sequence_type = :sequence_type, description = :description 
+					WHERE sensor_id = :sensor_id";
 			
 			$statement = $db->prepare($query);
 			$statement->bindValue(':sensor_name', $sensor->getSensorName());
 			$statement->bindValue(':sensor_type', $sensor->getSensorType());
-			$statement->bindValue(':sensor_units', $sensor->getUnits());
+			$statement->bindValue(':sensor_units', $sensor->getSensorUnits());
 			$statement->bindValue(':sequence_type', $sensor->getSequenceType());
 			$statement->bindValue(':description', $sensor->getDescription());
-			$statment->execute();
+			$statement->bindValue(':sensor_id', $sensor->getSensorId());
+			$statement->execute();
 			$statement->closeCursor();
 		} catch (Exception $e) {
 			$sensor->setError('sensor_id', 'SENSOR_COULD_NOT_BE_UPDATED');

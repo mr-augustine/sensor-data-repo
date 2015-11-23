@@ -50,7 +50,14 @@ class DBMaker {
 			$st->execute();
 			$st = $db->prepare("CREATE TABLE Sensors (
     			sensor_id       int(11) NOT NULL AUTO_INCREMENT,
-    			PRIMARY KEY (sensor_id)
+				dataset_id      int(11) NOT NULL,
+				sensor_name     varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
+    			sensor_type     varchar(32) NOT NULL COLLATE utf8_unicode_ci,
+    			sensor_units    varchar(32) NOT NULL COLLATE utf8_unicode_ci,
+    			sequence_type   varchar(32) NOT NULL COLLATE utf8_unicode_ci,
+    			description     varchar(128) COLLATE utf8_unicode_ci,
+    			PRIMARY KEY (sensor_id),
+				FOREIGN KEY (dataset_id) REFERENCES Datasets(dataset_id)
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 			$st->execute();
 			
@@ -97,6 +104,16 @@ class DBMaker {
 			
 			$st = $db->prepare("INSERT INTO Datasets (dataset_id, dataset_name)
 					VALUES (1, 'Lincoln Park Run')");
+			$st->execute();
+			
+			$st = $db->prepare("INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
+    			(1, 1, 'compass0', 'HEADING', 'DEGREES', 'SEQUENTIAL', \"The robot\'s only compass. Placed ontop a mast.\")");
+			$st->execute();
+			$st = $db->prepare("INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
+    			(2, 1, 'ping0', 'RANGE', 'CENTIMETERS', 'SEQUENTIAL', \"The robot\'s only ultrasonic sensor. Placed at the front/center.\")");
+			$st->execute();
+			$st = $db->prepare("INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
+				(3, 1, 'bump0', 'BINARY', 'ON-OFF', 'SEQUENTIAL', \"The robot\'s only bump switch. Placed at the front/center.\")");					
 			$st->execute();
 		} catch (PDOException $e) {
 			echo $e->getMessage();
