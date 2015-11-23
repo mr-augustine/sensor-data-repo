@@ -38,7 +38,7 @@ class DBMaker {
 			$st->execute();
 			$st = $db->prepare("CREATE TABLE DataSets (
     			dataset_id      int(11) NOT NULL AUTO_INCREMENT,
-				dataset_name    varchar(32) NOT NULL COLLATE utf8_unicode_ci,
+				dataset_name    varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
     			description     varchar(255) COLLATE utf8_unicode_ci,
     			date_created    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     			PRIMARY KEY (dataset_id)
@@ -69,6 +69,10 @@ class DBMaker {
 			
 			// Table insertions go here
 			
+			
+			$st = $db->prepare("INSERT INTO Datasets (dataset_id, dataset_name)
+					VALUES (1, 'Lincoln Park Run')");
+			$st->execute();
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}

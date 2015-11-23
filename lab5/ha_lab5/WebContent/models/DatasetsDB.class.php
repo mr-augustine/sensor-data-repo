@@ -19,8 +19,12 @@ class DatasetsDB {
 			$statement->bindValue(':description', $dataset->getDescription());
 			$statement->execute();
 			$statement->closeCursor();
-			$dataset->setDatasetId($db->lastInsertId('dataset_id'));
-			$dataset->setDateCreated($db->lastInsertId('date_created'));
+			
+			$newDatasetId = $db->lastInsertId('dataset_id');
+			$dataset->setDatasetId($newDatasetId);
+			
+			$dateCreatedArray = DatasetsDB::getDatasetsValuesBy('dataset_id', $newDatasetId, 'date_created');
+			$dataset->setDateCreated($dateCreatedArray[0]);
 		} catch (Exception $e) {
 			$dataset->setError('dataset_id', 'DATASET_INVALID');
 		}
@@ -73,6 +77,8 @@ class DatasetsDB {
 		$datasets = array();
 	
 		if (!empty($rows)) {
+			// Convert the array of arrays into an array of Datasets
+			// and set the id and date_created fields
 			foreach ($rows as $datasetRow) {
 				$dataset = new Dataset($datasetRow);
 	
@@ -81,9 +87,10 @@ class DatasetsDB {
 	
 				$datasetDateCreated = $datasetRow['date_created'];
 				$dataset->setDateCreated($datasetDateCreated);
-	
+				
 				// TODO: We should also get the dataset's associated sensors
 				// Coordinate this in the controller
+				array_push($datasets, $dataset);
 			}
 		}
 	
@@ -93,7 +100,7 @@ class DatasetsDB {
 	// Returns the $column of Datasets whose $type maches $value
 	public static function getDatasetsValuesBy($type = null, $value = null, $column) {
 		$datasetRows = DatasetsDB::getDatasetRowsBy($type, $value);
-	
+		
 		return DatasetsDB::getDatasetValues($datasetRows, $column);
 	}
 	
@@ -103,9 +110,9 @@ class DatasetsDB {
 		
 		foreach ($rows as $datasetRow) {
 			$datasetValue = $datasetRow[$column];
-			array_push($datasetValue, $datasetValues);
+			array_push($datasetValues, $datasetValue);
 		}
-		
+
 		return $datasetValues;
 	}
 	

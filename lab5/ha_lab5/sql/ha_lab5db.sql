@@ -13,7 +13,7 @@ CREATE TABLE Users (
 DROP TABLE if EXISTS DataSets;
 CREATE TABLE DataSets (
     dataset_id      int(11) NOT NULL AUTO_INCREMENT,
-    dataset_name    varchar(32) NOT NULL COLLATE utf8_unicode_ci,
+    dataset_name    varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
     description     varchar(255) COLLATE utf8_unicode_ci,
     date_created    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (dataset_id)
@@ -35,3 +35,6 @@ CREATE TABLE Measurements (
     PRIMARY KEY (measurement_id),
     FOREIGN KEY (sensor_id) REFERENCES Sensors(sensor_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO Datasets (dataset_id, dataset_name) VALUES
+    (1, 'Lincoln Park Run');
