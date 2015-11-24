@@ -11,7 +11,7 @@ class MeasurementsDB {
 				:measurement_value, :measurement_timestamp, :sensor_id)";
 		
 		try {
-			if (is_null($measurment) || $measurement->getErrorCount() > 0)
+			if (is_null($measurement) || $measurement->getErrorCount() > 0)
 				return $measurement;
 			
 			$db = Database::getDB();
@@ -22,7 +22,9 @@ class MeasurementsDB {
 			$statement->bindValue(":sensor_id", $measurement->getSensorId());
 			$statement->execute();
 			$statement->closeCursor();
-			$measurement->setMeasurementId($db->lastInsertId('measurement_id'));
+			
+			$newMeasurementId = $db->lastInsertId('measurement_id');
+			$measurement->setMeasurementId($newMeasurementId);
 		} catch (Exception $e) {
 			$measurement->setError('measurement_id', 'MEASUREMENT_INVALID');
 		}

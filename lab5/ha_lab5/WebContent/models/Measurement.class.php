@@ -209,7 +209,7 @@ class Measurement {
 	
 	private function validBinaryValue($binary) {
 		// Within list of accepted binary values
-		return (in_array($binary, self::VALID_BINARY_VALUES));
+		return (in_array($binary, self::$VALID_BINARY_VALUES));
 	}
 	
 	private function validCountValue($count) {
@@ -220,7 +220,7 @@ class Measurement {
 	private function validDirectionValue($direction) {
 		// Within list of accepted direction values
 		// Forward, reverse, left, right, NSEW
-		return (in_array($direction, self::VALID_DIRECTIONS));
+		return (in_array($direction, self::$VALID_DIRECTIONS));
 	}
 	
 	private function validDistanceValue($distance) {
@@ -235,7 +235,7 @@ class Measurement {
 	
 	private function validImageValue($image) {
 		// Within list of accepted image types
-		return (in_array($image, self::VALID_IMAGE_TYPES));
+		return (in_array($image, self::$VALID_IMAGE_TYPES));
 	}
 
 	private function validLatitudeValue($latitude) {
