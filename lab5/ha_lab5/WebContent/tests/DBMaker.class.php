@@ -67,7 +67,7 @@ class DBMaker {
     			measurement_id          int(11) NOT NULL AUTO_INCREMENT,
     			measurement_index       int(11) NOT NULL,
     			measurement_value       varchar(32) NOT NULL COLLATE utf8_unicode_ci,
-    			measurement_timestamp   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    			measurement_timestamp   TIMESTAMP,
     			sensor_id               int(11) NOT NULL,
     			PRIMARY KEY (measurement_id),
     			FOREIGN KEY (sensor_id) REFERENCES Sensors(sensor_id)

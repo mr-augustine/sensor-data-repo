@@ -69,12 +69,58 @@ class MeasurementsDBTest extends PHPUnit_Framework_TestCase {
 		$myDb = DBMaker::create('sensordatarepotest');
 		Database::clearDB();
 		$db = Database::getDB('sensordatarepotest', 'C:\xampp\myConfig.ini');
+		$testSensorId = 3;
+		$measurements = MeasurementsDB::getMeasurementsBy('sensor_id', $testSensorId);
+		
+		$this->assertEquals(3, count($measurements),
+				'The database should return exactly three measurements with the provided sensor_id');
+		
+		foreach ($measurements as $measurement)
+			$this->assertEquals($measurement->getSensorId(), $testSensorId,
+					'The database should return only those measurements with the provided sensor_id');
 	}
 	
 	public function testGetMeasurementByMeasurementId() {
 		$myDb = DBMaker::create('sensordatarepotest');
 		Database::clearDB();
 		$db = Database::getDB('sensordatarepotest', 'C:\xampp\myConfig.ini');
+		$testMeasurementId = 2;
+		$measurements = MeasurementsDB::getMeasurementsBy('measurement_id', $testMeasurementId);
+		
+		$this->assertEquals(1, count($measurements),
+				'The database should return exactly 1 measurements with the provided measurement_id');
+		
+		$measurement = $measurements[0];
+		$this->assertEquals($measurement->getMeasurementId(), $testMeasurementId,
+				'The database should return the measurement with the provided measurement_id');
+	}
+	
+	public function testUpdateMeasurementValue() {
+		$myDb = DBMaker::create('sensordatarepotest');
+		Database::clearDB();
+		$db = Database::getDB('sensordatarepotest', 'C:\xampp\myConfig.ini');
+		$testMeasurementId = 1;
+		
+		$measurements = MeasurementsDB::getMeasurementsBy('measurement_id', $testMeasurementId);
+		$measurement = $measurements[0];
+		
+		$this->assertEquals($measurement->getMeasurementValue(), '45.2',
+				'Before the update, the measurement should have value 45.2');
+		
+		$params = $measurement->getParameters();
+		$params['measurement_value'] = '25.4';
+		$params['sensorType'] = 'HEADING';
+		$params['sequenceType'] = 'SEQUENTIAL';
+		$newMeasurement = new Measurement($params);
+		$newMeasurement->setMeasurementId($testMeasurementId);
+		
+		$returnedMeasurement = MeasurementsDB::updateMeasurement($newMeasurement);
+		
+		$this->assertEquals($returnedMeasurement->getMeasurementValue(), $params['measurement_value'],
+				'After the update it should have the value '.$params['measurement_value']);
+		
+		$this->assertTrue(empty($returnedMeasurement->getErrors()),
+				'The updated measurement should be error-free');
 	}
 }
 ?>

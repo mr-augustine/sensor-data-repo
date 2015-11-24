@@ -290,7 +290,13 @@ class Measurement {
 			case 'SEQUENTIAL':
 				// Sequential measurements are ordered by index and don't have
 				// associated timestamps
-				$this->measurement_timestamp = null;
+				// However, if this is a sequential measurement that already has
+				// a timestamp, preserve it.
+				if (!empty($this->measurement_timestamp))
+					break;
+				
+				// Otherwise, set it to an empty string
+				$this->measurement_timestamp = '';
 				break;
 			default:
 				$this->setError('measurement_timestamp', 'MEASUREMENT_TIMESTAMP_INVALID');

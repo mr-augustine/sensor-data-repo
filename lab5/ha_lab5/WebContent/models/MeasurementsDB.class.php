@@ -123,7 +123,7 @@ class MeasurementsDB {
 			$checkMeasurement = MeasurementsDB::getMeasurementsBy('measurement_id',
 					$measurement->getMeasurementId());
 			
-			if ($empty($checkMeasurement)) {
+			if (empty($checkMeasurement)) {
 				$measurement->setError('measurement_id', 'MEASUREMENT_DOES_NOT_EXIST');
 				return $measurement;
 			}
@@ -132,7 +132,7 @@ class MeasurementsDB {
 			
 			$query = "UPDATE Measurements SET measurement_index = :measurement_index,
 					measurement_value = :measurement_value, measurement_timestamp = :measurement_timestamp,
-					sensor_id = :sensor_id WHERE measurement_id = :measurement_id:";
+					sensor_id = :sensor_id WHERE measurement_id = :measurement_id";
 			
 			$statement = $db->prepare($query);
 			$statement->bindValue(':measurement_index', $measurement->getMeasurementIndex());
@@ -144,6 +144,8 @@ class MeasurementsDB {
 			$statement->closeCursor();
 		} catch (Exception $e) {
 			$measurement->setError('measurement_id', 'MEASUREMENT_COULD_NOT_BE_UPDATED');
+			//echo $e->getMessage();
+			//echo 'file: '.$e->getFile().' line: '.$e->getLine();
 		}
 		
 		return $measurement;
