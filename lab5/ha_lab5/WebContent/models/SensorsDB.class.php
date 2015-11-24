@@ -61,6 +61,7 @@ class SensorsDB {
 				$statement = $db->prepare($query);
 				$statement->bindParam(":$type", $value);
 			} else {
+				$query = $query . " ORDER BY sensor_id ASC";
 				$statement = $db->prepare($query);
 			}
 			
