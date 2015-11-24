@@ -72,6 +72,14 @@ class Dataset {
 		$this->date_created = $datetime;
 	}
 	
+	public function setSensors($sensorsArray) {
+		$this->sensors = $sensorsArray;
+	}
+	
+	public function getSensors() {
+		return $this->sensors;
+	}
+	
 	public function getParameters() {
 		$paramArray = array('dataset_id' => $this->dataset_id,
 							'user_id' => $this->user_id,

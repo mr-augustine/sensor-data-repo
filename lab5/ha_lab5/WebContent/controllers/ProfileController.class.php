@@ -2,21 +2,51 @@
 class ProfileController {
 	
 	public static function run() {
-		$action = $_SESSION['action'];
-		$arguments = $_SESSION['arguments'];
+		$action = (array_key_exists('action', $_SESSION)) ? $_SESSION['action'] : "";
+		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : "";
 		
 		switch ($action) {
 			case "show":
-				// Prepare all data that will be displayed in the ProfileView
-				// --datasets associated with the user
-				// --number of sensors associated
-				// --total number of measurements per sensor
-				// --?member since
+				// For an individual user, show their profile page
+				if (is_numeric($arguments)) {
+					self::show();
+				}
 				break;
 			case "update":
 				
 				break;
 			default:
+		}
+	}
+	
+	// FIXME: Shouldn't this be a private function instead?
+	public static function show() {
+		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : 0;
+		
+		// Identify the target user
+		$users = UsersDB::getUserBy('user_id', $arguments);
+		$user = $users[0];
+		
+		if (!is_null($user)) {
+			// Prepare all data to be displayed in the target user's ProfileView
+			// --all of their datasets
+			// --all of the sensors for each dataset
+			// TODO: add 'member since'
+			$datasets = DatasetsDB::getDatasetsBy('user_id', $user->getUserId());
+			
+			foreach ($datasets as $dataset) {
+				$sensors = SensorsDB::getSensorsBy('dataset_id', $dataset->getDatasetId());
+				$dataset->setSensors($sensors);
+			}
+			
+			$_SESSION['user'] = $user;
+			$_SESSION['datasets'] = $datasets;
+			
+			ProfileView::show();
+		} else {
+			$_SESSION['user'] = null;
+			// TODO:: Consider showing a 'Specified user does not exist' page
+			HomeView::show();
 		}
 	}
 }
