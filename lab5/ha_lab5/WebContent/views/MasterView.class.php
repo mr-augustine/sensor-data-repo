@@ -51,14 +51,14 @@ class MasterView {
 		if (!is_null($authenticatedUser)) {
 			echo '<ul class="nav navbar-nav">';
 			echo '<li class="active"><a href="/'.$base.'/profile/show/'.
-					$authenticatedUserId.'">Profile</a></li>';
+					$authenticatedUser->getUserId().'">Profile</a></li>';
 			echo '</ul>';
 			
 			echo '<form class="navbar-form navbar-right"
 					method="post" action="/'.$base.'/logout">';
 			echo '<div class="form-group">';
 			echo '<span class="label label-default">Hey '.
-					$authenticatedUserData->getUserName().'</span>&nbsp; &nbsp;';
+					$authenticatedUser->getUsername().'</span>&nbsp; &nbsp;';
 			echo '</div>';
 			echo '<button type="submit" class="btn btn-success">Log out</button>';
 			echo '</form>';

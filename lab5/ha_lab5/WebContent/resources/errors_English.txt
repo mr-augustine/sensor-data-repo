@@ -56,4 +56,5 @@ USER_DOES_NOT_EXIST The user with the specified id does not exist
 USER_INVALID User could not be created
 USERNAME_EMPTY The username cannot be empty
 USERNAME_INVALID_CHARS The username contains invalid characters
+USERNAME_PASSWORD_COMBO_INVALID Your username or password is incorrect
 USERNAME_TOO_SHORT The username is too short
