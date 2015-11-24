@@ -25,6 +25,9 @@
 		case "logout":
 			LogoutController::run();
 			break;
+		case "profile":
+			ProfileController::run();
+			break;
 		case "signup":
 			SignupController::run();
 			break;
