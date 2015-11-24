@@ -22,6 +22,9 @@
 		case "login":
 			LoginController::run();
 			break;
+		case "logout":
+			LogoutController::run();
+			break;
 		default:
 			HomeView::show(array(null));
 	};
