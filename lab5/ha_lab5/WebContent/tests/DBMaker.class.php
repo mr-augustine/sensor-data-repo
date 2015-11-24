@@ -94,8 +94,8 @@ class DBMaker {
 			
 			
 			// Populate the Datasets table
-			$sql = "INSERT INTO Datasets (dataset_id, dataset_name)
-					VALUES (:dataset_id, :dataset_name)";
+			$sql = "INSERT INTO Datasets (dataset_id, user_id, dataset_name, description)
+					VALUES (:dataset_id, :user_id, :dataset_name, :description)";
 			$st = $db->prepare($sql);
 			$st->execute(array(':dataset_id' => 1, ':user_id' => 1, ':dataset_name' => 'Lincoln Park Run', ':description' => ''));
 			

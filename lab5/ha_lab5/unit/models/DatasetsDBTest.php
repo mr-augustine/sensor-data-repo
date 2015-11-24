@@ -27,7 +27,7 @@ class DatasetsDBTest extends PHPUnit_Framework_TestCase {
 		Database::clearDB();
 		$db = Database::getDB('sensordatarepotest', 'C:\xampp\myConfig.ini');
 		
-		$validTest = array('dataset_name' => 'Franklin Park Run',
+		$validTest = array('user_id' => 1, 'dataset_name' => 'Franklin Park Run',
 				'description' => 'A walk in the park with my robot');
 		$validDataset = new Dataset($validTest);
 		
@@ -36,7 +36,7 @@ class DatasetsDBTest extends PHPUnit_Framework_TestCase {
 		
 		$this->assertEquals(0, $newDataset->getErrorCount(),
 				'The inserted dataset should be error-free');
-		
+
 		$afterCount = count(DatasetsDB::getDatasetsBy());
 		$this->assertEquals($afterCount, $beforeCount + 1,
 				'The database should have one more dataset after insertion');
@@ -47,7 +47,7 @@ class DatasetsDBTest extends PHPUnit_Framework_TestCase {
 		Database::clearDB();
 		$db = Database::getDB('sensordatarepotest', 'C:\xampp\myConfig.ini');
 		
-		$invalidTest = array('dataset_name' => '',
+		$invalidTest = array('user_id' => 1, 'dataset_name' => '',
 				'description' => 'A walk in the park with my robot');
 		$invalidDataset = new Dataset($invalidTest);
 		
@@ -67,7 +67,7 @@ class DatasetsDBTest extends PHPUnit_Framework_TestCase {
 		Database::clearDB();
 		$db = Database::getDB('sensordatarepotest', 'C:\xampp\myConfig.ini');
 		
-		$duplicateTest = array('dataset_name' => 'Lincoln Park Run');
+		$duplicateTest = array('user_id' => 1, 'dataset_name' => 'Lincoln Park Run');
 		$duplicateDataset = new Dataset($duplicateTest);
 		
 		$beforeCount = count(DatasetsDB::getDatasetsBy());

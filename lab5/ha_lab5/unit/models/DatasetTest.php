@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'\..\..\WebContent\models\Dataset.class.php';
 class DatasetTest extends PHPUnit_Framework_TestCase {
 	
 	public function testValidDatasetCreate() {
-		$validTest = array('dataset_name' => 'Franklin Park Run',
+		$validTest = array('user_id' => 1, 'dataset_name' => 'Franklin Park Run',
 			'description' => 'Valid description');
 		$validDataset = new Dataset($validTest);
 		
@@ -16,7 +16,7 @@ class DatasetTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testInvalidDatasetName() {
-		$invalidTest = array('dataset_name' => 'Inv@l!d Name',
+		$invalidTest = array('user_id' => 1, 'dataset_name' => 'Inv@l!d Name',
 				'description' => 'Valid description');
 		$invalidDataset = new Dataset($invalidTest);
 		
@@ -27,7 +27,7 @@ class DatasetTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testInvalidDatasetDescription() {
-		$invalidTest = array('dataset_name' => 'Franklin Park Run',
+		$invalidTest = array('user_id' => 1, 'dataset_name' => 'Franklin Park Run',
 				'description' => 'This description is 256 characters long '.
 				'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tel');
 		$invalidDataset = new Dataset($invalidTest);
