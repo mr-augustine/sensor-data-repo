@@ -11,6 +11,7 @@ class Dataset {
 	private $formInput;
 	
 	private $dataset_id;
+	private $user_id;
 	private $dataset_name;
 	private $description;
 	private $date_created;
@@ -51,6 +52,10 @@ class Dataset {
 		$this->dataset_id = $id;
 	}
 	
+	public function getUserId() {
+		return $this->user_id;
+	}
+	
 	public function getDatasetName() {
 		return $this->dataset_name;
 	}
@@ -69,6 +74,7 @@ class Dataset {
 	
 	public function getParameters() {
 		$paramArray = array('dataset_id' => $this->dataset_id,
+							'user_id' => $this->user_id,
 							'dataset_name' => $this->dataset_name,
 							'description' => $this->description,
 							'date_created' => $this->date_created,
@@ -78,7 +84,8 @@ class Dataset {
 	}
 	
 	public function __toString() {
-		$objectString = "[Dataset] {id: ".$this->dataset_id.", name: ".
+		$objectString = "[Dataset] {dataset_id: ".$this->dataset_id.
+			", user_id: ".$this->user_id.", name: ".
 			$this->dataset_name.", date created: ".$this->date_created.
 			", description: ".$this->description.", sensors: ".
 			print_r($this->sensors, true)."}";
@@ -107,6 +114,7 @@ class Dataset {
 			$this->sensors = array();
 			$this->date_created = "";
 			
+			$this->validateUserId();
 			$this->validateDatasetName();
 			$this->validateDescription();
 		} else {
@@ -118,10 +126,22 @@ class Dataset {
 		$this->errorCount = 0;
 		$this->errors = array();
 		$this->dataset_id = "";
+		$this->user_id = "";
 		$this->dataset_name = "";
 		$this->description = "";
 		$this->date_created = "";
 		$this->sensors = array();
+	}
+	
+	private function validateUserId() {
+		$this->user_id = $this->extractForm('user_id');
+		
+		// Not empty
+		if (empty($this->user_id))
+			$this->setError('user_id', 'USER_ID_EMPTY');
+		// Numeric and greater than 0
+		else if (!is_numeric($this->user_id) || $this->user_id < 1)
+			$this->setError('user_id', 'USER_ID_INVALID');
 	}
 	
 	private function validateDatasetName() {

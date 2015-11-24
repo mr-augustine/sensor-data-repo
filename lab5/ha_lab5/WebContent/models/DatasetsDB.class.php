@@ -6,8 +6,8 @@ class DatasetsDB {
 	// otherwise, returns the Dataset unchanged. Sets a dataset_id error
 	// if there is a db issue.
 	public static function addDataset($dataset) {
-		$query = "INSERT INTO Datasets (dataset_name, description) VALUES 
-				(:dataset_name, :description)";
+		$query = "INSERT INTO Datasets (user_id, dataset_name, description) VALUES 
+				(:user_id, :dataset_name, :description)";
 		
 		try {
 			if (is_null($dataset) || $dataset->getErrorCount() > 0)
@@ -15,6 +15,7 @@ class DatasetsDB {
 			
 			$db = Database::getDB();
 			$statement = $db->prepare($query);
+			$statement->bindValue(':user_id', $dataset->getUserId());
 			$statement->bindValue(':dataset_name', $dataset->getDatasetName());
 			$statement->bindValue(':description', $dataset->getDescription());
 			$statement->execute();
@@ -43,12 +44,12 @@ class DatasetsDB {
 	// Returns an array of the rows from the Datasets table whose $type
 	// field has value $value. Throws an exception if unsuccessful.
 	public static function getDatasetRowsBy($type = null, $value = null) {
-		$allowedTypes = ['dataset_id', 'dataset_name'];
+		$allowedTypes = ['dataset_id', 'user_id', 'dataset_name'];
 		$datasetRows = array();
 		
 		try {
 			$db = Database::getDB();
-			$query = "SELECT dataset_id, dataset_name, description, date_created 
+			$query = "SELECT dataset_id, user_id, dataset_name, description, date_created 
 					FROM Datasets";
 			
 			if (!is_null($type)) {
@@ -117,6 +118,7 @@ class DatasetsDB {
 	}
 	
 	// Updates a Dataset entry in the Datasets table
+	// Only the name and description fields should be editable
 	public static function updateDataset($dataset) {
 		try {
 			$db = Database::getDB();
