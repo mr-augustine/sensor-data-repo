@@ -81,6 +81,21 @@ class DatasetsDBTest extends PHPUnit_Framework_TestCase {
 				'The database should have no additional datasets after insertion');
 	}
 	
+	public function testGetDatasetByUserId() {
+		$myDb = DBMaker::create('sensordatarepotest');
+		Database::clearDB();
+		$db = Database::getDB('sensordatarepotest', 'C:\xampp\myConfig.ini');
+		$testUserId = 1;
+		$datasets = DatasetsDB::getDatasetsBy('user_id', $testUserId);
+		
+		$this->assertEquals(1, count($datasets),
+				'The database should return exactly one datasets with the provided user id');
+		
+		$dataset = $datasets[0];
+		$this->assertEquals($testUserId, $dataset->getUserId(),
+				'The database should return the dataset with the provided user id');
+	}
+	
 	public function testGetDatasetByDatasetId() {
 		$myDb = DBMaker::create('sensordatarepotest');
 		Database::clearDB();
