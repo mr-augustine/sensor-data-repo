@@ -14,10 +14,12 @@ CREATE TABLE Users (
 DROP TABLE if EXISTS DataSets;
 CREATE TABLE DataSets (
     dataset_id      int(11) NOT NULL AUTO_INCREMENT,
+    user_id         int(11) NOT NULL,
     dataset_name    varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
     description     varchar(255) COLLATE utf8_unicode_ci,
     date_created    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (dataset_id)
+    PRIMARY KEY (dataset_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE if EXISTS Sensors;
@@ -63,8 +65,8 @@ INSERT INTO Users (user_id, username, password) VALUES
     (8, 'asuda0x1', 'zzzzzzzz');
     
 
-INSERT INTO Datasets (dataset_id, dataset_name) VALUES
-    (1, 'Lincoln Park Run');
+INSERT INTO Datasets (dataset_id, user_id, dataset_name, description) VALUES
+    (1, 1, 'Lincoln Park Run', 'Lovely day for a walk with my robot');
     
 INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
     (1, 1, 'compass0', 'HEADING', 'DEGREES', 'SEQUENTIAL', "The robot's only compass. Placed ontop a mast.");

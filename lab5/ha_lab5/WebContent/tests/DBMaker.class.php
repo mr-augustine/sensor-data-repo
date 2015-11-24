@@ -39,10 +39,12 @@ class DBMaker {
 			$st->execute();
 			$st = $db->prepare("CREATE TABLE DataSets (
     			dataset_id      int(11) NOT NULL AUTO_INCREMENT,
+				user_id         int(11) NOT NULL,
 				dataset_name    varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
     			description     varchar(255) COLLATE utf8_unicode_ci,
     			date_created    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    			PRIMARY KEY (dataset_id)
+    			PRIMARY KEY (dataset_id),
+				FOREIGN KEY (user_id) REFERENCES Users(user_id)
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 			$st->execute();
 			
@@ -95,7 +97,7 @@ class DBMaker {
 			$sql = "INSERT INTO Datasets (dataset_id, dataset_name)
 					VALUES (:dataset_id, :dataset_name)";
 			$st = $db->prepare($sql);
-			$st->execute(array(':dataset_id' => 1, ':dataset_name' => 'Lincoln Park Run'));
+			$st->execute(array(':dataset_id' => 1, ':user_id' => 1, ':dataset_name' => 'Lincoln Park Run', ':description' => ''));
 			
 			
 			// Populate the Sensors table
