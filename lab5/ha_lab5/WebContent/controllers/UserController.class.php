@@ -44,7 +44,7 @@ class UserController {
 			$params['username'] = (array_key_exists('username', $_POST)) ? $_POST['username'] : "";
 			$params['password'] = (array_key_exists('password', $_POST)) ? $_POST['password'] : "";
 			
-			$newUser = new User($params);
+			$updatedUser = new User($params);
 			$updatedUser->setUserId($users[0]->getUserId());
 			$returnedUser = UsersDB::updateUser($updatedUser);
 			
@@ -54,6 +54,8 @@ class UserController {
 				header('Location: /'.$_SESSION['base']);
 			} else {
 				$_SESSION['user'] = $updatedUser;
+				// Or should that be $returnedUser?
+				// UserView::showUpdate();
 			}
 		}
 	}

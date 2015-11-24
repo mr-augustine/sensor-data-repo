@@ -21,6 +21,8 @@ class DatasetController {
 				}
 				break;
 			case "update":
+				$datasets = DatasetsDB::getDatasetsBy('dataset_id', $arguments);
+				$_SESSION['dataset'] = $datasets[0];
 				self::updateDataset();
 				break;
 			default:
@@ -50,7 +52,34 @@ class DatasetController {
 	}
 	
 	private function updateDataset() {
+		$dataset = $_SESSION['dataset'];
 		
+		if (empty($dataset)) {
+			HomeView::show();
+			header('Location: /'.$_SESSION['base']);
+		} elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
+			DatasetView::showUpdate();
+		} else {
+			$params = $dataset->getParameters();
+			$params['dataset_name'] = (array_key_exists('dataset_name', $_POST)) ? $_POST['dataset_name'] : '';
+			$params['description'] = (array_key_exists('description', $_POST)) ? $_POST['description'] : '';
+			
+			$updatedDataset = new Dataset($params);
+			$updatedDataset->setDatasetId($dataset->getDatasetId());
+			$returnedDataset = DatasetsDB::updateDataset($updatedDataset);
+			
+			if ($returnedDataset->getErrorCount() == 0) {
+				// Show the Dataset view which should display the updated params
+				DatasetView::show();
+				header('Location: /'.$_SESSION['base'].'/dataset/show/'.$dataset->getDatasetId());
+			} else {
+				// Carry over the sensors, if any
+				$updatedDataset->setSensors($dataset->getSensors());
+				
+				$_SESSION['dataset'] = $updatedDataset;
+				DatasetView::showUpdate();
+			}
+		}
 	}
 	
 	private function UserCanEditTargetDataset($targetDatasetUserId) {
