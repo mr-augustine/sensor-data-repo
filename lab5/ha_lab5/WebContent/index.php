@@ -19,6 +19,9 @@
 		$_SESSION['authenticated'] = false;
 	
 	switch ($control) {
+		case "dataset":
+			DatasetController::run();
+			break;
 		case "login":
 			LoginController::run();
 			break;

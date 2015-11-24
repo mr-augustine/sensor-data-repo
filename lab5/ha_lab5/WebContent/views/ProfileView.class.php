@@ -2,7 +2,7 @@
 class ProfileView {
 	
 	public static function show() {
-		$_SESSION['headertitle'] = "User Profile";
+		$_SESSION['headertitle'] = 'User Profile';
 		$_SESSION['styles'] = array('site.css');
 		
 		MasterView::showHeader();
@@ -20,7 +20,8 @@ class ProfileView {
 		if (!is_null($user)) {
 			echo '<h1>Profile for '.$user->getUsername().'</h1>';
 			
-			if (self::CurrentUserCanEditProfileWithUserDataId($user->getUserId())) {
+			$targetProfileUserId = $user->getUserId();
+			if (self::CurrentUserCanEditTargetProfile($targetProfileUserId)) {
 				echo '<p>';
 				echo '<a class="btn btn-primary" ';
 				echo 'role="button" ';
@@ -54,21 +55,8 @@ class ProfileView {
 		}
 	}
 	
-	public static function CurrentUserCanEditProfileWithUserDataId($id) {
-		$canEdit = false;
-		
-		if (array_key_exists('authenticated', $_SESSION) &&
-				$_SESSION['authenticated'] == true &&
-				array_key_exists('authenticatedUser', $_SESSION) &&
-				!is_null($_SESSION['authenticatedUser'])) {
-			
-			$authenticatedUser = $_SESSION['authenticatedUser'];
-			
-			if ($authenticatedUser->getUserId() == $id)
-				$canEdit = true;
-		}
-		
-		return $canEdit;
+	public static function CurrentUserCanEditTargetProfile($targetUserId) {
+		return LoginController::UserIsLoggedIn($targetUserId);
 	}
 }
 ?>
