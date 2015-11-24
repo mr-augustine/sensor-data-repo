@@ -54,8 +54,7 @@ class UserController {
 				header('Location: /'.$_SESSION['base']);
 			} else {
 				$_SESSION['user'] = $updatedUser;
-				// Or should that be $returnedUser?
-				// UserView::showUpdate();
+				UserView::showUpdate();
 			}
 		}
 	}

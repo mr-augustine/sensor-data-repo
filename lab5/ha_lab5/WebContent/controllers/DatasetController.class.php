@@ -16,7 +16,11 @@ class DatasetController {
 					DatasetView::showAll();
 				} else {
 					$datasets = DatasetsDB::getDatasetsBy('dataset_id', $arguments);
-					$_SESSION['dataset'] = $datasets[0];
+					$dataset = $datasets[0];
+					$_SESSION['dataset'] = $dataset;
+					
+					$users = UsersDB::getUsersBy('user_id', $dataset->getUserId());
+					$_SESSION['user'] = $users[0];
 					self::show();
 				}
 				break;
