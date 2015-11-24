@@ -76,45 +76,66 @@ class DBMaker {
 			
 			
 			// Table insertions go here
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(1, 'jabituya', 'wwwwwwww')");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(2, 'mwatney', 'aaaaaaaa')");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(3, 'ryan.stone', 'bbbbbbbb')");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(4, 'cooper', 'cccccccc')");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(5, 'liz.shaw', 'dddddddd')");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(6, 'charlie-g', 'xxxxxxxx')");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(7, 'altars', 'yyyyyyyy')");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Users (user_id, username, password) VALUES
-					(8, 'asuda0x1', 'zzzzzzzz')");
-			$st->execute();
+			
+			// Populate the Users table
+			$sql = "INSERT INTO Users (user_id, username, password) VALUES
+					(:user_id, :username, :password)";
+			$st = $db->prepare($sql);
+			$st->execute(array(':user_id' => 1, ':username' => 'jabituya', ':password' => 'wwwwwwww'));
+			$st->execute(array(':user_id' => 2, ':username' => 'mwatney', ':password' => 'aaaaaaaa'));
+			$st->execute(array(':user_id' => 3, ':username' => 'ryan.stone', ':password' => 'bbbbbbbb'));
+			$st->execute(array(':user_id' => 4, ':username' => 'cooper', ':password' => 'cccccccc'));
+			$st->execute(array(':user_id' => 5, ':username' => 'liz.shaw', ':password' => 'dddddddd'));
+			$st->execute(array(':user_id' => 6, ':username' => 'charlie-g', ':password' => 'xxxxxxxx'));
+			$st->execute(array(':user_id' => 7, ':username' => 'altars', ':password' => 'yyyyyyyy'));
+			$st->execute(array(':user_id' => 8, ':username' => 'asuda0x1', ':password' => 'zzzzzzzz'));
+			
+			
+			// Populate the Datasets table
+			$sql = "INSERT INTO Datasets (dataset_id, dataset_name)
+					VALUES (:dataset_id, :dataset_name)";
+			$st = $db->prepare($sql);
+			$st->execute(array(':dataset_id' => 1, ':dataset_name' => 'Lincoln Park Run'));
+			
+			
+			// Populate the Sensors table
+			$sql = "INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
+    			(:sensor_id, :dataset_id, :sensor_name, :sensor_type, :sensor_units, :sequence_type, :description)";
+			$st = $db->prepare($sql);
+			$st->execute(array(':sensor_id' => 1, ':dataset_id' => 1, ':sensor_name' => 'compass0', 
+					':sensor_type' => 'HEADING', ':sensor_units' => 'DEGREES', ':sequence_type' => 'SEQUENTIAL', 
+					':description' => "The robot's only compass. Placed ontop a mast."));
+			$st->execute(array(':sensor_id' => 2, ':dataset_id' => 1, ':sensor_name' => 'ping0',
+					':sensor_type' => 'RANGE', ':sensor_units' => 'CENTIMETERS', ':sequence_type' => 'SEQUENTIAL',
+					':description' => "The robot's only ultrasonic sensor. Placed at the front/center"));
+			$st->execute(array(':sensor_id' => 3, ':dataset_id' => 1, ':sensor_name' => 'bump0',
+					':sensor_type' => 'BINARY', ':sensor_units' => 'ON-OFF', ':sequence_type' => 'SEQUENTIAL',
+					':description' => "The robot's only bump switch. Placed at the front/center."));
+			
+			
+			// Populate the Measurements table
+			$sql = "INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+				(:measurement_id, :measurement_index, :measurement_value, :measurement_timestamp, :sensor_id)";
+			$st = $db->prepare($sql);
+			$st->execute(array(':measurement_id' => 1, ':measurement_index' => 1, ':measurement_value' => '45.2',
+					':measurement_timestamp' => NULL, ':sensor_id' => 1));
+			$st->execute(array(':measurement_id' => 2, ':measurement_index' => 2, ':measurement_value' => '48.7',
+					':measurement_timestamp' => NULL, ':sensor_id' => 1));
+			$st->execute(array(':measurement_id' => 3, ':measurement_index' => 3, ':measurement_value' => '49.1',
+					':measurement_timestamp' => NULL, ':sensor_id' => 1));
+			$st->execute(array(':measurement_id' => 4, ':measurement_index' => 1, ':measurement_value' => '30',
+					':measurement_timestamp' => NULL, ':sensor_id' => 2));
+			$st->execute(array(':measurement_id' => 5, ':measurement_index' => 2, ':measurement_value' => '29',
+					':measurement_timestamp' => NULL, ':sensor_id' => 2));
+			$st->execute(array(':measurement_id' => 6, ':measurement_index' => 3, ':measurement_value' => '30',
+					':measurement_timestamp' => NULL, ':sensor_id' => 2));
+			$st->execute(array(':measurement_id' => 7, ':measurement_index' => 1, ':measurement_value' => 'OFF',
+					':measurement_timestamp' => NULL, ':sensor_id' => 3));
+			$st->execute(array(':measurement_id' => 8, ':measurement_index' => 2, ':measurement_value' => 'OFF',
+					':measurement_timestamp' => NULL, ':sensor_id' => 3));
+			$st->execute(array(':measurement_id' => 9, ':measurement_index' => 3, ':measurement_value' => 'ON',
+					':measurement_timestamp' => NULL, ':sensor_id' => 3));
 				
-			
-			$st = $db->prepare("INSERT INTO Datasets (dataset_id, dataset_name)
-					VALUES (1, 'Lincoln Park Run')");
-			$st->execute();
-			
-			$st = $db->prepare("INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
-    			(1, 1, 'compass0', 'HEADING', 'DEGREES', 'SEQUENTIAL', \"The robot\'s only compass. Placed ontop a mast.\")");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
-    			(2, 1, 'ping0', 'RANGE', 'CENTIMETERS', 'SEQUENTIAL', \"The robot\'s only ultrasonic sensor. Placed at the front/center.\")");
-			$st->execute();
-			$st = $db->prepare("INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
-				(3, 1, 'bump0', 'BINARY', 'ON-OFF', 'SEQUENTIAL', \"The robot\'s only bump switch. Placed at the front/center.\")");					
-			$st->execute();
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}

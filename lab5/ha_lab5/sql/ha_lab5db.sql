@@ -41,7 +41,8 @@ CREATE TABLE Measurements (
     measurement_timestamp   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     sensor_id               int(11) NOT NULL,
     PRIMARY KEY (measurement_id),
-    FOREIGN KEY (sensor_id) REFERENCES Sensors(sensor_id)
+    FOREIGN KEY (sensor_id) REFERENCES Sensors(sensor_id),
+    CONSTRAINT midx_sid UNIQUE (measurement_index, sensor_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO Users (user_id, username, password) VALUES
@@ -71,3 +72,22 @@ INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_uni
     (2, 1, 'ping0', 'RANGE', 'CENTIMETERS', 'SEQUENTIAL', "The robot's only ultrasonic sensor. Placed at the front/center.");
 INSERT INTO Sensors (sensor_id, dataset_id, sensor_name, sensor_type, sensor_units, sequence_type, description) VALUES
     (3, 1, 'bump0', 'BINARY', 'ON-OFF', 'SEQUENTIAL', "The robot's only bump switch. Placed at the front/center.");
+    
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (1, 1, '45.2', NULL, 1);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (2, 2, '48.7', NULL, 1);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (3, 3, '49.1', NULL, 1);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (4, 1, '30', NULL, 2);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (5, 2, '29', NULL, 2);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (6, 3, '30', NULL, 2);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (7, 1, 'OFF', NULL, 3);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (8, 2, 'OFF', NULL, 3);
+INSERT INTO Measurements (measurement_id, measurement_index, measurement_value, measurement_timestamp, sensor_id) VALUES
+    (9, 3, 'ON', NULL, 3);
