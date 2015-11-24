@@ -19,8 +19,7 @@ class ProfileController {
 		}
 	}
 	
-	// FIXME: Shouldn't this be a private function instead?
-	public static function show() {
+	private function show() {
 		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : 0;
 		
 		// Identify the target user

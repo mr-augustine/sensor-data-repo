@@ -24,5 +24,10 @@ class LoginController {
 			HomeView::show();
 		}
 	}
+	
+	public static function UserIsLoggedIn($userId) {
+		return ($_SESSION['authenticated'] == true &&
+				$_SESSION['authenticatedUser']->getUserId() == $userId);
+	}
 }
 ?>
