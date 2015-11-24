@@ -31,6 +31,9 @@
 		case "signup":
 			SignupController::run();
 			break;
+		case "user":
+			UserController::run();
+			break;
 		default:
 			HomeView::show(array(null));
 	};

@@ -24,7 +24,7 @@ class ProfileController {
 		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : 0;
 		
 		// Identify the target user
-		$users = UsersDB::getUserBy('user_id', $arguments);
+		$users = UsersDB::getUsersBy('user_id', $arguments);
 		$user = $users[0];
 		
 		if (!is_null($user)) {

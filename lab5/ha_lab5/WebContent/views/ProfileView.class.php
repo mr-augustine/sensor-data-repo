@@ -2,12 +2,12 @@
 class ProfileView {
 	
 	public static function show() {
-		$_SESSION['headertitle'] = "UserData details";
+		$_SESSION['headertitle'] = "User Profile";
 		$_SESSION['styles'] = array('site.css');
 		
 		MasterView::showHeader();
 		MasterView::showNavBar();
-		UserDataView::showDetails();
+		self::showDetails();
 		MasterView::showFooter();
 		MasterView::showPageEnd();
 	}
@@ -31,7 +31,7 @@ class ProfileView {
 			
 			echo '<section>';
 			echo '<fieldset><legend>Summary Info</legend>';
-			echo 'Username:<tab>'.$user->getUsername().'<br><br>'."\n";
+			echo 'Username:&nbsp'.$user->getUsername().'<br><br>'."\n";
 			
 			echo 'Datasets:<p>';
 			if (count($datasets) > 0) {
