@@ -11,8 +11,8 @@ CREATE TABLE Users (
     PRIMARY KEY (user_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-DROP TABLE if EXISTS DataSets;
-CREATE TABLE DataSets (
+DROP TABLE if EXISTS Datasets;
+CREATE TABLE Datasets (
     dataset_id      int(11) NOT NULL AUTO_INCREMENT,
     user_id         int(11) NOT NULL,
     dataset_name    varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,

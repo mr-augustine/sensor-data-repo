@@ -35,9 +35,9 @@ class DBMaker {
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 			$st->execute();
 			
-			$st = $db->prepare("DROP TABLE if EXISTS DataSets");
+			$st = $db->prepare("DROP TABLE if EXISTS Datasets");
 			$st->execute();
-			$st = $db->prepare("CREATE TABLE DataSets (
+			$st = $db->prepare("CREATE TABLE Datasets (
     			dataset_id      int(11) NOT NULL AUTO_INCREMENT,
 				user_id         int(11) NOT NULL,
 				dataset_name    varchar(32) UNIQUE NOT NULL COLLATE utf8_unicode_ci,
