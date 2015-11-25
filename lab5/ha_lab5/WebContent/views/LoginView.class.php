@@ -20,9 +20,10 @@ class LoginView {
 		echo '<h1>Log into Sensor Data Repo</h1>'."\n\n";
 		echo '<form action="login" method="post">'."\n";
 		
-		echo '<span class="error">';
-		if (!is_null($user)) { echo $user->getError('username'); }
-		echo '</span>'."\n";
+		// This is redundant
+// 		echo '<span class="error">';
+// 		if (!is_null($user)) { echo $user->getError('username'); }
+// 		echo '</span>'."\n";
 		
 		echo '<p>'."\n";
 		echo 'username<br>'."\n";

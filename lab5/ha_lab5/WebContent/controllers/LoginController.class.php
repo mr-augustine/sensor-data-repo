@@ -3,25 +3,30 @@ class LoginController {
 	
 	public static function run() {
 		$user = null;
+		$userIsLegit = false;
 		
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$user = new User($_POST);
-			$users = UsersDB::getUsersBy('username', $user->getUsername());
 			
-			if (empty($users))
-				$user->setError('username', 'USERNAME_PASSWORD_COMBO_INVALID');
-			else
-				$user = $users[0];
+			if ($user->getErrorCount() == 0) {
+				$checkUserArray = UsersDB::getUsersBy('username', $user->getUserName());
+				
+				$checkUser = $checkUserArray[0];
+				
+				$userIsLegit = password_verify($_POST['password'], $checkUser->getPassword());
+			}
+		} else {
+			LoginView::show();
 		}
 		
-		$_SESSION['user'] = $user;
-		
-		if (is_null($user) || $user->getErrorCount() !=0 )
-			LoginView::show();
-		else {
+		if ($userIsLegit) {
 			$_SESSION['authenticatedUser'] = $user;
 			$_SESSION['authenticated'] = true;
 			HomeView::show();
+		} else {
+			$user->setError('username', 'USERNAME_PASSWORD_COMBO_INVALID');
+			$_SESSION['user'] = $user;
+			LoginView::show();
 		}
 	}
 	

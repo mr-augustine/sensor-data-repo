@@ -48,21 +48,21 @@ CREATE TABLE Measurements (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO Users (user_id, username, password) VALUES
-    (1, 'jabituya', 'wwwwwwww');
+    (1, 'jabituya', '$2y$10$c1YR3YAtv5VJy7bU4KbC.umWt9mbL8bFtaxnoDbd8nvmggcfqaM5W');
 INSERT INTO Users (user_id, username, password) VALUES
-    (2, 'mwatney', 'aaaaaaaa');
+    (2, 'mwatney', '$2y$10$5pcOvjUbkcXKz7vfjCNjcej/6KO89vcNg.u7m84tLL1/jc99jJWF6');
 INSERT INTO Users (user_id, username, password) VALUES
-    (3, 'ryan.stone', 'bbbbbbbb');
+    (3, 'ryan.stone', '$2y$10$.iyID/cQucx7SF61f/RsreV61lVXVYa/lvgkKSq/EWukT0HTeut1u');
 INSERT INTO Users (user_id, username, password) VALUES
-    (4, 'cooper', 'cccccccc');
+    (4, 'cooper', '$2y$10$hZecd/spqqmWagIE3VXxZeaEOJEhSUiEkzTNIx7FtbXK5OdsbLiy.');
 INSERT INTO Users (user_id, username, password) VALUES
-    (5, 'liz.shaw', 'dddddddd');
+    (5, 'liz.shaw', '$2y$10$KGYOoNJr4yOF0meEDFPng.ZGgRlcfjv1a2H0ecDK03TETl7Eq2ZAS');
 INSERT INTO Users (user_id, username, password) VALUES
-    (6, 'charlie-g', 'xxxxxxxx');
+    (6, 'charlie-g', '$2y$10$g8SDz5IjB5ASFIVPR9addec13G6zuqA6tDjyzDVJvSzpIRGtQljoO');
 INSERT INTO Users (user_id, username, password) VALUES
-    (7, 'altars', 'yyyyyyyy');
+    (7, 'altars', '$2y$10$ADsSkEAN.1DYmX5/35AAEeskCs.KTi8w3muBEMHoWatZJbYjoWYp6');
 INSERT INTO Users (user_id, username, password) VALUES
-    (8, 'asuda0x1', 'zzzzzzzz');
+    (8, 'asuda0x1', '$2y$10$z0hExq5pEWicWCgirPAmvOKQMxNvwMMi1rizFK4ta15HwqLVun7K6');
     
 
 INSERT INTO Datasets (dataset_id, user_id, dataset_name, description) VALUES

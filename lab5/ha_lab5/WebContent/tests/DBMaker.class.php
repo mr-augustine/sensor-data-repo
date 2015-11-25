@@ -83,14 +83,14 @@ class DBMaker {
 			$sql = "INSERT INTO Users (user_id, username, password) VALUES
 					(:user_id, :username, :password)";
 			$st = $db->prepare($sql);
-			$st->execute(array(':user_id' => 1, ':username' => 'jabituya', ':password' => 'wwwwwwww'));
-			$st->execute(array(':user_id' => 2, ':username' => 'mwatney', ':password' => 'aaaaaaaa'));
-			$st->execute(array(':user_id' => 3, ':username' => 'ryan.stone', ':password' => 'bbbbbbbb'));
-			$st->execute(array(':user_id' => 4, ':username' => 'cooper', ':password' => 'cccccccc'));
-			$st->execute(array(':user_id' => 5, ':username' => 'liz.shaw', ':password' => 'dddddddd'));
-			$st->execute(array(':user_id' => 6, ':username' => 'charlie-g', ':password' => 'xxxxxxxx'));
-			$st->execute(array(':user_id' => 7, ':username' => 'altars', ':password' => 'yyyyyyyy'));
-			$st->execute(array(':user_id' => 8, ':username' => 'asuda0x1', ':password' => 'zzzzzzzz'));
+			$st->execute(array(':user_id' => 1, ':username' => 'jabituya', ':password' => '$2y$10$c1YR3YAtv5VJy7bU4KbC.umWt9mbL8bFtaxnoDbd8nvmggcfqaM5W'));
+			$st->execute(array(':user_id' => 2, ':username' => 'mwatney', ':password' => '$2y$10$5pcOvjUbkcXKz7vfjCNjcej/6KO89vcNg.u7m84tLL1/jc99jJWF6'));
+			$st->execute(array(':user_id' => 3, ':username' => 'ryan.stone', ':password' => '$2y$10$.iyID/cQucx7SF61f/RsreV61lVXVYa/lvgkKSq/EWukT0HTeut1u'));
+			$st->execute(array(':user_id' => 4, ':username' => 'cooper', ':password' => '$2y$10$hZecd/spqqmWagIE3VXxZeaEOJEhSUiEkzTNIx7FtbXK5OdsbLiy.'));
+			$st->execute(array(':user_id' => 5, ':username' => 'liz.shaw', ':password' => '$2y$10$KGYOoNJr4yOF0meEDFPng.ZGgRlcfjv1a2H0ecDK03TETl7Eq2ZAS'));
+			$st->execute(array(':user_id' => 6, ':username' => 'charlie-g', ':password' => '$2y$10$g8SDz5IjB5ASFIVPR9addec13G6zuqA6tDjyzDVJvSzpIRGtQljoO'));
+			$st->execute(array(':user_id' => 7, ':username' => 'altars', ':password' => '$2y$10$ADsSkEAN.1DYmX5/35AAEeskCs.KTi8w3muBEMHoWatZJbYjoWYp6'));
+			$st->execute(array(':user_id' => 8, ':username' => 'asuda0x1', ':password' => '$2y$10$z0hExq5pEWicWCgirPAmvOKQMxNvwMMi1rizFK4ta15HwqLVun7K6'));
 			
 			
 			// Populate the Datasets table
