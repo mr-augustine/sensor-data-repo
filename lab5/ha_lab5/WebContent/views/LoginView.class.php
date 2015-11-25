@@ -2,7 +2,7 @@
 class LoginView {
 	
 	public static function show() {
-		$_SESSION['headertitle'] = "Log into botspace";
+		$_SESSION['headertitle'] = "Log into Sensor Data Repo";
 		$_SESSION['styles'] = array('site.css');
 		
 		MasterView::showHeader();

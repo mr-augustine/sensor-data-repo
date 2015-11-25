@@ -12,6 +12,7 @@ class LoginController {
 				$checkUserArray = UsersDB::getUsersBy('username', $user->getUserName());
 				
 				$checkUser = $checkUserArray[0];
+				$user->setUserId($checkUser->getUserId());
 				
 				$userIsLegit = password_verify($_POST['password'], $checkUser->getPassword());
 			}
