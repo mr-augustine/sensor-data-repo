@@ -18,6 +18,7 @@ class LoginController {
 			}
 		} else {
 			LoginView::show();
+			return;
 		}
 		
 		if ($userIsLegit) {

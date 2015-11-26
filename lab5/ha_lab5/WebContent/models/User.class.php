@@ -130,7 +130,7 @@ class User {
 			$this->setError('password', 'PASSWORD_EMPTY');
 		
 		// Hashed password (retrieved from database)
-		if (passwordIsHashed($this->password))
+		if (self::passwordIsHashed($this->password))
 			return;
 		// Meets minimum length
 		else if (strlen($this->password) < self::$MIN_PASSWORD_LENGTH)
