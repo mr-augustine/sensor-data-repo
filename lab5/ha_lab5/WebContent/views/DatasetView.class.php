@@ -17,7 +17,47 @@ class DatasetView {
 	}
 	
 	public static function showNew() {
+		$user = (array_key_exists('user', $_SESSION)) ? $_SESSION['user'] : null;
+		$dataset = (array_key_exists('dataset', $_SESSION)) ? $_SESSION['dataset'] : null;
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
+		$_SESSION['headertitle'] = "botspace RobotData Creator";
+		$_SESSION['styles'] = array('site.css');
+		MasterView::showHeader();
+		MasterView::showNavBar();
 		
+		if (!isset($user) || !LoginController::UserIsLoggedIn($user->getUserId())) {
+			echo '<p>You must log in to create a new Dataset</p>';
+			return;
+		}
+		
+		echo '<h1>Create a Dataset</h1>';
+		
+		echo '<form action="/'.$base.'/dataset/create" method="POST">';
+		
+		if (isset($dataset) && array_key_exists('dataset_id', $dataset->getErrors()))
+			echo 'Error: '.$dataset->getError('dataset_id')."<br>";
+		
+		echo 'Dataset Name:&nbsp<input type="text" name="dataset_name" ';
+		if (isset($dataset)) { echo 'value="'.$dataset->getDatasetName().'"'; }
+		echo 'tabindex="1" required>'."\n";
+		echo '<span class="error">';
+		if (isset($dataset)) { echo $dataset->getError('dataset_name'); }
+		echo '</span><br><br>'."\n";
+		
+		echo 'Description:';
+		echo '<span class="error">';
+		if (isset($dataset)) { echo $dataset->getError('description'); }
+		echo '</span><br><br>'."\n";
+		echo '<textarea class="form-control" name="description" rows="4">';
+		if (isset($dataset)) { echo $dataset->getDescription(); }
+		echo '</textarea>';
+		echo '<br><br>';
+		
+		echo '<p><input type="submit" name="submit" value="Submit">';
+		echo '&nbsp&nbsp';
+		echo '<a href="/'.$base.'/profile/show/'.$user->getUserId().'">Cancel</a><br>';
+		echo '</form>';
+		echo '</section>';
 	}
 	
 	public static function showUpdate() {

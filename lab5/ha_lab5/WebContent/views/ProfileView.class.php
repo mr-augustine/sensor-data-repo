@@ -44,6 +44,7 @@ class ProfileView {
 						'">'.$dataset->getDatasetName().'</a></li>';	
 				}
 			} else {
+				// TODO: Replace this with an 'Add Dataset' button
 				echo 'No datasets created yet';
 			}
 			echo '</p>';

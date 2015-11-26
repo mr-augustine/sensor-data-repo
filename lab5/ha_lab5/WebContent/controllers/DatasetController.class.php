@@ -7,6 +7,7 @@ class DatasetController {
 		
 		switch ($action) {
 			case "create":
+				self::newDataset();
 				break;
 			case "show":
 				if ($arguments == 'all') {
@@ -52,7 +53,23 @@ class DatasetController {
 	}
 	
 	private static function newDataset() {
+		$dataset = null;
 		
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+			$dataset = new Dataset($_POST);
+		
+		$_SESSION['dataset'] = $dataset;
+		
+		if (is_null($dataset) || $dataset->getErrorCount() != 0) {
+			DatasetView::showNew();
+		} else {
+			$newDataset = DatasetsDB::addDataset($dataset);
+			
+			if ($newDataset->getErrorCount() == 0)
+				$_SESSION['dataset'] = $newDataset;
+			
+			ProfileView::show();
+		}
 	}
 	
 	private function updateDataset() {
