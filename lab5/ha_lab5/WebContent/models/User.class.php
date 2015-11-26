@@ -128,6 +128,10 @@ class User {
 		// Not empty
 		if (empty($this->password))
 			$this->setError('password', 'PASSWORD_EMPTY');
+		
+		// Hashed password (retrieved from database)
+		if (passwordIsHashed($this->password))
+			return;
 		// Meets minimum length
 		else if (strlen($this->password) < self::$MIN_PASSWORD_LENGTH)
 			$this->setError('password', 'PASSWORD_TOO_SHORT');
@@ -136,6 +140,12 @@ class User {
 				array('options' => array('regexp' => "/^([a-zA-Z0-9\-\_.!@#$%^&*<>?:;|+=])+$/i")))) {
 			$this->setError('password', 'PASSWORD_INVALID_CHARS');
 		}
+	}
+	
+	private function passwordIsHashed($password) {
+		$hashStart = '$2y$10$';
+		
+		return strpos($password, $hashStart, 0);
 	}
 }
 ?>
