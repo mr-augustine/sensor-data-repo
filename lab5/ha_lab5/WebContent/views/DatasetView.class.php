@@ -20,7 +20,7 @@ class DatasetView {
 		$user = (array_key_exists('user', $_SESSION)) ? $_SESSION['user'] : null;
 		$dataset = (array_key_exists('dataset', $_SESSION)) ? $_SESSION['dataset'] : null;
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
-		$_SESSION['headertitle'] = "botspace RobotData Creator";
+		$_SESSION['headertitle'] = "Sensor Data Repo | Create a Dataset";
 		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
 		MasterView::showNavBar();
@@ -30,9 +30,9 @@ class DatasetView {
 			echo '<p>You must log in to create a new Dataset</p>';
 			return;
 		}
-		
+
 		echo '<h1>Create a Dataset</h1>';
-		
+		echo '<section>';
 		echo '<form action="/'.$base.'/dataset/create" method="POST">';
 		
 		if (isset($dataset) && array_key_exists('dataset_id', $dataset->getErrors()))
@@ -128,8 +128,12 @@ class DatasetView {
 				echo '<p>';
 				echo '<a class="btn btn-primary" ';
 				echo 'role="button" ';
-				echo 'href="/'.$base.'/dataset/update/'.$dataset->getDatasetId().'" ';
+				echo 'href="/'.$base.'/dataset/update/'.$dataset->getDatasetId().'"';
 				echo '>Update Dataset</a>';
+				echo '&nbsp&nbsp';
+				echo '<a class="btn btn-success" ';
+				echo 'role="button" ';
+				echo 'href="/'.$base.'/sensor/create">Add Sensor</a>';
 				echo '</p>';
 			}
 			

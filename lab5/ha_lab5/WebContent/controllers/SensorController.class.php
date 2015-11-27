@@ -6,6 +6,9 @@ class SensorController {
 		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : "";
 		
 		switch ($action) {
+			case "create":
+				self::newSensor();
+				break;
 			case "show":
 				if ($arguments = 'all') {
 					$_SESSION['sensors'] = SensorsDB::getSensorsBy();
@@ -42,7 +45,24 @@ class SensorController {
 	}
 	
 	private function newSensor() {
+		$sensor = null;
 		
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+			$sensor = new Sensor($_POST);
+		
+		$_SESSION['sensor'] = $sensor;
+		
+		if (is_null($sensor) || $sensor->getErrorCount() != 0) {
+			SensorView::showNew();
+		} else {
+			$newSensor = SensorsDB::addSensor($sensor);
+			
+			if ($newSensor->getErrorCount() == 0)
+				$_SESSION['sensor'] = $newSensor;
+			
+			DatasetView::show();
+			header('Location: /'.$_SESSION['base'].'/dataset/show/'.$newSensor->getDatasetId());
+		}
 	}
 	
 	private function updateSensor() {

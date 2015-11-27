@@ -31,6 +31,9 @@
 		case "profile":
 			ProfileController::run();
 			break;
+		case "sensor":
+			SensorController::run();
+			break;
 		case "signup":
 			SignupController::run();
 			break;
