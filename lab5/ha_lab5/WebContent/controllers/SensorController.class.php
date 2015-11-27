@@ -1,0 +1,56 @@
+<?php
+class SensorController {
+	
+	public static function run() {
+		$action = (array_key_exists('action', $_SESSION)) ? $_SESSION['action'] : "";
+		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : "";
+		
+		switch ($action) {
+			case "show":
+				if ($arguments = 'all') {
+					$_SESSION['sensors'] = SensorsDB::getSensorsBy();
+					$_SESSION['headertitle'] = 'Sensor Data Repo | Sensors';
+					
+					SensorView::showAll();
+				} else {
+					$sensors = SensorsDB::getSensorsBy('sensor_id', $arguments);
+					
+					if (count($sensors) > 0) {
+						$sensor = $sensors[0];
+						$_SESSION['sensor'] = $sensor;
+						
+						$datasets = DatasetsDB::getDatasetBy('dataset_id', $sensor->getDatasetId());
+						
+						if (count($datasets) > 0) {
+							$_SESSION['dataset'] = $datasets[0];
+							self::show();
+						} else 
+							HomeView::show();
+					}
+					else
+						HomeView::show();
+				}
+				break;
+			case "update":
+				break;
+			default:
+		}
+	}
+	
+	private function show() {
+		
+	}
+	
+	private function newSensor() {
+		
+	}
+	
+	private function updateSensor() {
+		
+	}
+	
+	private function UserCanEditTargetSensor($targetSensorUserId) {
+		return LoginController::UserIsLoggedIn($targetSensorUserId);
+	}
+}
+?>

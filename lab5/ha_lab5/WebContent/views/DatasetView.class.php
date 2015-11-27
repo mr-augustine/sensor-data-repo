@@ -26,6 +26,7 @@ class DatasetView {
 		MasterView::showNavBar();
 		
 		if (!isset($user) || !LoginController::UserIsLoggedIn($user->getUserId())) {
+			echo '<br><br>';
 			echo '<p>You must log in to create a new Dataset</p>';
 			return;
 		}

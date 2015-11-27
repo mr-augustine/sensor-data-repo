@@ -17,12 +17,20 @@ class DatasetController {
 					DatasetView::showAll();
 				} else {
 					$datasets = DatasetsDB::getDatasetsBy('dataset_id', $arguments);
-					$dataset = $datasets[0];
-					$_SESSION['dataset'] = $dataset;
 					
-					$users = UsersDB::getUsersBy('user_id', $dataset->getUserId());
-					$_SESSION['user'] = $users[0];
-					self::show();
+					if (count($datasets) > 0) {
+						$dataset = $datasets[0];
+						$_SESSION['dataset'] = $dataset;
+					
+						$users = UsersDB::getUsersBy('user_id', $dataset->getUserId());
+						
+						if (count($users) > 0) {
+							$_SESSION['user'] = $users[0];
+							self::show();
+						} else
+							HomeView::show();
+					} else
+						HomeView::show();
 				}
 				break;
 			case "update":
@@ -52,7 +60,7 @@ class DatasetController {
 		}
 	}
 	
-	private static function newDataset() {
+	private function newDataset() {
 		$dataset = null;
 		
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
