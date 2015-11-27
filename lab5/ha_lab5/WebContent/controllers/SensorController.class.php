@@ -10,7 +10,7 @@ class SensorController {
 				self::newSensor();
 				break;
 			case "show":
-				if ($arguments = 'all') {
+				if ($arguments == 'all') {
 					$_SESSION['sensors'] = SensorsDB::getSensorsBy();
 					$_SESSION['headertitle'] = 'Sensor Data Repo | Sensors';
 					
@@ -22,7 +22,7 @@ class SensorController {
 						$sensor = $sensors[0];
 						$_SESSION['sensor'] = $sensor;
 						
-						$datasets = DatasetsDB::getDatasetBy('dataset_id', $sensor->getDatasetId());
+						$datasets = DatasetsDB::getDatasetsBy('dataset_id', $sensor->getDatasetId());
 						
 						if (count($datasets) > 0) {
 							$_SESSION['dataset'] = $datasets[0];
@@ -41,7 +41,22 @@ class SensorController {
 	}
 	
 	private function show() {
+		$arguments = (array_key_exists('arguments', $_SESSION)) ? $_SESSION['arguments'] : 0;
+		$sensor = $_SESSION['sensor'];
+		$dataset = $_SESSION['dataset'];
 		
+		if (!is_null($sensor)) {
+			// Populate the Sensor with its measurements
+			$measurements = MeasurementsDB::getMeasurementsBy('sensor_id', $sensor->getSensorId());
+			$sensor->setMeasurements($measurements);
+			
+			// Update the session sensor
+			$_SESSION['sensor'] = $sensor;
+			SensorView::show();
+		} else {
+			HomeView::show();
+			header('Location: /'.$_SESSION['base']);
+		}
 	}
 	
 	private function newSensor() {

@@ -153,7 +153,7 @@ class DatasetView {
 				echo '<div class="table-responsive">';
 				echo '<table class="table table-striped">';
 				echo '<thead>';
-				echo '<tr><th>Name</th><th>Type</th><th>Units</th><th>Num Records</th>';
+				echo '<tr><th>Name</th><th>Type</th><th>Units</th><th>Num Records</th></tr>';
 				echo '</thead>'."\n";
 				
 				echo '<tbody>';

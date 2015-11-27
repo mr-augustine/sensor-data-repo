@@ -28,6 +28,9 @@
 		case "logout":
 			LogoutController::run();
 			break;
+		case "measurement":
+			MeasurementController::run();
+			break;
 		case "profile":
 			ProfileController::run();
 			break;

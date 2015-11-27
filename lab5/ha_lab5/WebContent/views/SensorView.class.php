@@ -2,7 +2,7 @@
 class SensorView {
 	
 	public static function show() {
-		$_SESSION['headertitle'] = 'Dataset Summary';
+		$_SESSION['headertitle'] = 'Sensor Summary';
 		$_SESSION['styles'] = array('site.css');
 		
 		MasterView::showHeader();
@@ -111,7 +111,79 @@ class SensorView {
 	}
 	
 	private function showDetails() {
-		
+		$sensor = (array_key_exists('sensor', $_SESSION)) ? $_SESSION['sensor'] : null;
+		$dataset = (array_key_exists('dataset', $_SESSION)) ? $_SESSION['dataset'] : null;
+		$user = (array_key_exists('user', $_SESSION)) ? $_SESSION['user'] : null;
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
+	
+		if (!is_null($sensor)) {
+			echo '<h1>Sensor Summary</h1>';
+			
+			$targetSensorUserId = $dataset->getUserId();
+			if (self::CurrentUserCanEditTargetSensor($targetSensorUserId)) {
+				echo '<p>';
+				echo '<a class="btn btn-primary" ';
+				echo 'role="button" ';
+				echo 'href="/'.$base.'/sensor/update/'.$sensor->getSensorId().'"';
+				echo '>Update Sensor</a>';
+				echo '&nbsp&nbsp';
+				echo '<a class="btn btn-success" ';
+				echo 'role="button" ';
+				echo 'href="/'.$base.'/measurement/create">Add Measurements</a>';
+				echo '</p>';
+			}
+			
+			echo '<section>';
+			echo '<fieldset><legend>Summary Info</legend>';
+			echo 'Dataset Name:&nbsp<a href="/'.$base.'/dataset/show/'.$dataset->getDatasetId().
+				'">'.$dataset->getDatasetName().'</a><br><br>'."\n";
+			echo 'Sensor Name:&nbsp'.$sensor->getSensorName().'<br><br>'."\n";
+			echo 'Sensor Type:&nbsp'.$sensor->getSensorType().'<br><br>'."\n";
+			echo 'Sensor Units:&nbsp'.$sensor->getSensorUnits().'<br><br>'."\n";
+			echo 'Sequence Type:&nbsp'.$sensor->getSequenceType().'<br><br>'."\n";
+			echo 'Description:&nbsp'.$sensor->getDescription().'<br><br>'."\n";
+			echo '</fieldset></section>';
+			
+			echo '<section>';
+			echo '<h2>Sensor Measurements</h2>';
+			
+			if (count($sensor->getMeasurements()) > 0) {
+				echo '<div class="table-responsive">';
+				echo '<table class="table table-striped">';
+				echo '<thead>';
+				echo '<tr><th>';
+				
+				if ($sensor->getSequenceType() == 'TIME-CODED')
+					echo 'Timestamp';
+				else
+					echo 'Sequence Number';
+				
+				echo '</th>';
+				echo '<th>Measurement</th><tr></thead>'."\n";
+				
+				echo '<tbody>';
+				foreach ($sensor->getMeasurements() as $measurment) {
+					echo '<tr>';
+					echo '<td>';
+					
+					if ($sensor->getSequenceType() == 'TIME-CODED')
+						echo $measurement->getMeasurementTimestamp();
+					else
+						echo $measurement->getMeasurementIndex();
+					echo '</td>';
+					echo '<td>'.$measurement->getMeasurementValue().'</td></tr>'."\n";
+				}
+				echo '</tbody>';
+				echo '</table>';
+				echo '</div>';
+			} else {
+				echo '<p>No measurements associated with this sensor</p>';
+			}
+			echo '</section>';
+		} else {
+			echo '<p>Unknown sensor</p>';
+		}
+		echo '<br><br>';
 	}
 	
 	private function CurrentUserCanEditTargetSensor($targetSensorUserId) {
