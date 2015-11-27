@@ -49,11 +49,12 @@ class DatasetView {
 		echo '<span class="error">';
 		if (isset($dataset)) { echo $dataset->getError('description'); }
 		echo '</span><br><br>'."\n";
-		echo '<textarea class="form-control" name="description" rows="4">';
+		echo '<textarea class="form-control" name="description" tabindex="2" rows="4">';
 		if (isset($dataset)) { echo $dataset->getDescription(); }
 		echo '</textarea>';
 		echo '<br><br>';
 		
+		echo '<input type="hidden" name="user_id" value="'.$user->getUserId().'">';
 		echo '<p><input type="submit" name="submit" value="Submit">';
 		echo '&nbsp&nbsp';
 		echo '<a href="/'.$base.'/profile/show/'.$user->getUserId().'">Cancel</a><br>';

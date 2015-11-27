@@ -77,6 +77,7 @@ class DatasetController {
 				$_SESSION['dataset'] = $newDataset;
 			
 			ProfileView::show();
+			header('Location: /'.$_SESSION['base'].'/profile/show/'.$newDataset->getUserId());
 		}
 	}
 	

@@ -27,6 +27,10 @@ class ProfileView {
 				echo 'role="button" ';
 				echo 'href="/'.$base.'/user/update/'.$user->getUserId().'" ';
 				echo '>Edit Account</a>';
+				echo '&nbsp&nbsp';
+				echo '<a class="btn btn-success" ';
+				echo 'role=button" ';
+				echo 'href="/'.$base.'/dataset/create">Add Dataset</a>';
 				echo '</p>';
 			}
 			
