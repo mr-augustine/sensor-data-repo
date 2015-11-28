@@ -99,11 +99,12 @@ class MasterView {
 		
 		// TODO: Perhaps a mini logo should go here
 		
-		echo '<ul class="footer-right">';
-		echo '<li><a href="/'.$base.'/tests.html">TESTS</a></li>';
-		echo '<li><a href="/'.$base.'/create">CREATE</a></li>';
-		echo '<li><a href="/'.$base.'/show">SHOW</a></li>';
-		echo '</ul>';
+		// Not valid for this project iteration
+// 		echo '<ul class="footer-right">';
+// 		echo '<li><a href="/'.$base.'/tests.html">TESTS</a></li>';
+// 		echo '<li><a href="/'.$base.'/create">CREATE</a></li>';
+// 		echo '<li><a href="/'.$base.'/show">SHOW</a></li>';
+// 		echo '</ul>';
 		
 		echo '</footer>';
 	}
