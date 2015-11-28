@@ -59,7 +59,9 @@ class SensorView {
 		if (isset($sensor)) { echo $sensor->getError('sensor_type'); }
 		echo '</span><br><br>'."\n";
 		echo '<select onchange="updateSensorUnits()" id="sensorType" class="form-control" name="sensor_type" tabindex="2">'."\n";
-		foreach (Sensor::$VALID_SENSOR_TYPES as $sensorType) {
+		$sensorTypes = Sensor::$VALID_SENSOR_TYPES;
+		sort($sensorTypes);
+		foreach ($sensorTypes as $sensorType) {
 			echo '<option value="'.$sensorType.'"';
 			if (isset($sensor) && $sensor->getSensorType() == $sensorType) { echo ' selected'; }
 			echo '>'.$sensorType.'</option>'."\n";
@@ -71,11 +73,7 @@ class SensorView {
 		if (isset($sensor)) { echo $sensor->getError('sensor_units'); }
 		echo '</span><br><br>'."\n";
 		echo '<select id="sensorUnits" class="form-control" name="sensor_units" tabindex="3">'."\n";
-// 		foreach (Sensor::$VALID_SENSOR_UNITS as $sensorUnits) {
-// 			echo '<option value="'.$sensorUnits.'"';
-// 			if (isset($sensor) && $sensor->getSensorUnits() == $sensorUnits) { echo ' selected'; }
-// 			echo '>'.$sensorUnits.'</option>'."\n";
-// 		}
+		// This section is handled by UpdateSensorUnits.js
 		echo '</select><br><br>'."\n";
 		
 		echo 'Sequence Type:&nbsp';

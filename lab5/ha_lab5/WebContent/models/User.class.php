@@ -145,7 +145,7 @@ class User {
 	private function passwordIsHashed($password) {
 		$hashStart = '$2y$10$';
 		
-		return strpos($password, $hashStart, 0);
+		return (strpos($password, $hashStart) == 0);
 	}
 }
 ?>
