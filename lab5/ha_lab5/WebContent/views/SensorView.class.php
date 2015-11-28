@@ -38,6 +38,7 @@ class SensorView {
 			return;
 		}
 		
+		echo '<script src="/'.$base.'/js/UpdateSensorUnits.js"></script>';
 		echo '<h1>Create a Sensor</h1>';
 		echo '<section>';
 		echo '<form action="/'.$base.'/sensor/create" method="POST">';
@@ -57,7 +58,7 @@ class SensorView {
 		echo '<span class="error">';
 		if (isset($sensor)) { echo $sensor->getError('sensor_type'); }
 		echo '</span><br><br>'."\n";
-		echo '<select class="form-control" name="sensor_type" tabindex="2">'."\n";
+		echo '<select onchange="updateSensorUnits()" id="sensorType" class="form-control" name="sensor_type" tabindex="2">'."\n";
 		foreach (Sensor::$VALID_SENSOR_TYPES as $sensorType) {
 			echo '<option value="'.$sensorType.'"';
 			if (isset($sensor) && $sensor->getSensorType() == $sensorType) { echo ' selected'; }
@@ -69,12 +70,12 @@ class SensorView {
 		echo '<span class="error">';
 		if (isset($sensor)) { echo $sensor->getError('sensor_units'); }
 		echo '</span><br><br>'."\n";
-		echo '<select class="form-control" name="sensor_units" tabindex="3">'."\n";
-		foreach (Sensor::$VALID_SENSOR_UNITS as $sensorUnits) {
-			echo '<option value="'.$sensorUnits.'"';
-			if (isset($sensor) && $sensor->getSensorUnits() == $sensorUnits) { echo ' selected'; }
-			echo '>'.$sensorUnits.'</option>'."\n";
-		}
+		echo '<select id="sensorUnits" class="form-control" name="sensor_units" tabindex="3">'."\n";
+// 		foreach (Sensor::$VALID_SENSOR_UNITS as $sensorUnits) {
+// 			echo '<option value="'.$sensorUnits.'"';
+// 			if (isset($sensor) && $sensor->getSensorUnits() == $sensorUnits) { echo ' selected'; }
+// 			echo '>'.$sensorUnits.'</option>'."\n";
+// 		}
 		echo '</select><br><br>'."\n";
 		
 		echo 'Sequence Type:&nbsp';
@@ -162,7 +163,7 @@ class SensorView {
 				echo '<th>Measurement</th><tr></thead>'."\n";
 				
 				echo '<tbody>';
-				foreach ($sensor->getMeasurements() as $measurment) {
+				foreach ($sensor->getMeasurements() as $measurement) {
 					echo '<tr>';
 					echo '<td>';
 					
