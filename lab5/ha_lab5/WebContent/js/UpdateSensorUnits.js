@@ -5,7 +5,7 @@
 
 function updateSensorUnits() {
 	var sensorType = document.getElementById('sensorType');
-	alert(sensorType.value);
+	
 	var validUnits = undefined;
 	
 	switch (sensorType.value) {
@@ -61,6 +61,5 @@ function updateSensorUnits() {
         o.value = validUnits[i].toString();
         o.text = validUnits[i].toString();
         sensorUnit.appendChild(o);
-        alert('Added another child!');
     }
 }
