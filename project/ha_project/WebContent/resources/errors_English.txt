@@ -1,0 +1,62 @@
+DATASET_DESCRIPTION_TOO_LONG The dataset description is too long
+DATASET_COULD_NOT_BE_UPDATED The dataset could not be updated
+DATASET_DOES_NOT_EXIST The dataset with the specified id does not exist
+DATASET_ID_EMPTY The dataset id cannot be empty
+DATASET_ID_INVALID The dataset id is invalid
+DATASET_INVALID Dataset could not be created
+DATASET_NAME_EMPTY The dataset name cannot be empty
+DATASET_NAME_INVALID_CHARS The dataset name contains invalid characters
+DATASET_NAME_TOO_LONG The dataset name is too long
+DATASET_NAME_TOO_SHORT The dataset name is too short
+MEASUREMENT_COULD_NOT_BE_UPDATED The measurement could not be updated
+MEASUREMENT_DOES_NOT_EXIST The measurement with the specified id does not exist
+MEASUREMENT_ID_EMPTY The measurement id cannot be empty
+MEASUREMENT_ID_INVALID The measurement id is invalid
+MEASUREMENT_INDEX_EMPTY The measurement index cannot be empty
+MEASUREMENT_INDEX_INVALID The measurement index is invalid
+MEASUREMENT_INVALID Measurement could not be created
+MEASUREMENT_TIMESTAMP_EMPTY The measurement timestamp cannot be empty
+MEASUREMENT_TIMESTAMP_INVALID The measurement timestamp is invalid
+MEASUREMENT_TIMESTAMP_FORMAT_INVALID The measurement timestamp must be in the format YYYY-MM-DD HH:MM:SS[.uuuuuu]
+MEASUREMENT_TIMESTAMP_RANGE_INVALID The measurement timestamp must occur between Jan. 1, 1970 and now
+MEASUREMENT_TIMESTAMP_VALUE_INVALID The measurement timestamp is invalid
+MEASUREMENT_VALUE_EMPTY The measurement value cannot be empty
+MEASUREMENT_VALUE_INVALID The measurement value is invalid
+MEASUREMENT_VALUE_INVALID_ALTITUDE The altitude value must be non-negative
+MEASUREMENT_VALUE_INVALID_BINARY The binary value is not recognized
+MEASUREMENT_VALUE_INVALID_COUNT The count value must be non-negative
+MEASUREMENT_VALUE_INVALID_DIRECTION The direction value is not recognized
+MEASUREMENT_VALUE_INVALID_DISTANCE The distance value must be numeric
+MEASUREMENT_VALUE_INVALID_HEADING The heading value must be between 0 and 360 inclusive
+MEASUREMENT_VALUE_INVALID_IMAGE The image type is not recognized
+MEASUREMENT_VALUE_INVALID_LATITUDE The latitude must be between -90 and 90 inclusive
+MEASUREMENT_VALUE_INVALID_LONGITUDE The longitude must be between -180 and 180 inclusive
+MEASUREMENT_VALUE_INVALID_RANGE The range value must be non-negative
+MEASUREMENT_VALUE_INVALID_RATE The rate value must be numeric
+MEASUREMENT_VALUE_INVALID_TEMPERATURE The temperature value must be numeric
+PASSWORD_EMPTY The password cannot be empty
+PASSWORD_INVALID_CHARS The password contains invalid characters
+PASSWORD_TOO_SHORT The password must be at least 8 characters long
+SENSOR_COULD_NOT_BE_UPDATED The sensor could not be updated
+SENSOR_DESCRIPTION_TOO_LONG The sensor description is too long
+SENSOR_DOES_NOT_EXIST The sensor with the specified id does not exist
+SENSOR_ID_INVALID The sensor id is invalid
+SENSOR_INVALID Sensor could not be created
+SENSOR_NAME_EMPTY The sensor name cannot be empty
+SENSOR_NAME_INVALID_CHARS The sensor name contains invalid characters
+SENSOR_NAME_TOO_SHORT The sensor name is too short
+SENSOR_SEQUENCE_TYPE_EMPTY The sequence type cannot be empty
+SENSOR_SEQUENCE_TYPE_INVALID The sequence type is invalid
+SENSOR_TYPE_EMPTY The sensor type cannot be empty
+SENSOR_TYPE_INVALID The sensor type is invalid
+SENSOR_UNITS_EMPTY The sensor units cannot be empty
+SENSOR_UNITS_INVALID The sensor units are invalid
+USER_COULD_NOT_BE_UPDATED The user could not be updated
+USER_DOES_NOT_EXIST The user with the specified id does not exist
+USER_ID_EMPTY The user id cannot be empty
+USER_ID_INVALID The user id is invalid
+USER_INVALID User could not be created
+USERNAME_EMPTY The username cannot be empty
+USERNAME_INVALID_CHARS The username contains invalid characters
+USERNAME_PASSWORD_COMBO_INVALID Your username or password is incorrect
+USERNAME_TOO_SHORT The username is too short
