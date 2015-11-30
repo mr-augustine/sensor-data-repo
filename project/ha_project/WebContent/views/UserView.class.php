@@ -40,7 +40,7 @@ class UserView {
 			echo 'value="'.$user->getUsername().'"';
 		echo '><span class="error">';
 		if (!is_null($user))
-			echo $user->getError('user_name');
+			echo $user->getError('username');
 		echo '</span></p>';
 		
 		echo '<p>New Password: <input type="password" name="password"><span class="error">';

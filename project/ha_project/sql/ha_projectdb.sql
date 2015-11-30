@@ -1,7 +1,7 @@
-/* Create the ha_lab5db database, supporting tables, and initial data */
-DROP DATABASE if EXISTS ha_lab5db;
-CREATE DATABASE ha_lab5db;
-USE ha_lab5db;
+/* Create the ha_projectdb database, supporting tables, and initial data */
+DROP DATABASE if EXISTS ha_projectdb;
+CREATE DATABASE ha_projectdb;
+USE ha_projectdb;
 
 DROP TABLE if EXISTS Users;
 CREATE TABLE Users (

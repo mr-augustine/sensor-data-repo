@@ -1,3 +1,3 @@
 RewriteEngine on
  
-FallbackResource /ha_lab5/index.php
+FallbackResource /ha_project/index.php
