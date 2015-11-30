@@ -35,7 +35,7 @@ class UserView {
 		}
 		
 		echo '<section><form method="POST" action="/'.$base.'/user/update/'.$user->getUserId().'">';
-		echo '<p>Username: <input type="text" name="user_name"';
+		echo '<p>New Username: <input type="text" name="username"';
 		if (!is_null($user))
 			echo 'value="'.$user->getUsername().'"';
 		echo '><span class="error">';
@@ -43,7 +43,7 @@ class UserView {
 			echo $user->getError('user_name');
 		echo '</span></p>';
 		
-		echo '<p>Password: <input type="password" name="password"><span class="error">';
+		echo '<p>New Password: <input type="password" name="password"><span class="error">';
 		if (!is_null($user))
 			echo $user->getError('password');
 		echo '</span></p>';
