@@ -211,7 +211,7 @@ class Sensor {
 		
 		// Not empty
 		if (empty($this->sensor_units))
-			$this-setError('sensor_units', 'SENSOR_UNITS_EMPTY');
+			$this->setError('sensor_units', 'SENSOR_UNITS_EMPTY');
 		// Within the list of accepted sensor units
 		else if (!in_array($this->sensor_units, self::$VALID_SENSOR_UNITS))
 			$this->setError('sensor_units', 'SENSOR_UNITS_INVALID');
