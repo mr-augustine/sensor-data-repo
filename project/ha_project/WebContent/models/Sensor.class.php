@@ -95,6 +95,10 @@ class Sensor {
 		$this->measurements = $measurements;
 	}
 	
+	public function requiresTimestampedMeasurements() {
+		return ($this->sequence_type == 'TIME_CODED');
+	}
+	
 	public function getParameters() {
 		$paramArray = array('sensor_id' => $this->sensor_id,
 							'dataset_id' => $this->dataset_id,

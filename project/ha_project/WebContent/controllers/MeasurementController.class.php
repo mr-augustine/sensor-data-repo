@@ -19,7 +19,25 @@ class MeasurementController {
 	}
 	
 	private function newMeasurement() {
-		MeasurementView::showNew();
+		$measurement = null;
+		
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+			$measurement = new Measurement($_POST);
+		
+		$_SESSION['measurement'] = $measurement;
+		
+		if (is_null($measurement) || $measurement->getErrorCount() != 0) {
+			MeasurementView::showNew();
+		} else {
+			$newMeasurement = MeasurementsDB::addMeasurement($measurement);
+			
+			if ($newMeasurement->getErrorCount() == 0)
+				$_SESSION['measurement'] = $newMeasurement;
+			
+			SensorView::show();
+			header('Location: /'.$_SESSION['base'].'/sensor/show/'.$_SESSION['sensor']->getSensorId());
+		}
+		
 	}
 	
 	private function updateMeasurement() {
