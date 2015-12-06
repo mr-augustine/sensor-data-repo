@@ -153,7 +153,7 @@ class DatasetView {
 				echo '<div class="table-responsive">';
 				echo '<table class="table table-striped">';
 				echo '<thead>';
-				echo '<tr><th>Name</th><th>Type</th><th>Units</th><th>Num Records</th></tr>';
+				echo '<tr><th>Name</th><th>Type</th><th>Units</th><th>Num Records</th><th>Plot</th></tr>';
 				echo '</thead>'."\n";
 				
 				echo '<tbody>';
@@ -166,6 +166,7 @@ class DatasetView {
 					echo '<td>'.$sensor->getSensorType().'</td>';
 					echo '<td>'.$sensor->getSensorUnits().'</td>';
 					echo "<td>$numRecords</td>";
+					echo "<td>".self::LinksToPlotTypes($sensor->getSensorType(), $sensor->getSensorId())."<td>";
 					echo '</tr>'."\n";
 				}
 				echo '</tbody>';
@@ -184,6 +185,40 @@ class DatasetView {
 	
 	private function CurrentUserCanEditTargetDataset($targetDatasetUserId) {
 		return LoginController::UserIsLoggedIn($targetDatasetUserId);
+	}
+	
+	private function LinksToPlotTypes($sensorType, $sensorId) {
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
+		$linksToPlotTypes = '';
+		
+		switch ($sensorType) {
+			// Line Only
+			case 'ALTITUDE':
+			case 'HEADING':
+			case 'RATE':
+			case 'TEMPERATURE':
+				$linksToPlotTypes = '<a href="/'.$base.'/plot/line/'.$sensorId.'">Line</a>';
+				break;
+			
+			// Column Only
+			case 'BINARY':
+			case 'RANGE':
+				$linksToPlotTypes = '<a href="/'.$base.'/plot/column/'.$sensorId.'">Column</a>';
+				break;
+			
+			// Line and Column
+			case 'COUNT':
+				$linksToPlotTypes = '<a href="/'.$base.'/plot/line/'.$sensorId.'">Line</a>';
+				$linksToPlotTypes += '&nbsp';
+				$linksToPlotTypes += '<a href="/'.$base.'/plot/column/'.$sensorId.'">Column</a>';
+				break;
+			
+			// Chart not implemented yet
+			default:
+				break;
+		}
+		
+		return $linksToPlotTypes;
 	}
 }
 ?>

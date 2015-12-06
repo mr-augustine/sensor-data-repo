@@ -20,7 +20,7 @@ class PlotView {
 		$yLabel = (array_key_exists('yLabel', $_SESSION)) ? $_SESSION['yLabel'] : "";
 		$plotTitle = (array_key_exists('plotTitle', $_SESSION)) ? $_SESSION['plotTitle'] : "";
 		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : '';
-		$_SESSION['headertitle'] = 'Sensor Data Repo | Line Chart';
+		$_SESSION['headertitle'] = 'Sensor Data Repo | Column Chart';
 		$_SESSION['styles'] = array('site.css');
 		MasterView::showHeader();
 		MasterView::showNavBar();
@@ -40,7 +40,11 @@ class PlotView {
 				echo $measurement->getTimestamp();
 			else
 				echo $measurement->getMeasurementIndex();
-			echo '\', '.$measurement->getMeasurementValue().', ';
+			
+			if ($sensor->getSensorType() == 'BINARY')
+				echo '\', '.self::TranslatedBinaryValue($measurement->getMeasurementValue()).', ';
+			else
+				echo '\', '.$measurement->getMeasurementValue().', ';
 			echo '\'color: blue\']';
 		}
 		echo "\n\t\t".']);'."\n\n";
@@ -120,6 +124,23 @@ class PlotView {
         echo "\t\t".'\'packages\':[\'corechart\']'."\n";
         echo "\t\t".'}]'."\n";
         echo "\t\t".'}"></script>'."\n";
+	}
+	
+	private function TranslatedBinaryValue($measurementValue) {
+		$translatedBinaryValue = '';
+		
+		switch ($measurementValue) {
+			case '1':
+			case 'YES':
+			case 'TRUE':
+			case 'ON':
+				$translatedBinaryValue = 1;
+				break;
+			default:
+				$translatedBinaryValue = 0;
+		}
+		
+		return $translatedBinaryValue;
 	}
 }
 ?>
