@@ -31,6 +31,9 @@
 		case "measurement":
 			MeasurementController::run();
 			break;
+		case "plot":
+			PlotController::run();
+			break;
 		case "profile":
 			ProfileController::run();
 			break;

@@ -87,5 +87,9 @@ class MeasurementView {
 	public static function showUpdate() {
 		
 	}
+	
+	private function showDetails() {
+		
+	}
 }
 ?>
