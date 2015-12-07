@@ -35,6 +35,9 @@ class SensorController {
 				}
 				break;
 			case "update":
+				$sensors = SensorsDB::getSensorsBy('sensor_id', $arguments);
+				$_SESSION['sensor'] = $sensors[0];
+				self::updateSensor();
 				break;
 			default:
 		}
@@ -81,7 +84,34 @@ class SensorController {
 	}
 	
 	private function updateSensor() {
+		$sensor = $_SESSION['sensor'];
 		
+		if (empty($sensor)) {
+			HomeView::show();
+			header('Location: /'.$_SESSION['base']);
+		} elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
+			SensorView::showUpdate();
+		} else {
+			$params = $sensor->getParameters();
+			$params['sensor_name'] = (array_key_exists('sensor_name', $_POST)) ? $_POST['sensor_name'] : '';
+			$params['description'] = (array_key_exists('description', $_POST)) ? $_POST['description'] : '';
+			
+			$updatedSensor = new Sensor($params);
+			$updatedSensor->setSensorId($sensor->getSensorId());
+			$returnedSensor = SensorsDB::updateSensor($updatedSensor);
+			
+			if ($returnedSensor->getErrorCount() == 0) {
+				// Show the Sensor View which should display the updated params
+				SensorView::show();
+				header('Location: /'.$_SESSION['base'].'/sensor/show/'.$sensor->getSensorId());
+			} else {
+				// Carry over the measurements, if any
+				$updatedSensor->setMeasurements($sensor->getMeasurements());
+				
+				$_SESSION['sensor'] = $updatedSensor;
+				SensorView::showUpdate();
+			}
+		}
 	}
 	
 	private function UserCanEditTargetSensor($targetSensorUserId) {

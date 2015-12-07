@@ -106,7 +106,50 @@ class SensorView {
 	}
 	
 	public static function showUpdate() {
+		$sensor = (array_key_exists('sensor', $_SESSION)) ? $_SESSION['sensor'] : null;
+		$dataset = (array_key_exists('dataset', $_SESSION)) ? $_SESSION['dataset'] : null;
+		$user = (array_key_exists('user', $_SESSION)) ? $_SESSION['user'] : null;
+		$base = (array_key_exists('base', $_SESSION)) ? $_SESSION['base'] : "";
+		$_SESSION['headertitle'] = 'Sensor Data Repo | Sensor Edit';
+		$_SESSION['styles'] = array('site.css');
+		MasterView::showHeader();
+		MasterView::showNavBar();
 		
+		if (!is_null($sensor)) {
+			echo '<h1>Sensor Edit</h1>';
+			
+			echo '<section>';
+			echo '<form method="POST" action="/'.$base.'/sensor/update/'.$sensor->getSensorId().'">';
+			
+			echo '<fieldset><legend>Summary Info</legend>';
+			echo 'Dataset Name:&nbsp<a href="/'.$base.'/dataset/show/'.$dataset->getDatasetId().
+				'">'.$dataset->getDatasetName().'</a><br><br>'."\n";
+			echo 'Sensor Name:&nbsp<input type="text" name="sensor_name" ';
+			if (!is_null($sensor)) { echo 'value="'.$sensor->getSensorName().'" '; }
+			echo 'tabindex="1" required>'."\n";
+			echo '<span class="error">';
+			if (!is_null($sensor)) { echo $sensor->getError('sensor_name'); }
+			echo '</span><br><br>'."\n";
+			
+			echo 'Sensor Type:&nbsp'.$sensor->getSensorType().'<br><br>'."\n";
+			echo 'Sensor Units:&nbsp'.$sensor->getSensorUnits().'<br><br>'."\n";
+			echo 'Sequence Type:&nbsp'.$sensor->getSequenceType().'<br><br>'."\n";
+			
+			echo 'Description:';
+			echo '<span class="error">';
+			if (isset($sensor)) { echo $sensor->getError('description'); }
+			echo '<span><br><br>'."\n";
+			echo '<textarea class="form-control" name="description" tabindex="2" rows="2">';
+			if (isset($sensor)) { echo $sensor->getDescription(); }
+			echo '</textarea>';
+			echo '<br><br>';
+			
+			echo '<p><input type="submit" name="submit" value="Submit">';
+			echo '&nbsp&nbsp';
+			echo '<a href="/'.$base.'/sensor/show/'.$sensor->getSensorId().'">Cancel</a><br>';
+			echo '</form>';
+			echo '</section>';
+		}
 	}
 	
 	private function showDetails() {
