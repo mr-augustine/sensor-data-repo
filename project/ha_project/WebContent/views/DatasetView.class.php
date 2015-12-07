@@ -166,7 +166,11 @@ class DatasetView {
 					echo '<td>'.$sensor->getSensorType().'</td>';
 					echo '<td>'.$sensor->getSensorUnits().'</td>';
 					echo "<td>$numRecords</td>";
-					echo "<td>".self::LinksToPlotTypes($sensor->getSensorType(), $sensor->getSensorId())."<td>";
+					
+					if ($numRecords > 0)
+						echo "<td>".self::LinksToPlotTypes($sensor->getSensorType(), $sensor->getSensorId())."<td>";
+					else 
+						echo "<td>No data</td>";
 					echo '</tr>'."\n";
 				}
 				echo '</tbody>';
@@ -209,12 +213,13 @@ class DatasetView {
 			// Line and Column
 			case 'COUNT':
 				$linksToPlotTypes = '<a href="/'.$base.'/plot/line/'.$sensorId.'">Line</a>';
-				$linksToPlotTypes += '&nbsp';
-				$linksToPlotTypes += '<a href="/'.$base.'/plot/column/'.$sensorId.'">Column</a>';
+				$linksToPlotTypes = $linksToPlotTypes.',&nbsp';
+				$linksToPlotTypes = $linksToPlotTypes.'<a href="/'.$base.'/plot/column/'.$sensorId.'">Column</a>';
 				break;
 			
 			// Chart not implemented yet
 			default:
+				$linksToPlotTypes = 'Not Plotable Yet';
 				break;
 		}
 		
