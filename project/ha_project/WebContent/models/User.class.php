@@ -57,6 +57,10 @@ class User {
 		return $this->password;
 	}
 	
+	public function setPassword($password) {
+		$this->password = $password;
+	}
+	
 	public function getParameters() {
 		$paramArray = array('user_id' => $this->user_id,
 							'username' => $this->username,

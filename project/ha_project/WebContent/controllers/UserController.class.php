@@ -46,6 +46,9 @@ class UserController {
 			
 			$updatedUser = new User($params);
 			$updatedUser->setUserId($users[0]->getUserId());
+			$plaintextPassword = $updatedUser->getPassword();
+			$hashedPassword = password_hash($plaintextPassword, PASSWORD_DEFAULT);
+			$updatedUser->setPassword($hashedPassword);
 			$returnedUser = UsersDB::updateUser($updatedUser);
 			
 			if ($returnedUser->getErrorCount() == 0) {
