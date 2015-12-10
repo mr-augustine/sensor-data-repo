@@ -6,10 +6,19 @@ class SignupController {
 		
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$formUser = new User($_POST);
-			$user = UsersDB::addUser($formUser);
 			
-			if ($user->getErrorCount() == 0) {
-				$_POST['user'] = $user;
+			if ($formUser->getErrorCount() == 0) {
+				$plaintextPassword = $formUser->getPassword();
+				$hashedPassword = password_hash($plaintextPassword, PASSWORD_DEFAULT);
+				$formUser->setPassword($hashedPassword);
+				
+				$user = UsersDB::addUser($formUser);
+				
+				if ($user->getErrorCount() == 0) {
+					$_SESSION['user'] = $user;
+				}
+			} else {
+				$user = $formUser;
 			}
 		}
 		

@@ -134,7 +134,7 @@ class User {
 			$this->setError('password', 'PASSWORD_EMPTY');
 		
 		// Hashed password (retrieved from database)
-		if (self::passwordIsHashed($this->password))
+		else if (self::passwordIsHashed($this->password))
 			return;
 		// Meets minimum length
 		else if (strlen($this->password) < self::$MIN_PASSWORD_LENGTH)
@@ -149,7 +149,7 @@ class User {
 	private function passwordIsHashed($password) {
 		$hashStart = '$2y$10$';
 		
-		return (strpos($password, $hashStart) == 0);
+		return (strpos($password, $hashStart) === 0);
 	}
 }
 ?>

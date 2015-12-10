@@ -11,10 +11,12 @@ class LoginController {
 			if ($user->getErrorCount() == 0) {
 				$checkUserArray = UsersDB::getUsersBy('username', $user->getUserName());
 				
-				$checkUser = $checkUserArray[0];
-				$user->setUserId($checkUser->getUserId());
+				if (count($checkUserArray) > 0) {
+					$checkUser = $checkUserArray[0];
+					$user->setUserId($checkUser->getUserId());
 				
-				$userIsLegit = password_verify($_POST['password'], $checkUser->getPassword());
+					$userIsLegit = password_verify($_POST['password'], $checkUser->getPassword());
+				}
 			}
 		} else {
 			LoginView::show();
